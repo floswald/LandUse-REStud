@@ -1,0 +1,338 @@
+---
+title: Replication Package for *Land Use, Structural Change and Urban Expansion*
+date: today
+bibliography: refs.bib
+format:
+  docx: default
+  html: default
+  pdf: default
+---
+
+This replication package accompanies Nicolas Coeurdacier, Florian Oswald and Marc Teignier, REStud 2025
+<!---
+Include as much detail in the article citation as you can.
+-->
+
+## Authors
+
+- Nicolas Coeurdacier
+- Florian Oswald
+- Marc Teignier
+
+## Structure
+
+This replication package has the following format:
+
+```
+.
+├── code
+│   ├── CASDr
+│   ├── LandUse.jl
+│   ├── LandUseR
+│   └── stata
+├── data
+│   ├── processed
+│   └── raw
+├── output
+│   ├── plots
+│   └── tables
+├── README_files
+│   └── libs
+├── README.docx
+├── README.html
+├── README.pdf
+├── README.qmd
+└── refs.bib
+```
+
+
+
+## Data availability and provenance statements
+
+### Statement about rights
+
+The author(s) of the manuscript have legitimate access to and permission to use the data used in this manuscript.
+
+### Summary of availability
+
+
+- Some data **cannot be made** publicly available.
+- All exhibits in the main text and B can be reproduced with data shared with this replication package.
+- 8 out of 40 exhibits in Appendix A require access to confidential data and cannot be reproduced with this package.
+
+
+### Details on each data source
+
+Unless specifically pointed out, all data in this list are in the public domain, hence freely accessible, and we have the right to redistribute them with as part of our replication package.
+
+- French Land used in Agriculture. We have different data sources for different points in time.
+    - 1882 and 1892: 
+        1. @mauguin1890statistique
+        2. @flechey1898statistique
+        3. @hitier1899statistique
+    - 1937: @auge1945statistiques
+    - 1840 until WW2: Recencement Agricole, **what is this? is this the sub-section "exploitation agricole" as part of the "recensement generale de la populuatoin"? citation for each year needed**
+    - Interwar period: 
+		1. @toutain1987produit
+		2. @mauco1937modes
+    - post WW2 and until 2000: @desriers2007agriculture
+    - after 2000: Website of Agricultural ministry (Agreste). **What is the correct citation here - need an URL and more info**
+- Sectoral Employment:
+    - 1806-1990: @marchand1991deux
+    - 1856-2006: @herrendorf2014growth
+    - 1950-2018: OECD *need a citation/URL*
+- Sectoral National Accounts and Prices
+    - 1815-1938: @toutain1987produit via [http://www.ggdc.net/](http://www.ggdc.net)
+    - Post WW2: INSEE. *citation of data source/URL needed*
+    - Relative Price of Agricultural goods: @sauvy1952variations
+- Consumption Expenditure:
+    - 1896-1939: @villa1993productivite via  http://gesd.free.fr/villadoc.pdf
+    - 1959-2017: INSEE Comptes Nationaux (Base 2014)
+- Land and Housing Wealth: @piketty2014capital via https://wid.world/fr/accueil/
+- Urban Area and Population Measurement:
+    - 1866: Carte d'Etat Major, via [geoportail](https://www.geoportail.gouv.fr/donnees/carte-de-letat-major-1820-1866)
+    - 1950: Aerial photography, via [geoportail IGN](https://www.ign.fr)
+    - @GHSL-built
+    - @GHSL-pop
+    - @angel2012atlas
+    - @angel2010persistent
+    - We use contemporary (vintage 2018) land use cover data from @corine-2018
+- Farmland Prices, Yields and Agricultural land Use
+    - Local Farmland Values
+        - 1892: Recensement Agricole in 1892 via https://gallica.bnf.fr/ark:/12148/bpt6k855121k/f1.item
+        - Post 1950: Farmland values at *Petite region agricole (PRA)* level
+        - https://agreste.agriculture.gouv.fr/agreste-web/disaron/Chd21010/detail/
+        - What are the citations for the other years? what are the relevant URLs?
+    - Wheat Yields
+        - @schaubergeretal2022
+- Historical Commuting Speed in Paris
+    - 1959: @bertrand1962enquete
+    - Enquete Global Transport 1976, 1983, 1991, 2001, 2010 **missing citation**
+    - 1835, 1856, 1876, 1890, 1910 and 1930:
+        - @martin1894etude
+        - @bertillon1910accroissement
+        - @brunet1986mouvement
+        - @merlin1997transports
+        - @Stats-Paris-1931
+        - @orselli2008usages
+        - @papon2010parcours
+    - 1955, 1990, 2000, 2010:
+        - @bastie1958population
+        - @Stats-Paris-1955
+        - OMNIL 2000 and 2010 **missing**
+        - OMNIL (all modes 2000-2020) **missing**
+- Individual level Data for Urban Areas. All data in this subsection are with **confidential access restriction, hence not shared in this replication package**. You can apply for access following the procedure at [https://www.comite-du-secret.fr](https://www.comite-du-secret.fr).
+    - Commuting Data
+        - Enquête National du Logement (ENL) 
+            - 1984: @ENL-1984
+            - 1988: @ENL-1988
+            - 2006: @ENL-2006
+            - 2013: @ENL-2013
+        - Base Tous Salariés : fichier Postes (formerly known as DADS-Postes). We use a 50% random sample from the 2018 edition, see @Postes-2018.
+    - Urban Productivity and Wages
+        - @PanelEDP
+
+
+
+## Code
+
+The package uses stata, R and julia code; All code is located in the subfolder `code/`.
+
+### Stata
+
+Data cleaning and production of graphics relating to land use, sectoral employment, national accounts and prices, consumption expenditures, historical commuting speeds and land and housing wealth.
+
+We used stata version **xxx**.
+
+There is a `main.do` script which will run all stata related code (in each subfolder?)
+
+
+### R
+
+There are two `R` packages in the subfolder `code`: `LandUseR` and `CASDr`, the latter of which is used inside the secure CASD environment only. Apart from running the built in unit tests, `CASDr` will not run outside of CASD.
+
+Both `R` packages are used for data cleaning, regression analysis and production of plots for local farmland prices, wheat yields, individual commuting data, and confrontation of model vs data.
+
+## julia
+
+Prepration of data moments for model, implementation of structural model, estimation of parameters and calibration exercise, production of simulation output (figures and tables). There is a single driver script which produces all output from the model.
+
+<!---
+Give a high-level overview of the program files and their purpose. Remove redundant/ obsolete files from the Replication archive.
+-->
+
+
+### (Optional, but recommended) License for Code
+
+The code is licensed under a MIT/BSD/GPL/Creative Commons license. See [LICENSE.txt](LICENSE.txt) for details.
+
+
+# List of tables and figures
+
+<!---
+Your programs should clearly identify the tables and figures as they appear in the manuscript, by number. Sometimes, this may be obvious, e.g. a program called "`table1.do`" generates a file called `table1.png`. Sometimes, mnemonics are used, and a mapping is necessary. In all circumstances, provide a list of tables and figures, identifying the program (and possibly the line number) where a figure is created.
+
+If the public repository is incomplete, because not all data can be provided, as described in the data section, then the list of tables should clearly indicate which tables, figures, and in-text numbers can be reproduced with the public material provided.
+-->
+
+The provided code reproduces:
+<!---
+pick one
+-->
+
+- All numbers provided in text in the paper
+- All tables and figures in the paper
+
+### Main Text Exhibits
+
+| Exhibit   | Language | Program/function | Output in `output/`      | Reproducible |
+|------|------|------|---------|-------|
+| Figure 1  | `stata`  | `code/stata/figure1.do` | plots/figure1.pdf        | yes          |
+| Figure 2  | --       |(no data/code used)      | plots/fig2a(b).pdf       | yes          |
+| Figure 3  | `R`      |`LandUseR::figure3()`    | plots/figure3.pdf        | yes          |
+| Figure 4a  | `R`      |`LandUseR::plot_top100_densities()`    | plots/figure4a.pdf    | yes          |
+| Figure 4b  | `R`      |`LandUseR::figure4b()`    | plots/figure4b.pdf    | yes          |
+| Figure 5  | `R`      |`LandUseR::figure5()`    | plots/figure5a(b).pdf    | yes          |
+| Figure 6  | `stata`      |`code/stata/figure6.do`  | plots/figure6a(b).pdf    | yes          |
+| Table 1   | `julia`  |`LandUse.latex_param()`  | tables/table1.tex        | yes          |
+| Figure 7  | `stata`  |`code/stata/figure7.do`  | plots/figure7.pdf        | yes          |
+| Figure 8  | `julia`  | `LandUse.figure8()`     | plots/figure8a(b,c).pdf  | yes          |
+| Figure 9  | `julia`  | `LandUse.figure9()`     | plots/figure9a(b).pdf    | yes          |
+| Figure 10 | `julia`  | `LandUse.figure10()`    | plots/figure10a(b).pdf   | yes          |
+| Figure 11 | `julia`  | `LandUse.figure11()`    | plots/figure11a(b).pdf   | yes          |
+| Figure 12 | `julia`  | `LandUse.figure12()`    | plots/figure12a(b).pdf   | yes          |
+| Figure 13 | `julia`  | `LandUse.figure13()`    | plots/figure13a(b,c).pdf | yes          |
+| Table 2   | `R`      | `LandUseR::table2()`    | tables/table2.tex        | yes          |
+| Figure 14 | `julia`  | `LandUse.figure14()`    | plots/figure14a(b).pdf   | yes          |
+| Figure 15 | `julia`  | `LandUse.figure15()`    | plots/figure15a(b).pdf   | yes          |
+| Figure 16 | `julia`  | `LandUse.figure16()`    | plots/figure16a(b).pdf   | yes          |
+| Figure 17 | `julia`  | `LandUse.figure17()`    | plots/figure17a(b).pdf   | yes          |
+
+: Main Text exhibits {tbl-colwidths="[10,10,35,35,10]"}
+
+
+### Appendix A Exhibits
+
+| Exhibit      | Language | Program/function                    | Output in `output/`                    | Reproducible               |
+|-----------   |----------|-----------                          |---------                               |---------                   |
+| Figure A.1   | --       | no code                             | plots/figureA1.pdf                     | yes                        |
+| Figure A.2   | `stata`  | `code/stata/figureA2.do`            | plots/figureA2a(b).pdf                 | yes                        |
+| Figure A.3   | `stata`  | `code/stata/figureA3.do`            | plots/figureA3.pdf                     | yes                        |
+| Figure A.4   | `stata`  | `code/stata/figure7.do`             | plots/figureA4.pdf                     | identical to figure 7      |
+| Figure A.5   | `stata`  | `code/stata/figureA5.do`            | plots/figureA5.pdf                     | identical to figure 7      |
+| Figure A.6   | --       | no code                             | plots/figureA6.pdf                     | yes                        |
+| Figure A.7   | --       | no code                             | plots/figureA7.pdf                     | yes                        |
+| Figure A.8   | --       | no code                             | plots/figureA8.pdf                     | yes                        |
+| Figure A.9   | --       | no code                             | plots/figureA9.pdf                     | yes                        |
+| Table A.1    | `R`      | `LandUseR::print_pop_1950()`        | tables/tableA1.tex                     | yes                        |
+| Table A.2    | `R`      | `LandUseR::print_paris_pop_1950()`  | tables/tableA2.tex                     | yes                        |
+| Figure A.10  | `R`      | `LandUseR::GHSL_plots()`            | plots/tableA10.pdf                     | yes                        |
+| Figure A.11  | `R`      | `LandUseR::GHSL_plots()`            | plots/tableA11.pdf                     | same function produces both|
+| Figure A.12  | `R`      | `LandUseR::plot_top100_densities()` | plots/figureA12.pdf                    | yes                        |
+| Figure A.13  | `R`      | `LandUseR::plot_top100_densities()` | plots/figureA13.pdf                    | same function              |
+| Figure A.14  | `stata`  | `code/stata/figureA14.do`           | plots/figureA14a(b).pdf                | yes                        |
+| Figure A.15  | `R`      | `LandUseR::plot_top100_cutoff()`    | plots/figureA15.pdf                    | yes                        |
+| Figure A.16  | `R`      | `LandUseR::plot_top100_cutoff()`    | plots/figureA16.pdf                    | same function              |
+| Figure A.17  | --       | no code                             | plots/figureA17.pdf                    | yes                        |
+| Figure A.18  | `R`      | `LandUseR::plot_sat_vs_manual()`    | plots/figureA18.pdf                    | yes                        |
+| Figure A.19  | `R`      | `LandUseR::plot_shlomo()`           | plots/figureA19.pdf                    | yes                        |
+| Figure A.20  | `R`      | `LandUseR::CLC_plots()`             | plots/figureA20.pdf                    | yes                        |
+| Figure A.21  | `R`      | `LandUseR::CLC_measure()`           | plots/figureA21.pdf                    | yes                        |
+| Figure A.22  | `R`      | `LandUseR::map_pra_all()`           | plots/figureA22.pdf                    | yes                        |
+| Figure A.23  | `R`      | `LandUseR::wheat_plots()`           | plots/figureA23a(b).pdf                | yes                        |
+| Figure A.24  | `R`      | `LandUseR::pra_check()`             | plots/figureA24.pdf                    | yes                        |
+| Figure A.25  | `R`      | `LandUseR::map_pra_prices2000()`    | plots/figureA25.pdf                    | yes                        |
+| Table A.3    | `R`      | `LandUseR::tableA3()`               | tables/tableA3.tex                     | yes                        |
+| Table A.4    | `R`      | `LandUseR::tableA4()`               | tables/tableA4.tex                     | yes                        |
+| Table A.5    | `R`      | `LandUseR::tableA5_A6()`            | tables/tableA5.tex                     | yes                        |
+| Table A.6    | `R`      | `LandUseR::tableA5_A6()`            | tables/tableA6.tex                     | yes                        |
+| Figure A.26a | `R`      | `CASDr::ENLrun(1984)`               | plots/speed-dist-france-dist-1984.tex  | no - CASD                  |
+| Figure A.26b | `R`      | `CASDr::ENLrun(2013)`               | plots/speed-dist-france-dist-2013.tex  | no - CASD                  |
+| Figure A.27  | `R`      | `CASDr::ENL_all_run_panel()`        | plots/speed-dist-france-2013.pdf       | no - CASD                  |
+| Table A.7    | `R`      | `CASDr::ENLrun(1984)`               | tables/speed-dist-france-1984.tex      | no - CASD                  |
+| Table A.8    | `R`      | `CASDr::ENLrun(2013)`               | tables/speed-dist-france-2013.tex      | no - CASD                  |
+| Table A.9    | `R`      | `CASDr::ENL_all_run_panel()`        | tables/speed-dist-france-1984-2013.tex | no - CASD                  |
+| Figure A.28  | `R`      | `CASDr::d1d2_regression()`          | plots/figureA28a(b).pdf                | no - CASD                  |
+| Table A.10   | `R`      | `CASDr::PTSEDP19_subset()`          | tables/tableA10.tex                    | no - CASD                  |
+| Figure A.29  | `stata`  | `code/stata/figureA29.do`           | plots/figureA29.pdf                    | yes                        |
+| Figure A.30  | `stata`  | `code/stata/figureA30.do`           | plots/figureA30a(b).pdf                | yes                        |
+
+: Appendix A exhibits {tbl-colwidths="[10,10,35,35,10]"}
+
+
+### Appendix B Exhibits
+
+to be done
+
+| Exhibit    | Language | Program/function | Output in `output/` | Reproducible |
+
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
+
+
+# Dataset list
+
+<!---
+In some cases, authors will provide one dataset (file) per data source, and the code to combine them. In others, in particular when data access might be restrictive, the replication package may only include derived/analysis data. Every file should be described. This can be provided as a Excel/CSV table, or in the table below.
+-->
+
+| Data file | Source | Notes    |Provided |
+|-----------|--------|----------|---------|
+
+to be done
+
+
+# Computational requirements
+
+<!---
+In general, the specific computer code used to generate the results in the article will be within the repository that also contains this README. However, other computational requirements - shared libraries or code packages, required software, specific computing hardware - may be important, and is always useful, for the goal of replication. Some example text follows. 
+-->
+
+## Software requirements
+
+<!---
+List all of the software requirements, up to and including any operating system requirements, for the entire set of code. It is suggested to distribute most dependencies together with the replication package if allowed, in particular if sourced from unversioned code repositories, Github repos, and personal webpages. In all cases, list the version *you* used. 
+-->
+
+
+
+### Memory and runtime requirements
+
+<!---
+Memory and compute-time requirements may also be relevant or even critical. Some example text follows. It may be useful to break this out by Table/Figure/section of processing. For instance, some estimation routines might run for weeks, but data prep and creating figures might only take a few minutes.
+-->
+
+#### Summary
+
+
+#### Details
+
+The code was last run on a **4-core Intel-based laptop with MacOS version 10.14.4**. 
+
+Portions of the code were last run on a **32-core Intel server with 1024 GB of RAM, 12 TB of fast local storage**. Computation took 734 hours. 
+
+Portions of the code were last run on a **12-node AWS R3 cluster, consuming 20,000 core-hours**.  
+
+
+## Instructions to replicators
+
+### Software Installation Instructions
+
+We give installation instructions for each software package separately.
+
+#### `LandUseR`
+
+
+
+<!---
+The first two sections ensure that the data and software necessary to conduct the replication have been collected. This section then describes a human-readable instruction to conduct the replication. This may be simple, or may involve many complicated steps. It should be a simple list, no excess prose. Strict linear sequence. If more than 4-5 manual steps, please wrap a master program/Makefile around them, in logical sequences. Examples follow.
+-->
+
+1. do this
+2. do that
+3. look there
+
+### Details
+

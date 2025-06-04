@@ -1,0 +1,686 @@
+\documentclass[./20250130-paper.tex]{subfiles}
+
+
+\begin{document}
+
+This Section evaluates quantitatively the model developed in Section \ref{sec:baselinemodel} for France since 1840.
+
+\subsection{Quantitative set-up}\label{sec:setup}
+
+The time sequence starts in 1840 with steps of 10 years until a final period $T$ far away in the future, $t \in \{1840, 1850,..., T\}$. The model is calibrated using French historical data over the period 1840-2015 from various sources detailed below. The driving forces are sectoral regional productivity changes and aggregate population growth. After the final data point and until period $T$, productivity growth is assumed to be constant over time, across sectors and across regions, equal to 1\%. Population is growing according to forecasts until 2050 and at a constant rate until $T$. 
+
+For quantitative purposes, we extend the model in two directions. First, we consider a dynamic version of the model. Because of free mobility, the model can be solved as a sequence of static equilibria, but we need to pin down the path of the equilibrium real interest rate and compute land values beyond rents. This extension considers a logarithmic instantaneous utility and, given a discount factor $\beta$, households maximize their lifetime utility with borrowing and lending in a risk-free asset in net-zero supply. In each location and at each date, land values correspond to the discounted sum of future rents 
+\begin{equation*}
+	\tilde{\rho}_{k,t}(\ell) = \sum_{s=t}^\infty \frac{\rho_s(\ell_k)}{(R_s)^{(s-t)}},
+\end{equation*}
+where the infinite sum is approximated by truncation for a $T$ large enough relative to $t$, and the real interest rate $R$ is the ratio of marginal utilities between two consecutive periods.
+
+Second, the supply elasticity of housing space, $\epsilon(\ell_k)$, is allowed to depend on the location within city $k$ (as in \cite{baumsnowhan2020}), with $\partial\epsilon(\ell_k)/\partial\ell_k\geq 0$ and common elasticity in the rural area, $\epsilon(\phi_k)=\epsilon_r$. This is meant to capture higher costs to build closer to the center than in the suburbs or the rural part of the economy. Details of the equilibrium under these extensions are relegated to Appendix \ref{B-sec:Qmodel}. 
+
+%\greenie{SHOULD WE UPDATE OUR REFERENCES FOR BOPPART ET AL., BAUM-SNOW AND HAN?}
+%\subsection{Calibration}\label{sec:calibration}
+\subsection{Parameter values}\label{sec:calibration}
+
+For computational purposes, we consider $K=20$ regions/cities selected among the initial set of 100 cities measured in 1870. One region represents the Parisian area and the remaining 19 cities are randomly drawn from the sample of 100 cities to preserve the distribution of city sizes in terms of population.\footnote{We use 1870 for population measures. After selecting Paris by default, we compute median population for the remaining cities, and split the sample at this value. Above the median, we use 10 quantiles of city population to create nine bins, where we draw one city from each bin randomly; below the median we sample from all concerned cities 10 times without replacement. This strategy is employed because below the median, cities are very similar in terms of population, hence choosing randomly amongst all (instead of by bins) ensures better mixing of city types.} Each region is initially endowed with the same land area $S$ normalized to unity. Data used for the calibration together with model counterparts are detailed in Appendices \ref{B-sec:model-inputs}-\ref{B-sec:map-model-to-data}.
+
+As detailed below, few parameters, $\{\alpha,\beta,\epsilon(0),\epsilon_r\}$, are calibrated using values from the literature. Other parameters are disciplined to match data outcomes. The parameters $\{\xi_l,\xi_w\}$ are estimated separately using micro data on commuting. Population growth is set to match aggregate data. All the remaining parameters are jointly determined to minimize the distance between the model's outcomes and a set of specified moments in the data. Details of the minimization procedure for the joint estimation of parameters $\{\nu, \gamma, \underline{c}, \underline{s}, \sigma, a\}$ together with the distribution of sectoral productivities across regions at each date $t$, $\{\theta_{u,k,t}, \theta_{r,k,t}\}$, are provided in Appendix \ref{B-sec:solestimation}. The parameter values for the baseline simulation are summarized in Table \ref{tab:params} and the main intuitions behind the identification of the model's parameters are provided below. 
+
+% \begin{table}[H]
+	% 	\begin{center}
+		% 		\input{\modtables/params-2-digits-old.tex}   % please don't manually edit the table.
+		% 	\end{center}
+	% 	\caption{Old Parameter values\label{tab:params}}
+	% \end{table}
+
+\begin{table}[h]
+	\begin{center}
+		\input{\modtables/params-2-digits-baseline.tex}   % please don't manually edit the table.
+	\end{center}
+	\caption{Aggregate Parameter Values.\label{tab:params}}
+	{\footnotesize \textit{Notes}: Total initial population in the economy is $K \times L_{1840}$. Total space is $K \times S$.}
+\end{table}
+
+%\vspace{-0.25cm}
+\textbf{Rural production function.} The land intensity in agriculture is set to 25\%, $\alpha=0.75$ as in \cite{boppart2019}. Rural production in the quantitative model is Cobb-Douglas but we perform sensitivity with respect to the elasticity of substitution between labor and land, as described in Section \ref{sec:extensions}.
+
+\textbf{Rural and urban productivity.} The productivity path for each region $k$ in sector $s \in \{u,r\}$, $\theta_{s,k,t}$, is the product of a common (aggregate) component, $\theta_{s,t}$ and a region-specific component, $\theta^k_{s,t}$,
+\begin{equation}
+	\theta_{s,k,t}=\theta_{s,t} \cdot \theta^k_{s,t},\label{eq:theta-definition}
+\end{equation}   
+where the region-specific components are normalized such that aggregate sectoral productivity is equal to $\theta_{s,t}$ at all dates.\footnote{The weighted mean of $\theta^k_{s,t}$ is normalized to 1, weighting by population in sector $s$ and region $k$.} The path for aggregate productivity in both sectors, $\theta_{r,t}$ and  $\theta_{u,t}$, is set to match its data counterpart using aggregate French sectoral data on production, employment and agricultural land use since 1840.\footnote{1840 is the first date of observation for agricultural land use necessary to compute the path of rural productivity. Due to the normalization of price indices, $\theta_{r,0}$ and $\theta_{u,0}$ are set equal to unity in 1840. The yearly path of $\theta$s in the data is smoothed to remove business cycles fluctuations.} The estimated path for $\theta_{r,t}$ and  $\theta_{u,t}$ (displayed in Figure \ref{fig:theta}) is in line with the evolution of the standards of living in France since 1840. It is consistent with the conventional view that the nineteenth century is characterized by a slow agricultural productivity growth relative to the recent decades. More specifically, starting the agricultural crisis in the late nineteenth century, technological progress in French agriculture was slow and delayed relative to other countries, before catching up at a fast rate post-World War II (\cite{bairoch1989}).
+
+
+\begin{figure}[h!]
+	\begin{center}
+		\includegraphics[width=0.69\textwidth]{\modplots/../Thetalong_FRA1840.pdf}
+	\end{center}
+	\vspace{-0.5cm}
+	\caption{Estimated Aggregate Productivity Series, Rural ($\theta_{r,t}$) and Urban ($\theta_{u,t}$), 1840=1 (1840-2019). Estimation details in Appendix \ref{A-sec:sectoral-productivities}.}
+	\label{fig:theta}
+\end{figure}
+
+Region-specific sectoral productivities, $\theta^k_{s,t}$, are estimated jointly with the parameters $\{\nu, \gamma, \underline{c}, \underline{s}, \sigma, a\}$ in the minimization procedure described in Appendix \ref{B-sec:solestimation}. However, their estimation relies on some targeted cross-sectional moments, namely the relative population of cities and local farmland values. The targeted population of each city is the population of the delineated urban areas measured using Census data in 1876 and 1950 and satellite data in 1975, 1990, 2000 and 2015 (see Section \ref{sec:urban-expansion}). The targeted local farmland values are prices of arable land at the département level in 1892 from the Agricultural Census, and at the level of a département subdivision `Petite Région Agricole (PRA)' from the Ministry of Agriculture in 1950, 1975, 1990, 2000 and 2015 (see Appendix \ref{A-sec:spatialagri}). For the estimation procedure, the distribution of city populations and local farmland values is kept fixed from 1840 until a first observation date set to 1870, and data are linearly interpolated in between observation dates.\footnote{We have three potential dates for the first cross-sectional data point (1866 for the historical map delivering urban areas, 1876 for the population Census, and 1892 for farmland prices). For estimation, we target these initial observations at the unique initial date of 1870.} Region-specific urban productivities, $\theta^k_{u,t}$, are chosen to match the distribution of population of the 20 different cities. Region-specific rural productivities, $\theta_{r,k,t}$ are estimated to match the distribution of arable land values around each city---where the model-implied price of farmland, $\tilde{\rho}_{r,k,t}$, is the appropriately discounted value of farmland rents located beyond the urban fringe $\phi_{k,t}$ in region $k$.\footnote{Within the set of wheat producing regions, our estimates of $\theta_{r,k,t}$ are highly correlated with wheat yields. While the estimation of $\theta_{r,k,t}$ could rely on local agricultural yields, this would require comparing yields for different crops given spatial differences in crop specialization. Data on local farmland values circumvent these issues. See \cite{fiszbein2022agricultural} for the modeling of crop choice across U.S counties.} Specifically, for each rural location $\ell$, the value of land is $\tilde{\rho}_{k,t}(\ell) = \sum_{s=t}^\infty \frac{\rho_s(\ell_k)}{(R_s)^{(s-t)}}$, as defined in Section \ref{sec:setup}, and the average value of farmland in region $k$ is given by
+\begin{equation*}
+	\tilde{\rho}_{r,k,t}=\frac{\int_{\phi_{k,t}}^{\sqrt{S/\pi}} \tilde{\rho}_{k,t}(\ell)2 \pi \ell d\ell}{S - \phi_{k,t}^2 \pi}.
+\end{equation*}
+
+
+\textbf{Demographics.} Aggregate population, $L_t$, is normalized to the number of regions, $K$, in the first period and set at each date to match the increase of the French population since 1840 according to Census data.\footnote{The normalization of the 1840 population together with homogeneous land area $S$ across regions make sure that the land area per person in 1840 is independent of $K$, equal to $1/S$. Thus, with homogeneous productivities across space, the quantitative model behaves like a one-city model of population normalized to unity in each region.} Over the period, the French population roughly doubled and the increase in the labor force is of the same magnitude. Going forward, we use the projections for the French population by INSEE until 2050 and a constant growth rate of $0.4\%$ thereafter.
+
+\textbf{Preferences.} Given technology, demographics, and the commuting cost elasticities $\{\xi_l,\xi_w\}$, the preference parameters $\{\nu, \gamma, \underline{c}, \underline{s}, \sigma\}$ are jointly set such that the agricultural employment share and the housing spending share are in line with the data. More precisely, the subsistence needs in agriculture parameter, $\underline{c}$, determines the agricultural employment share in the earlier periods, while the preferences parameter towards the rural good, $\nu$, determines the long-run employment share in agriculture. Similarly, the endowment of urban good, $\underline{s}$, determines the housing spending share for the year 1900 (24\% with a 5-year average around 1900)---our initial period of observation regarding consumption expenditures, while the preference parameter towards housing services, $\gamma$, determines the housing spending share in recent years (31\% in 2010). The parameter governing the elasticity of substitution between the rural and the urban good, $\sigma$, determines the impact of relative aggregate sectoral productivity growth on the aggregate sectoral allocation. While aggregate urban and rural productivity increased roughly at the same rate until the 1970s, they moved apart later with faster rural productivity growth (Figure \ref{fig:theta}). Therefore, for given income-effects parametrized by $\{\underline{c}, \underline{s}\}$, a higher $\sigma$ implies a slower reallocation of labor away from the rural sector in the recent decades---these later evolutions of the rural employment share pinning down $\sigma$. The baseline estimate, $\sigma=1.01$, suggests that substitution effects are not important to match sectoral employment. However, with little variations of relative sectoral productivity growth, we remain cautious with such an estimate and perform sensitivity analysis with alternative values in Section \ref{sec:extensions}. 
+
+The last preference parameter, the discount factor $\beta$, is irrelevant for the equilibrium allocation given other parameters but pins down the rate of interest and thus matters for the value of land at each date. It is set externally to a standard value of $0.96$ on an annual basis, but, within the range of admissible values, results do not depend on the value of $\beta$.\footnote{The minimization procedure detailed in \ref{B-sec:solestimation} implies computing rural land values around each city but estimates of region-specific productivities aiming at matching relative arable land values barely depend on the value of $\beta$.} 
+
+\textbf{Housing supply conditions.} Existing estimates of the housing supply elasticities, $\epsilon$, typically vary between 2 and 5, depending on the location as well as on the estimation technique (see, among others, \cite{albouyehrlichshin2018},  \cite{combesetal2019} and \cite{baumsnowhan2020}). \cite{baumsnowhan2020} provides evidence of the \textit{within-city} variation of the housing supply elasticities, ranging from about 2.5 at the central part of the city to about 5 at the fringe of cities. In all regions, we set an elasticity of $2$ at location $\ell_k=0$ and $5$ at the fringe and the rural area.\footnote{With Cobb-Douglas production of housing using land and structure, there is a mapping between $\epsilon$ and the land share in production. Typical estimates of the land share are between 0.2 and 0.3, corresponding to $\epsilon$ between 2 and 4. We assume that $\epsilon(\ell)$ evolves linearly from the central value to the fringe value. Results do not depend on this choice.} For comparison purposes, we perform sensitivity analysis with a constant elasticity of housing supply, $\epsilon=3$, and we show that the main results do not change (see Section \ref{sec:extensions}).
+%Across urban census tracts in our estimation sample, we estimate an average floorspace supply elasticity of 0.42, an average housing units supply elasticity of 0.35 and an average land development elasticity of 0.09. Predicted elasticities range from 0.14 to 0.44 for unit supply and 0.33 to 0.70 for floorspace supply in 25th and 75th percentile neighborhoods, with means of 0.29 and 0.51 respectively
+
+\textbf{Commuting costs.} The elasticities of commuting costs to income, $\xi_w$, and to distance, $\xi_\ell$, are estimated externally using individual level commuting data detailed in Appendix \ref{A-sec:commuting}. In the model, the elasticity of speed to commuting distance is equal to $1-\xi_\ell$. We find that this elasticity is precisely estimated within a narrow range around 0.45---depending on the sample used and the controls. Thus, $\xi_\ell$ is set externally to $0.55$.\footnote{Commuting data also show that the relationship between speed and commuting distance is very close to log-linear.}  
+
+The elasticity of commuting costs to income $\xi_w$ is tied to the evolution of urban speed when average income increases. More precisely, $\left( 1-\xi_w\right)$ is the elasticity of speed to wage income at a given commuting distance. Using the individual commuting data, one can estimate the percentage change in speed over 30 years for a given commuting distance. Over the period 1984-2013, this increase is equal to 11\% for an increase in measured aggregate urban productivity of 44\%---yielding an estimate for $\xi_w = 1-\frac{11}{44}$. Thus, $\xi_w$ is set externally to $0.75$. 
+
+
+The remaining parameter $a$ is estimated to make the total urban area, $\sum_k\pi\phi_k^2 $, represent 17\% of rural land in the recent period---the measured artificial land is 17\% of the agricultural land in 2010. Results are not very sensitive to $a$ as long as urban land remains a small fraction of available land.
+
+
+\subsection{Results: aggregate outcomes}\label{sec:resagg}
+
+
+%\begin{figure}
+%\begin{center}
+%\includegraphics[width=0.8\textwidth]{\imgs/Thetalong_FRA1815.pdf}
+%\end{center}\caption{Estimated time series $\{\theta_{u,t}\},\{\theta_{r,t}\}$. We use a smoothed version in the model. \label{fig:smooth-thetas}}
+%\end{figure}
+
+
+We first focus on aggregate outcomes over the period 1840-2020 to investigate the ability of the model to reproduce quantitatively the salient facts of Section \ref{sec:empevidence}. Model predictions across regions/cities are investigated in a second step. Outcomes are aggregated across regions and compared to aggregate data when available. For urban outcomes, one can interpret the following results as model predictions for the `average' representative French city.\footnote{Alternatively, these are approximately the outcomes of a city in a region with regional sectoral productivities corresponding to the aggregate ones.}
+
+\begin{figure}[h!]
+	\begin{adjustbox}{center}
+		\begin{subfigure}{\pthree\textwidth}
+			\includegraphics[width = \linewidth]{\modplots/aggregation/mod_data_Lrshare.pdf}
+			\caption{Rural employment share.}
+		\end{subfigure}
+		% \hspace{0.1cm}
+		\begin{subfigure}{\pthree\textwidth}
+			\includegraphics[width = \linewidth]{\modplots/aggregation/mod_data_pr.pdf}
+			\caption{Relative price of rural good.\label{fig:model-relativeprice}} 
+		\end{subfigure}
+		% \hspace{0.1cm}
+		\begin{subfigure}{\pthree\textwidth}
+			\includegraphics[width = \linewidth]{\modplots/aggregation/model_spending.pdf}
+			\caption{Spending shares.\label{fig:model-spending}} 
+		\end{subfigure}
+	\end{adjustbox}
+	\caption{Structural change. \label{fig:model-stchange}}
+	
+	{\footnotesize \textit{Notes}: Outcomes of the baseline simulation of the quantitative model where parameters are set to the values of Table \ref{tab:params}. Corresponding data for the employment share, the relative price of rural goods and spending shares are described in Appendix \ref{A-sec:aggregate}. The relative price is normalized to 1 in 1950.}
+\end{figure}
+
+
+\noindent{\textbf{Structural change.}} Figure \ref{fig:model-stchange} shows that our model is able to account for the patterns of structural change observed in France. As well known in the literature, due to low initial productivity, the (targeted) share of workers needed to produce rural goods is high at the start to satisfy subsistence needs. The demand for rural goods for subsistence makes them initially relatively expensive and households spend a disproportionate share of income on rural goods. Rising rural productivity solves the `food problem', reallocates labor away from the rural sector and the relative price of rural goods falls. Our model fits the data on the historical evolution of the relative price remarkably well, despite not being targeted (Figure \ref{fig:model-relativeprice}). Moreover, rising income leads to a reallocation of spending away from rural goods towards the urban good and housing services: the spending share on the rural good gradually falls, the share spent on the urban good continuously increases, and so does the (targeted) spending share on housing services, although at a slower speed (Figure \ref{fig:model-spending}). Overall, the spending share patterns are broadly in line with aggregate data if one abstracts from fluctuations in the interwar period.
+
+
+
+
+% \begin{figure}[h]
+% 	\begin{adjustbox}{center}	
+% 		\begin{subfigure}{\ptwo\textwidth}
+% 			\includegraphics[width = \linewidth]{\modplots/hetr-fig11-3.pdf}
+% 			\caption{Urban Area and Population (1870=1)}
+% 		\end{subfigure}
+% 		\hspace{0.4cm}
+% 		\begin{subfigure}{\ptwo\textwidth}
+% 			\includegraphics[width = \linewidth]{\modplots/hetr-fig11-3.pdf}
+% 			\caption{Average urban density (1870=1)}
+% 		\end{subfigure}	
+% 	\end{adjustbox}		
+% 	\caption{Urban expansion.\label{fig:model-urbanexp}}
+% 	{\footnotesize \textit{Notes}: Outcomes of the baseline simulation of the quantitative model where parameters are set to the values of Table \ref{tab:params}. Plots start in 1870 for comparison with data. Corresponding data for urban population, area and average density are described in Appendix \ref{A-sec:area-pop-measure}. Data and model outcomes are normalized to 1 in 1870 and shown on a log-scale.}
+% \end{figure}
+
+
+
+% \begin{figure}[H]
+% 	\advance\leftskip-1.5cm
+% 	\advance\rightskip-1.5cm
+% 	\subfloat[Rural employment share.\label{fig:model-emp}]{\begin{centering}
+% 			\includegraphics[scale=0.5]{\modplots/AgrEmpl_data.pdf}
+% 			\par\end{centering}
+		
+% 	}\subfloat[Relative price of rural good.\label{fig:model-relativeprice}]{\begin{centering}
+% 			\includegraphics[scale=0.5]{\modplots/AgrPrice_data.pdf}\par\end{centering}
+		
+% 	}\hspace{0.0cm}\subfloat[Spending shares.\label{fig:model-spending}]{\begin{centering}
+% 			\includegraphics[scale=0.5]{\modplots/Expshares_data.pdf}\par\end{centering}
+		
+% 	}
+% 	\caption{Structural change. \label{fig:model-stchange}}
+% 	\advance\leftskip 1.5cm
+% 	\advance\rightskip 1.5cm
+% 	{\footnotesize \textit{Notes}: Outcomes of the baseline simulation of the quantitative model where parameters are set to the values of Table \ref{tab:params}. Corresponding data for the employment share, the relative price of rural goods and spending shares are described in appendices \ref{A-sec:sectoral-employment}, \ref{A-sec:national-accounts} and \ref{A-sec:cons-expenditures}. The relative price is normalized to 1 in 1950.}
+% \end{figure}
+% \vspace{-0.5cm}
+% \begin{figure}[H]
+% 	\subfloat[City size (1870=1).\label{fig:model-citysize}]{\begin{centering}
+% 			\includegraphics[scale=0.6]{\modplots/CitySize_data.pdf}
+% 			\par\end{centering}
+		
+% 	}\subfloat[Average urban density (1870=1).\label{fig:model-density}]{\begin{centering}
+% 			\includegraphics[scale=0.6]{\modplots/AvgDensb_data.pdf}\par\end{centering}
+		
+% 	}
+% 	\caption{Urban expansion.\label{fig:model-urbanexp}}
+% 	%\advance\leftskip 1.5cm
+% 	%\advance\rightskip 1.5cm
+% 	{\footnotesize \textit{Notes}: Outcomes of the baseline simulation of the quantitative model where parameters are set to the values of Table \ref{tab:params}. Plots start in 1870 for comparison with data. Corresponding data for urban population, area and average density are described in Appendix \ref{A-sec:area-pop-measure}. Data and model outcomes are normalized to 1 in 1870 and shown on a log-scale.}
+% \end{figure}
+% \vspace{-0.5cm}
+
+\begin{figure}[hpt]
+	\begin{adjustbox}{center}	
+		\begin{subfigure}{\ptwo\textwidth}
+			\includegraphics[width = \linewidth]{\modplots/aggregation/mod_data_urban_pop_area.pdf}
+			\caption{Urban Area and Population (1870=1)\label{fig:model-citysize}}
+		\end{subfigure}
+		\hspace{0.1cm}
+		\begin{subfigure}{\ptwo\textwidth}
+			\includegraphics[width = \linewidth]{\modplots/aggregation/mod_data_avgdensity.pdf}
+			\caption{Average urban density (1870=1)\label{fig:model-density}}
+		\end{subfigure}	
+	\end{adjustbox}	
+	\caption{Urban expansion.\label{fig:model-urbanexp}}
+	{\footnotesize \textit{Notes}: Outcomes of the baseline simulation of the quantitative model where parameters are set to the values of Table \ref{tab:params}. Plots start in 1870 for comparison with data. Data and model outcomes are normalized to 1 in 1870 and shown on a log-scale.}	
+\end{figure}
+
+\begin{figure}[hpb]
+	\begin{adjustbox}{center}	
+		\begin{subfigure}{\ptwo\textwidth}
+			\includegraphics[width = \linewidth]{\modplots/aggregation/model_density_0_r.pdf}
+			\caption{Urban density (1840=1).\label{fig:model-density2}}
+		\end{subfigure}
+		\hspace{0.1cm}
+		\begin{subfigure}{\ptwo\textwidth}
+			\includegraphics[width = \linewidth]{\modplots/aggregation/mod_data_expdecay.pdf}
+			\caption{Density gradient (2020).\label{fig:model-gradient}}
+		\end{subfigure}	
+	\end{adjustbox}		
+	\caption{Density across space.\label{fig:model-densityspace}}
+	%\advance\leftskip 1.5cm
+	%\advance\rightskip 1.5cm
+	{\footnotesize \textit{Notes}: Outcomes of the baseline simulation of the quantitative model where parameters are set to the values of Table \ref{tab:params}. Density in different urban locations (left plot) is normalized to 1 in 1840 for readability. Densities are population-weighted averages across cities. Density of the city center is computed on a circle ending at 15\% of the initial city radius in 1840. The right panel shows the model implied average exponential decay of urban density in model (year 2000) and data (year 2015). Estimation of model decay is described in detail in Appendix \ref{B-sec:model-outputs}, while for data in Appendix \ref{A-sec:density-results}. Both normalized to 1 at distance 0.}
+\end{figure}
+
+\noindent{\textbf{Urban expansion.}} Figure \ref{fig:model-urbanexp} shows model outcomes that are more specific to our theory with endogenous land use: aggregate urban area (compared to aggregate urban population) and average urban density. For comparison with data on urban expansion, the plots start in 1870---normalizing the value in 1870 to unity. In line with the data, cities expand much faster in area than in population (Figure \ref{fig:model-citysize}). While our model does not account for the full observed expansion of the urban area, particularly so until 1950, it explains a very large fraction, despite not being targeted. As a consequence, the model predicts a large fall in average urban density---density is divided by almost 6 since 1870, a bit less than in the data (Figure \ref{fig:model-density}). The decline in average urban density is the outcome of two different forces---a structural change channel and a commuting cost channel. On the one hand, this is the natural consequence of structural change driven by \textit{rural} productivity growth: higher rural productivity frees up farmland for cities to expand. Combined with less valuable rural goods, this puts downward pressure on farmland prices (relative to income) at the urban fringe. Moreover, as workers spend less on rural goods, they can afford larger homes and spend relatively more on housing. The city expands outwards at a fast rate. On the other hand, changes in commuting costs driven by rising \textit{urban} productivity leads to a reallocation of workers away from the dense center towards the fringe---contributing further to the fall in average urban density. With rising urban income, the share of income devoted to commuting costs falls ($\xi_w<1$) and workers move towards the suburbs to enjoy larger homes despite a rising opportunity cost of commuting time.\footnote{According to the micro-foundation of commuting costs, this is so because urban workers optimally choose faster commuting modes when moving towards the suburbs, implying $\xi_w<1$.} Thus, although the mechanisms are entirely different, both rural and urban productivity growth contribute to urban sprawl and falling urban density.
+
+
+
+% \begin{figure}[H]
+% 	\subfloat[Urban density (1840=1).\label{fig:model-density2}]{\begin{centering}
+% 			\includegraphics[scale=0.6]{\modplots/UrbDens.pdf}\par\end{centering}		
+% 	}
+% 	\subfloat[Density gradient (2015).\label{fig:model-gradient}]{\begin{centering}
+% 			\includegraphics[scale=0.6]{\modplots/DecDensity_data.pdf}
+% 			\par\end{centering}
+		
+% 	}
+% 	\caption{Density across space.\label{fig:model-densityspace}}
+% 	%\advance\leftskip 1.5cm
+% 	%\advance\rightskip 1.5cm
+% 	{\footnotesize \textit{Notes}: Outcomes of the baseline simulation of the quantitative model where parameters are set to the values of Table \ref{tab:params}. Density in different urban locations (left plot) is normalized to 1 in 1840 for readability. Density of the city center is computed on a circle ending at 15\% of the initial city radius in 1840. The right panel shows the model implied urban density at 20 equal-sized bins of distance from the center in 2015, where we normalized by the most central bin. For comparison, we also plot an exponential decay model whose coefficient we estimate from data as described in appendix \ref{A-sec:density-results}.}
+% \end{figure}
+
+\noindent{\textbf{Density within cities.}} Figure \ref{fig:model-densityspace} shows the model predictions for density in different locations of the `average' French city. Figure \ref{fig:model-density2} depicts the evolution of the central density and the density at the fringe of the city (relative to the average), where densities are normalized to 1 in 1840 for readability.\footnote{Densities of the `average' French city are population-weighted average across cities. The fringe of the city center is at 15\% of the radius of each city in 1840. Central density is the population-weighted average across cities of the density within this radius.} The fall in average density is driven both by a fall in central density and a fall in density at the urban fringe. The fall in density at the fringe is the natural consequence of structural change which puts downward pressure on the price of farmland (relative to income). Households can afford larger homes in the suburban parts of the city. Central density also falls because households find it worth to relocate towards the suburbs to enjoy larger homes as they can commute faster when their urban income rises. The former mechanism, more specific to our theory, is crucial to generate a fall in average density that is larger than the fall in the central one---in line with the Parisian data discussed in Section \ref{sec:empevidence}. Our model predicts that the overall fall in the central density is about 70\% of the fall in the average density---in the ballpark of the estimates for Paris. Lastly, one can measure the density gradient by distance within urban areas, both in the data and in the model in the recent period.. The model predictions are shown in Figure \ref{fig:model-gradient} for the `average' city. The shape of the curve is very close to an exponential (fitted curve) as in the data, and the value of the coefficient of the fitting curve is in the ballpark of the data although slightly higher. Thus, our quantitative model provides a reasonable fit of the data regarding the density of urban settlements within a city and across time.
+
+
+
+% \begin{figure}[h]
+% 	\begin{adjustbox}{center}	
+% 		\begin{subfigure}{\ptwo\textwidth}
+% 			\resizebox{\linewidth}{!}{
+% 			\input{\modplots/aggregation/density_0_r.tikz}
+% 			}
+% 			\caption{Urban density (1840=1).}
+% 		\end{subfigure}
+% 		\hspace{0.1cm}
+% 		\begin{subfigure}{\ptwo\textwidth}
+% 			\resizebox{\linewidth}{!}{
+% 			\input{\modplots/aggregation/expdecay.tikz}
+% 			}
+% 			\caption{Density gradient (2015).}
+% 		\end{subfigure}	
+% 	\end{adjustbox}		
+% 	\caption{Density across space.\label{fig:model-densityspace}}
+% 	%\advance\leftskip 1.5cm
+% 	%\advance\rightskip 1.5cm
+% 	{\footnotesize \textit{Notes}: Outcomes of the baseline simulation of the quantitative model where parameters are set to the values of Table \ref{tab:params}. Density in different urban locations (left plot) is normalized to 1 in 1840 for readability. Density of the city center is computed on a circle ending at 15\% of the initial city radius in 1840. The right panel shows the model implied urban density at 20 equal-sized bins of distance from the center in 2015, where we normalized by the most central bin. For comparison, we also plot an exponential decay model whose coefficient we estimate from data as described in appendix \ref{A-sec:density-results}.}
+% \end{figure}
+
+% \vspace{-0.5cm}
+
+
+
+
+\noindent{\textbf{Commuting speed and the `agricultural productivity gap'.}} Using the micro-foundation of commuting costs detailed in Appendix \ref{B-sec:extensions-commute}, the model generates predictions regarding the evolution of commuting speed across time. Moreover, the marginal urban worker, who has the longest commute, needs to be compensated relative to the rural worker in each region. Our model thus predicts an endogenous urban-rural wage gap, which depends in each region on the city fringe ($\phi_k$) and the commuting costs in this furthest away location. These predictions, averaged across regions, are shown in Figure \ref{fig:model-commuting}. 
+
+Over time, our model generates almost a five-fold rise in the average commuting speed (Figure \ref{fig:model-speed}). The endogenous increase in speed is driven by two forces. First, as cities sprawl, urban workers located further away find it worth to commute faster. Second, rising urban income increases the opportunity cost of time and workers choose faster commutes. We collected historical data on the use of different commuting modes for Paris to provide an estimate of the evolution of the average commuting speed in the Parisian urban area (see Appendix \ref{A-sec:commuteparis} for details). The overall increase in average speed since 1840 predicted by the model is of a similar magnitude than in the Parisian data.\footnote{\cite{milessefton2020} find a similar increase for the U.K. Historical data are unfortunately not available for the rest of France. The model implied speed in Paris is also very close to the data counterpart.} Beyond the overall increase, the predictions about the timing line up relatively well with the evolution of commuting speed in the Parisian area. The increase by a factor of about 2 until 1930 reflects the more intensive usage of public transport and their increase in speed over this period (from the initial horse-drawn omnibus to the metro). The later increase, more specifically post-World War II, reflects the increasing car usage.  %Overall, the model provides predictions regarding the evolution of the average urban speed that are of reasonable magnitude.
+
+
+
+
+%To illustrate the mode switch over the period, we discretize the range of possible speeds in the model into 3 bins: slow, medium and high. The thresholds are chosen such that the medium speed is barely used in 1840 and the high speed only starts being used in 1930. This illustrates different commuting modes ranked according to their respective speed (walking, public transports/bikes and cars/motorbikes). Our model accounts relatively well for the broad patterns of commuting over the period (Figure \ref{fig:model-mode}). 
+
+%Lastly, Figure \ref{fig:model-agp} shows the urban-rural wage gap (`agricultural productivity gap', $w_u/w_r$)---a monotonic transformation of commuting costs at the fringe of the city. Following \cite{gollin2014agricultural}, one can compare the predicted values to the raw `agricultural productivity gap' ($\text{Raw AGP}$) computed using national accounts data, $\text{Raw AGP}=\frac{L_r/L_u}{VA_r/VA_u}$, where $VA_i$ denotes the value added in sector $i$ (agriculture vs. non-agriculture). In France, alike other developed countries (\cite{gollin2014agricultural}), the raw `agricultural productivity gap' hovers between 1.5 and 2.5 since 1840---in the ballpark of the values predicted by the model. Even though the model misses the time variations,\footnote{This is particularly visible at the beginning of the sample (1840-1860). However, using wage data, \cite{sicsic1992} provides estimates of the rural-urban wage gap in France over the period 1852-1911. Like in the U.K., he finds a significant increase of the gap, more in line with our predictions.} it is able to account for a significant fraction of the measured gap. Our quantitative model suggests that spatial frictions combined with location-specific housing can generate urban-rural wage gaps of a significant economic magnitude. It also provides insights on the persistence of fairly large gaps even in developed countries, where labor misallocation is arguably less relevant. 
+
+
+
+Following \cite{gollin2014agricultural}, Figure \ref{fig:model-agp} shows the `agricultural productivity gap', averaged across regions. For each region $k$, the `agricultural productivity gap' is a monotonic transformation of commuting costs at the fringe of the city---proportional to the urban-rural wage gap, $w_{u,k}/w_{r,k}$. We compute the average raw `agricultural productivity gap' at a given date as, 
+\begin{equation*}
+\text{Raw-APG}=\sum_{k=1}^{K}\left( \frac{L_k}{L}\right) \left( \frac{L_{r,k}/L_{u,k}}{VA_{r,k}/VA_{u,k}}\right),
+%=\alpha\frac{w_u}{w_r},
+\end{equation*}
+where $\frac{L_k}{L}$ is the population-weight of region $k$, $L_{s,k}$ and $VA_{s,k}$ denotes the employment and value added in sector $s$ of region $k$. The value predicted by the model for the recent period, around 1.6, is in line with the values computed by \cite{gollin2014agricultural} for France---lying in between their Raw-APG and Adjusted-APG. Computing the Raw-APG for the entire sample period directly from historical national accounts data, we find that our model falls short of the entire gap, especially for the initial years, but explains a large fraction since 1960.\footnote{Using wage data, \cite{sicsic1992} provides estimates of the urban-rural wage gap in France over the period 1852-1911. Like in the U.K., he finds a significant increase of the gap over the period, in line with our predictions.} Our quantitative model suggests that spatial frictions combined with location-specific housing can generate urban-rural wage gaps of a significant economic magnitude. It also provides insights on the persistence of fairly large gaps even in developed countries, where labor misallocation is arguably less relevant.
+
+\begin{figure}[h!]
+	\begin{adjustbox}{center}	
+		\begin{subfigure}{\ptwo\textwidth}
+			\includegraphics[width = \linewidth]{\modplots/aggregation/mod_data_commute_speed.pdf}
+			\caption{Average urban commuting speed (1840=1).\label{fig:model-speed}}
+		\end{subfigure}
+		\hspace{0.1cm}
+		\begin{subfigure}{\ptwo\textwidth}
+			\includegraphics[width = \linewidth]{\modplots/aggregation/mod_APG_agg.pdf}
+			\caption{Agricultural productivity gap.\label{fig:model-agp}}
+		\end{subfigure}	
+	\end{adjustbox}		
+	\caption{Commuting speed and the `agricultural productivity gap'.\label{fig:model-commuting}}
+	%\advance\leftskip 1.5cm
+	%\advance\rightskip 1.5cm
+	{\footnotesize \textit{Notes}: Outcomes of the baseline simulation of the quantitative model where parameters are set to the values of Table \ref{tab:params}. The average urban commuting speed (left plot) is the density-weighted average of speeds across urban locations (see Appendix \ref{B-sec:model-outputs} for definition, normalization to 1 in 1840). Estimates for Paris are detailed in Appendix \ref{A-sec:commuteparis}. The `agricultural productivity gap' (right plot) is defined as the population-weighted average across regions of $\frac{L_{r,k}/L_{u,k}}{VA_{r,k}/VA_{u,k}}$.}
+\end{figure}
+
+\begin{figure}[h!]
+	\begin{adjustbox}{center}	
+		\begin{subfigure}{\ptwo\textwidth}
+			\includegraphics[width = \linewidth]{\modplots/aggregation/mod_data_piketty.pdf}
+			\caption{Urban versus rural land wealth.\label{fig:model-piketty}}
+		\end{subfigure}
+		\hspace{0.1cm}
+		\begin{subfigure}{\ptwo\textwidth}
+			\includegraphics[width = \linewidth]{\modplots/aggregation/model_HPI.pdf}
+			\caption{Real Housing Price Index (1840=100).\label{fig:model-housingprice}}
+		\end{subfigure}	
+	\end{adjustbox}		
+	\caption{Land values and housing price.\label{fig:model-landvalues}}	%\advance\leftskip 1.5cm
+	%\advance\rightskip 1.5cm
+	{\footnotesize \textit{Notes}: Outcomes of the baseline simulation of the quantitative model where parameters are set to the values of Table \ref{tab:params}. Land and housing values are computed as the discounted sum of future land rents in each location. Corresponding data (dashed) are based on \cite{piketty2014capital}. The real housing price index averages the purchasing housing prices across locations (deflated using a model implied GDP-deflator). Details on the computation are provided in Appendix \ref{B-sec:model-outputs}.}
+\end{figure}
+
+
+% \begin{figure}[H]
+% 	\subfloat[Average urban commuting speed (1840=1).\label{fig:model-speed}]{\begin{centering}
+% 			\includegraphics[scale=0.6]{\modplots/CommSpeed_data.pdf}
+% 			\par\end{centering}
+		
+% 	}%\subfloat[Commuting modes.\label{fig:model-mode}]{\begin{centering}
+% 	%		\includegraphics[scale=0.4]{\modplots/UrbSpeeds.pdf}
+% 	%		\par\end{centering}
+% 	%	}
+% 	\hspace{0.0cm}\subfloat[Agricultural productivity gap.\label{fig:model-agp}]{\begin{centering}
+% 			\includegraphics[scale=0.6]{\modplots/APG.pdf}
+% 			\par\end{centering}
+% 	}
+% 	\caption{Commuting speed and the `agricultural productivity gap'.\label{fig:model-commuting}}
+% 	%\advance\leftskip 1.5cm
+% 	%\advance\rightskip 1.5cm
+% 	{\footnotesize \textit{Notes}: Outcomes of the baseline simulation of the quantitative model where parameters are set to the values of Table \ref{tab:params}. The average urban commuting speed (left plot) is the density-weighted average of speeds across urban locations (see Appendix \ref{A-sec:model-describe} for definition, normalization to 1 in 1840). Estimates for Paris are detailed in Appendix \ref{A-sec:commuteparis}. The agricultural productivity gap (right plot) is defined as $\frac{L_r/L_u}{VA_r/VA_u}$.}
+% \end{figure}
+% \vspace{-0.5cm}
+% \begin{figure}[H]
+% 	\subfloat[Urban versus rural land wealth.\label{fig:model-piketty}]{\begin{centering}
+% 			% \includegraphics[scale=0.6]{\modplots/WealthValues_data2.pdf}
+% 			\includegraphics[scale=0.6]{\modplots/WealthValues_data4.pdf}
+% 			\par\end{centering}
+		
+% 	}\subfloat[Real Housing Price Index (1870=100).\label{fig:model-housingprice}]{\begin{centering}
+% 			\includegraphics[scale=0.6]{\modplots/HouseIndex.pdf}\par\end{centering}
+% 	}
+% 	\caption{Land values and housing price.\label{fig:model-landvalues}}
+% 	%\advance\leftskip 1.5cm
+% 	%\advance\rightskip 1.5cm
+% 	{\footnotesize \textit{Notes}: Outcomes of the baseline simulation of the quantitative model where parameters are set to the values of Table \ref{tab:params}. Land and housing values are computed as the discounted sum of future land rents in each location. Corresponding data (dashed) are based on \cite{piketty2014capital} and described in more detail in Appendix \ref{A-sec:wealth}. The real housing price index averages the purchasing housing prices across locations (deflated using a model implied GDP-deflator). Details on the computation are provided in Appendix \ref{A-sec:extensions-dynamic}.}
+% \end{figure}
+
+
+
+%\vspace{-0.5cm}
+\noindent{\textbf{Land values and housing prices.}} Figure \ref{fig:model-landvalues} shows the model predictions for land values and housing prices. Figure \ref{fig:model-piketty} shows the reallocation of land value across rural and urban use.\footnote{To compute the urban land value in the data, we multiply the housing wealth by the share of land in housing, whose average is 0.32 in the data for the period 1979-2019.} Due to structural change, the value of rural land relative to urban land fell dramatically. In the model, while the value of agricultural land constituted more than 80\% of the total land value, it is less than 10\% nowadays. This is broadly in line with data from \cite{piketty2014capital} even though our model misses the timing of the reallocation around the time of World War II---arguably due to war destructions.\footnote{War destructions arguably delayed the increase in housing wealth (to the post-reconstruction period). This delay has been possibly reinforced by a drop in housing values following the Great Depression and by the rent control imposed in France in between the wars .} Importantly, the value of urban land (per unit of land) increased faster in the recent decades. This mirrors the evolution of the housing price index since 1840 (Figure \ref{fig:model-housingprice}), whose shape reminds of the hockey-stick shown in Figure \ref{fig:real-hpi-knoll}. The model generates about half of the increase in housing prices described in \cite{knoll2017no} post-World War II. Quantitatively, the model misses the very steep increase in the 2000s, most likely due to factors outside the model such as the large decline in interest rates and/or a tightening of land use restrictions.\footnote{France has a planned allocation of land use (agricultural, housing, protected area such as forests) decided at the municipality level. These restrictions are likely to play a larger role at the end of the sample as the law regarding the `Plans Locaux d'Urbanisme (PLU)', initiated in the year 2000, becomes stricter and more broadly enforced.}
+
+\subsection{Results: outcomes across regions}\label{sec:rescross}
+
+While the main purpose of the quantitative model is to reproduce the aggregate facts developed in Section \ref{sec:empevidence}, the model with multiple regions/cities provides additional predictions across  space. The dispersion across regions of urban and rural productivities, $\{\theta_{u,k,t }, \theta_{r,k,t}\}$, generates dispersion across regions of sectoral employment and wages, of land use and urban density, of urban and rural land values. We focus on the dispersion of urban density and land values, more central in our contribution. We also focus on the implications of the dispersion of rural productivity since a crucial aspect of our story is the role of rural productivity for the expansion and density of cities. 
+
+\noindent \textbf{Region-specific productivity changes.} Before investigating the model predictions across space, it is important to clarify the response of a given region facing regional productivity changes in sector $s$, changes in $\theta^k_{s,t}$, as opposed to common (aggregate) productivity changes, i.e. changes in $\theta_{s,t}$.
+
+In response to a local increase in rural productivity $\theta^k_{r,t}$, region $k$ sees its rural sector expand in terms of employment and value added, while city $k$ shrinks in area. Intuitively, a rise in region $k$'s rural productivity leads to higher rural wages and land values in region $k$. Region $k$, then, attracts rural workers from other regions, which further increases rural land values there. With higher prices at the urban fringe, urban land and housing prices increase, making city $k$ less attractive. As a consequence, urban area in city $k$ falls and urban density increases.\footnote{To the opposite, the rural sector in other regions shrinks while their respective cities expand---the effects might be relatively small though if region $k$ accounts for a small share of total employment.} This latter prediction is at the heart of our story: higher land prices at the fringe of cities increase urban density. 
+
+It is important to note that the predictions for region $k$ are drastically different when the increase in rural productivity is common across regions (an increase in $\theta_{r,t}$). In this case, the rural sector shrinks and rural land prices drop in \emph{all} regions, since structural change forces operate. As workers move to the urban sector, all cities expand both in area and population, but faster in area: urban density decreases as illustrated in Section \ref{sec:resagg}. In other words, for a given change in rural productivity $\theta_{r,k,t}$ in region $k$, the response is drastically different whether the productivity change is local or common. General equilibrium effects through the relative price of rural goods following a common (aggregate) increase in rural productivity are crucial for the result---a reminiscence of the role of rural productivity for structural change in open versus closed economies (\cite{matsuyama1992agricultural}, \cite{gollin2010agricultural}, \cite{uy2013structural}, \cite{bustosetal2016}, \cite{teignier2018role} among others).\footnote{See also \cite{donaldson2016railroads} for the role of falling trade costs for regional agricultural specialization.}
+
+Similarly, a higher region-specific urban productivity, $\theta^k_{u,t}$, significantly increases the size of city $k$, both in population and area---workers from other cities move towards the relatively more productive city. Due to higher housing prices, city $k$ gets then relatively denser. To the opposite, a common increase in urban productivity, $\theta_{u,t}$, barely increases the population of city $k$---the same amount of rural workers is needed to feed the urban population. The rise in $\theta_{u,t}$ does, however, lead to a fall in the density of all cities, as urban area increases due to faster commuting modes.  
+
+
+Thus, again, depending on their local or global nature, productivity changes in a given city $k$ have entirely different implications for urban population and density. While variations in the time-series are arguably dominated by aggregate productivity changes (Section \ref{sec:resagg}), region-specific productivity changes might generate very different cross-sectional implications. We now investigate further some of these implications across regions.%\footnote{See Appendix \ref{B-sec:numillus_new} for cross-sectional predictions and a visual guide to the identification of the $\theta_{s,k,t}$.}
+
+
+
+\noindent \textbf{City size and urban density.} Beyond the targeted distribution of population across cities, the model does a decent job at reproducing the distribution of urban area and average urban density across time and space (see Figure \ref{fig:model-data}). In particular, Figure \ref{fig:model-data-density} plots the log of average urban density in a given city against its data counterpart for the dates where it is observed in the data (1870, 1950, 1975, 1990, 2000 and 2015).\footnote{We interpolate model outcomes for 1975 and 2015. Model outcomes are defined up to a constant of normalization defining the measurement unit; normalization such that the mean across all observations matches the data counterpart.} The model predicts that, over time, for a given city, urban density falls as urban population increases following common (aggregate) productivity changes---in line with the aggregate results. In the cross-section, due to higher housing prices, more populated cities are however denser. Both predictions, over time and in the cross-section, are qualitatively in line with the data discussed in Section \ref{sec:empevidence}. Quantitatively, the model does notably better in the time-series than in the cross-section. At a given date, more populated cities are significantly denser in the model than in the data (visible in Figure \ref{fig:model-data-density} for the largest and densest cities).\footnote{The issue is the most severe for Paris. Relaxing the monocentric assumption in Section \ref{sec:extensions} helps to some extent but overall, our model generates an order of magnitude too large Parisian density.} Overall, with only productivity differences across regions, our model falls short of explaining the cross-sectional dispersion of urban density, particularly so in the recent period.
+
+\begin{figure}[H]
+	\begin{adjustbox}{center}
+		\begin{subfigure}{\pthree\textwidth}
+			\includegraphics[width = \linewidth]{\modplots/mod_data_pop_allyears_square_45deg.pdf}
+			\caption{Urban Population.\label{fig:model-data-Lu}}
+		\end{subfigure}
+		% \hspace{0.1cm}
+		\begin{subfigure}{\pthree\textwidth}
+			\includegraphics[width = \linewidth]{\modplots/mod_data_area_allyears_square_color_45deg.pdf}
+			\caption{Urban Area.\label{fig:model-data-area}}
+		\end{subfigure}
+		% \hspace{0.1cm}
+		\begin{subfigure}{\pthree\textwidth}
+			\includegraphics[width = \linewidth]{\modplots/mod_data_density_allyears_color_square_45deg.pdf}
+			\caption{Urban Density.\label{fig:model-data-density}}
+		\end{subfigure}
+	\end{adjustbox}
+	\caption{Regional Urban Moments.\label{fig:model-data}}
+	
+	{\footnotesize \textit{Notes}: We plot the log of model population/areas/density vs the log of population/areas/density in the data for all observed dates. Dotted 45° line and solid (pooled) regression line of model against data. Variables centered such that the mean in the data across observations matches the model's counterpart. Data and model outcomes are for dates $t \in \{1870, 1950, 1975, 1990, 2000, 2015 \}$, with model outcomes interpolated to obtain 1975 and 2015 values. Sample of 20 cities. Outcomes of the baseline simulation where parameters are set to the values of Table \ref{tab:params}.}
+\end{figure}
+
+\noindent \textbf{Urban density and rural land values.} A second important implication, crucial for our mechanisms, goes as follows: a relatively higher rural productivity in region $k$, higher $\theta^k_{r,t}$, increases land prices at the fringe of city $k$, leading to higher density in city $k$. Following the evidence in Section \ref{sec:urban-expansion}, we investigate  the link between average urban density in a given city and its farmland price at the fringe using satellite measures of urban density and the corresponding local price of arable land of the `Petite Région Agricole'. We perform the following regression in the model and in the data,
+\begin{equation}
+\log \text{density}_{k,t} = a_t + b \cdot \log \bar{\rho}_{r,k,t}+ c \cdot Z_{k,t} + u_{k,t},
+\label{reg:densityruralprice}
+\end{equation}
+where $\text{density}_{i,t}$ is the average urban density of city $k$, $\bar{\rho}_{r,k,t}$ the farmland price around city $k$, $a_t$ a time-effect and $Z_{k,t}$ region/city-specific controls. Controlling for aggregate changes through $a_t$, the model unambiguously predicts $b>0$, when controlling for region-specific urban productivity, $\theta^k_{u,t}$. In other words, a city in region $k$ should be denser when the value of farmland is higher, holding everything else constant. When turning to the data, two important caveats are in order: measurement issues and endogeneity concerns. For the latter, beyond possible reverse causality, unobservable local characteristics (e.g., land use regulations or local amenities) might simultaneously affect the local price of farmland and urban density. To address these issues, we instrument local farmland prices using département-level data on wheat yields focusing on a sub-sample of cities in départements where wheat is one of the main crops. Given the reduced sample, we use a larger sample of cities, the 200 largest French cities, to preserve statistical power. 
+
+
+
+\begin{table}[h]
+	\vspace{0.5cm}
+	\begin{center}
+		
+		\input{\datatables/table2-editnico.tex}
+		
+		\caption{Urban density and rural land values.\label{tab:densityruralprice}}
+	\end{center}
+	{\footnotesize \textit{Notes}: Results of Regression Eq. \ref{reg:densityruralprice} in the model and in the data for years $t \in \{1975, 1990, 2000, 2015\}$. Model regressions based on outcomes of the baseline simulation of the quantitative model with a set of $K=20$ cities. Farmland values in region $k$, $\bar{\rho}_{r,k,t}$, computed as the discounted sum of future land rents beyond the urban fringe $\phi_{r,k,t}$ in region $k$. Average urban density, $\text{density}_{k,t}$, is the urban population $L_{u,k,t}$ of city $k$ divided by its area $\pi \phi^2_{k,t}$. Data on local farmland value $\bar{\rho}_{r,k,t}$ is the price of arable land in the Petite Region Agricole (PRA) of city $k$.  Average urban density is measured using GHSL data for a sample of 200 cities. For IV-regressions, local farmland values are instrumented by wheat yields on the restricted sample of cities in départements with wheat as one of the main crops in 2000. Controls are urban wages (in log), $w_{u,k,t}$, in city $k$ in model and data. Std Errors clustered at the département level. Signif. Codes: ***=0.01, **=0.05, *=0.1.}
+\end{table}
+
+
+Our baseline IV-estimates using this subsample of cities are shown in Table \ref{tab:densityruralprice} together with the OLS estimate on the whole sample of 200 cities measured in years 1975, 1990, 2000 and 2015. Results are striking: cities in locations with higher farmland values are denser. Quantitatively, the IV-estimated elasticity is relatively close to its model's counterpart---a 10\% increase in the local farmland value increasing urban density by about 3.5\%. Details of the empirical strategy together with sensitivity analysis and robustness checks are relegated to
+Appendix \ref{A-sec:density-PRAdata}. Our baseline IV-strategy provides a direct mapping between the primitives of the model (region-specific agricultural productivity) and the data (region-specific wheat yields in départements growing wheat) but at the cost of using essentially cross-sectional variations in yields to instrument farmland prices. To circumvent this issue, we also provide a different IV-strategy which relies on time-series variations and allows to control for local fixed-effects. Levering up on the availability of yields for different crops combined with different crop specialization across French départements, we build shift-share instruments of farmland prices by interacting national changes in yields of each crop with the share of land use for the different crops at an early date. At the cost of weaker instruments due to the limited timespan, this strategy gives estimates of similar magnitude than our baseline cross-sectional identification. Beyond validating the cross-sectional prediction, these results provide more convincing evidence of our mechanisms over time, whereby lower rural land values at the fringe of cities lowers urban density along the process of structural change. 
+
+
+
+% to the appendix: measurement issuesfirst, $\rho_{r,k,t}$ is imperfectly measured as available data regards the market price of arable land but some cities might be surrounded other types of by vineyards, ...
+
+
+
+\subsection{Counterfactual Experiments}\label{sec:sensitivityQ}
+
+In order to shed further light on the mechanisms at play and discuss the sensitivity of our results to the different elements of the model, we perform counterfactual experiments. These experiments aim at showing how aggregate productivity changes, structural change and the use of faster commutes contribute to urban expansion. However, it is important to note that the structural change and commuting costs channels interact with each other, most notably structural change magnifies the commuting costs channel, and this makes it difficult to account quantitatively for their respective contribution.
+
+%The two channels interact strongly with each other, which makes it difficult to disentangle the contribution of each of them. first, structural change amplifies the commuting cost channel, since the implied expansion in urban area driven by structural change makes further away residents commute faster. Second, the effects of falling commuting costs depend largely on structural change: when rural productivity is low and the economy is mainly agrarian, people spend most of their resources on rural necessity goods, limiting the desire of urban workers to move to the city suburbs and to expand their housing space with the fall of commuting costs; to the contrary, when rural productivity is high and the agricultural sector is smaller, falling commuting costs expand the urban area much more as urban residents can now afford larger housing space.
+
+\begin{figure}[p!]
+	\begin{adjustbox}{center}	
+		\begin{subfigure}{\ptwo\textwidth}
+			\includegraphics[width = \linewidth]{\modplots/../sensitivity-R3-fixedtheta/aggregation/mod_data_urban_pop_area.pdf}
+			\caption{Urban Area and Population (1870=1)\label{fig:model-citysize-fixedcross}}
+		\end{subfigure}
+		\hspace{0.1cm}
+		\begin{subfigure}{\ptwo\textwidth}
+			\includegraphics[width = \linewidth]{\modplots/../sensitivity-R3-fixedtheta/aggregation/mod_data_avgdensity.pdf}
+			\caption{Average urban density (1870=1)\label{fig:model-density-fixedcross}}
+		\end{subfigure}	
+	\end{adjustbox}	
+	\caption{Urban expansion (Fixed Cross-sectional Heterogeneity).\label{fig:model-urbanexp-fixedcross}}
+	{\footnotesize \textit{Notes}: Regional sectoral productivity differences  are constant to the 1870 value. Outcomes of the simulation with fixed cross-sectional heterogeneity where other parameters are set to their baseline values.}
+\end{figure}
+
+
+\begin{figure}[p!]
+	\begin{adjustbox}{center}
+		\begin{subfigure}{\pthree\textwidth}
+			\includegraphics[width = \linewidth]{\modplots/../sensitivity-R3-fixedtheta/mod_data_pop_allyears_square_45deg.pdf}
+			\caption{Urban Population.\label{fig:model-data-Lu-fixedcross}}
+		\end{subfigure}
+		% \hspace{0.1cm}
+		\begin{subfigure}{\pthree\textwidth}
+			\includegraphics[width = \linewidth]{\modplots/../sensitivity-R3-fixedtheta/mod_data_area_allyears_square_color_45deg.pdf}
+			\caption{Urban Area.\label{fig:model-data-area-fixedcross}}
+		\end{subfigure}
+		% \hspace{0.1cm}
+		\begin{subfigure}{\pthree\textwidth}
+			\includegraphics[width = \linewidth]{\modplots/../sensitivity-R3-fixedtheta/mod_data_density_allyears_color_square_45deg.pdf}
+			\caption{Urban Density.\label{fig:model-data-density-fixedcross}}
+		\end{subfigure}
+	\end{adjustbox}
+	\caption{Regional Urban Moments (Fixed Cross-sectional Heterogeneity).\label{fig:model-data-fixedcross}}
+	
+	{\footnotesize \textit{Notes}: Regional sectoral productivity differences  are constant to the 1870 value. We plot the log of model population/areas/density vs the log of population/areas/density in the data for all observed dates. Variables are centered such that the mean in the data across observations matches the model's counterpart. Data and model outcomes are for the dates $t \in \{1870, 1950, 1975, 1990, 2000, 2015 \}$, with model outcomes interpolated to obtain 1975 and 2015 values. Sample of 20 cities. Outcomes of the simulation with fixed cross-sectional heterogeneity where other parameters are set to their baseline values.}
+\end{figure}
+
+\textbf{Counterfactual with fixed cross-sectional heterogeneity}. The baseline estimation combines the effects of aggregate productivity changes and region-specific productivity changes on area and density of cities. To isolate the effect of aggregate changes, at the heart of our mechanisms, we perform a counterfactual fixing cross-sectional heterogeneity to its initial value---leaving all parameters but region-specific ones to their baseline value. While the evolution of the rural employment share, of the relative price of rural goods and of spending shares are barely affected, outcomes regarding urban expansion, more specific to our theory, are quantitatively different from the baseline. Specifically, this counterfactual leads to more urban sprawl and to a larger decline of average urban density compared to our baseline---bringing their evolution closer to the data (see Figure \ref{fig:model-urbanexp-fixedcross}). While validating the importance of aggregate productivity changes for the results, this counterfactual with fixed-cross sectional heterogeneity also isolates the importance for the baseline results of the reallocation across regions driven by region-specific productivity changes. It shows that these composition effects across regions matter to some extent in the aggregate for the baseline. They are largely driven by the reallocation of urban workers towards large cities, Paris in particular, whose population grew faster than smaller cities. As these cities are denser, average (aggregate) urban density falls less in the baseline than in the counterfactual with fixed-cross sectional heterogeneity. 
+
+
+
+Looking at cross-sectional urban outcomes (Figure \ref{fig:model-data-fixedcross}), this counterfactual cannot, by construction, fit as well the relative population of cities but implies cross-sections of urban density closer to the data. This echoes the limited ability of the baseline estimation to account for the differential evolution of density across cities discussed in Section \ref{sec:rescross}. While the model predicts relatively well the density decline in all cities due to aggregate productivity changes, the baseline estimation overstates the increase in density in large cities growing faster relative to smaller ones. 
+
+
+
+
+
+In the next counterfactuals, we aim at disentangling further the mechanisms driving the decline in urban density, most notably the structural change channel tied to improvements in rural productivity to the commuting costs channel.
+
+\textbf{The role of structural change.} How much would have density declined without (or less) structural change? To answer this question, it is useful to shut down the main driver of structural change and perform a counterfactual with lower aggregate rural productivity growth. We perform simulations with an almost stagnating (resp. slowly growing) rural productivity, where the growth rate of $\theta_r$ is 4\% (resp. 20\%) of the baseline at each date.\footnote{With 4\% of the baseline aggregate rural productivity growth rate, the share of rural employment stays roughly the same over the whole period. We refer to this as the no structural change counterfactual.} While reducing aggregate rural productivity growth, the urban region-specific components, $\theta^k_{u,t}$, are re-estimated to preserve urban aggregate productivity growth and the distribution of city populations.\footnote{Although not crucial for the results, re-estimating the region-specific urban productivities preserves aggregate urban productivity and facilitates the numerical solution: otherwise workers are moving massively to Paris due to its faster (baseline) urban productivity growth. With a low rural growth, workers must come from small cities (instead of the rural area), which increases aggregate urban productivity, empties some cities and leads to corner solutions.}  All other parameters are kept to their baseline values. Results of these simulations are shown in Figure \ref{fig:model-sensi-thetar} for some variables of interest (aggregated across cities) together with the baseline simulation for comparison. Without or much less structural change, or equivalently with lower improvements of the rural technology, the urban density falls significantly less and might even increase with a sufficiently low rural productivity growth (Figure \ref{fig:model-sensi-thetar-avgd}). Population and urban productivity growth put pressure on land in the rural area to feed an increasingly numerous and richer population. This increases the relative price of rural goods and the price of farmland at the urban fringe (Figure \ref{fig:model-sensi-thetar-rhor})---preventing the city to expand. Furthermore, facing higher price of rural goods, households reduce their housing spending share to feed themselves, reducing the demand for urban land. These forces tend to make the city much denser than our baseline---more so at the urban fringe due to rising farmland values (Figure \ref{fig:model-sensi-thetar-dr}). It is also worth emphasizing that population growth, by putting pressure on land, makes agricultural productivity growth even more crucial to generate a sizable expansion in urban area. 
+
+\begin{figure}[p]
+	% \vspace{-0.55cm}
+	\begin{adjustbox}{center}
+		\begin{subfigure}{\pthree\textwidth}
+			\includegraphics[width = \linewidth]{\modplots/../sensitivity-thetar/citydensity_1840.pdf}
+			\caption{Average urban density (1840=1).\label{fig:model-sensi-thetar-avgd}}
+		\end{subfigure}
+		% \hspace{0.1cm}
+		\begin{subfigure}{\pthree\textwidth}
+			\includegraphics[width = \linewidth]{\modplots/../sensitivity-thetar/dr_1840.pdf}
+			\caption{Density at the fringe (1840=1).\label{fig:model-sensi-thetar-dr}}
+		\end{subfigure}
+		% \hspace{0.1cm}
+		\begin{subfigure}{\pthree\textwidth}
+			\includegraphics[width = \linewidth]{\modplots/../sensitivity-thetar/ρr_1840.pdf}
+			\caption{Rental price of farmland.\label{fig:model-sensi-thetar-rhor}}
+		\end{subfigure}
+	\end{adjustbox}
+	\caption{Sensitivity to rural productivity growth.\label{fig:model-sensi-thetar}}
+	
+	{\footnotesize \textit{Notes}: Productivity growth in the rural sector is set to 4\% of the baseline rural productivity growth (solid line), resp. 20\% of the baseline (solid line with circles). Region-specific urban productivity parameters are re-estimated to preserve the distribution of city populations. Other parameters are kept to their baseline value of Table \ref{tab:params}. Simulation for the baseline rural productivity growth is shown in dotted for comparison.}
+\end{figure}
+
+This experiment does not say that improvements in commuting technologies do not matter for the expansion in area of cities. However, it makes clear that they matter only when combined with rural productivity growth and structural change. In this counterfactual, urban density might increase despite a significant rise in commuting speed due to rising urban productivity. This is so because higher urban wages make individuals commute faster but the impact on their location decisions is ambiguous: on one side, it increases the opportunity cost of commuting time, attracting people to the center; on the other side, it makes them willing to increase their housing size and relocate to the suburbs. Without structural change, the latter force is muted due to subsistence needs: urban productivity growth and faster commutes have much less of an effect on urban sprawl. The next experiment provides further insights on the quantitative role of commuting costs when combined with structural change.
+
+% \begin{figure}[H]
+% 	\advance\leftskip-1.5cm
+% 	\advance\rightskip-1.5cm
+% 	\subfloat[Average urban density (1840=1).\label{fig:model-rdensity}]{\begin{centering}
+% 			\includegraphics[scale=0.5]{\modplots/AvgUrbDens_comp_rg.pdf}\par\end{centering}
+
+% 	}\hspace{0.0cm}\subfloat[Density at the urban fringe (1840=1).\label{fig:model-rfdensity}]{\begin{centering}
+% 			\includegraphics[scale=0.5]{\modplots/FringeDens_comp_rg.pdf}\par\end{centering}
+
+% 	}
+% 	\subfloat[Rental price of farmland (1840=1).\label{fig:model-rfarmland}]{\begin{centering}
+% 			\includegraphics[scale=0.5]{\modplots/FarmLandRents_comp_rg.pdf}
+% 			\par\end{centering}
+% 	}
+% 	\caption{Sensitivity to rural productivity growth.\label{fig:model-rgrowth}}
+% 	\advance\leftskip 1.5cm
+% 	\advance\rightskip 1.5cm
+% 	{\footnotesize \textit{Notes}: Productivity growth in the rural sector is set to 2\% of the baseline rural productivity growth (solid line), resp. 20\% of the baseline (solid line with circles). All other parameters are kept to their baseline value of Table \ref{tab:params}. Simulation for the baseline rural productivity growth is shown in dotted for comparison.}
+% \end{figure}
+% \vspace{-0.4cm}
+% \begin{figure}[H]
+% 	\advance\leftskip-1.5cm
+% 	\advance\rightskip-1.5cm
+% 	\subfloat[Average commuting speed (1840=1).\label{fig:model-scommutingspeed}]{\begin{centering}
+% 			\includegraphics[scale=0.5]{\modplots/CommSpeed_comp_expw.pdf}\par\end{centering}
+
+% 	}\hspace{0.0cm}\subfloat[Average urban density (1840=1).\label{fig:model-scommutingdensity}]{\begin{centering}
+% 			\includegraphics[scale=0.5]{\modplots/AvgUrbDens_comp_expw.pdf}\par\end{centering}
+
+% 	}
+% 	\subfloat[Real Housing Price Index (1870=100).\label{fig:model-scommutinghprice}]{\begin{centering}
+% 			\includegraphics[scale=0.5]{\modplots/HouseIndex_comp_expw.pdf}
+% 			\par\end{centering}
+% 	}
+% 	\caption{Sensitivity to the elasticity of commuting costs to income.\label{fig:model-scommuting}}
+% 	\advance\leftskip 1.5cm
+% 	\advance\rightskip 1.5cm
+% 	{\footnotesize \textit{Notes}: The elasticity of commuting cost to income, $\xi_w$, is set to 1. All other parameters are kept to their baseline value of Table \ref{tab:params}. Simulation for the baseline calibration shown in dotted for comparison.}
+% \end{figure}
+
+% \vspace{-0.5cm}
+
+
+
+\begin{figure}[p]
+	\begin{adjustbox}{center}
+		\begin{subfigure}{\pthree\textwidth}
+			\includegraphics[width = \linewidth]{\modplots/../sensitivity-commutecost/commuting_speed_1840.pdf}
+			\caption{Average commuting speed (1840=1).\label{fig:model-sensi-commute-speed}}
+		\end{subfigure}
+		% \hspace{0.1cm}
+		\begin{subfigure}{\pthree\textwidth}
+			\includegraphics[width = \linewidth]{\modplots/../sensitivity-commutecost/citydensity_1840.pdf}
+			\caption{Average urban density (1840=1).\label{fig:model-sensi-commute-avgd}}
+		\end{subfigure}
+		% \hspace{0.1cm}
+		\begin{subfigure}{\pthree\textwidth}
+			\includegraphics[width = \linewidth]{\modplots/../sensitivity-commutecost/HPI_1840.pdf}
+			\caption{Real Housing Price Index (1840=1).\label{fig:model-sensi-commute-HPI}}		
+		\end{subfigure}
+	\end{adjustbox}
+	\caption{Sensitivity to the elasticity of commuting costs to income.\label{fig:model-sensi-commute}}
+	{\footnotesize \textit{Notes}: The elasticity of commuting cost to income, $\xi_w$, is set to 1. All other parameters are kept to their baseline value of Table \ref{tab:params}. Simulation for the baseline calibration shown in dotted for comparison.}\end{figure}
+
+% \vspace{-0.25cm}
+%\textbf{The elasticity of commuting costs to income}. 
+\textbf{The role of commuting costs}. In presence of structural change, how much would have density declined without (or less) increase in commuting speed? To shed light on the quantitative importance of falling commuting costs and rising commuting speed, we set the elasticity of commuting costs to income, $\xi_w$, to unity, $\tau(\ell_k)=a.w_{u,k}.\ell_k^{\xi_\ell}$.\footnote{This is the limit value. In this knife-edge case of the commuting choice model used as micro-foundation, workers do not switch to faster modes at a given location with rising wages: the higher operating cost of faster commutes offsets the benefits due to a rising opportunity cost of time.} All other parameters are set to their baseline values. In such a calibration without income-effects on commuting, the fraction of wages devoted to commuting in a given location does not fall with rising urban productivity: contrary to our baseline, the speed of commuting does not increase with rising urban wages. When compared to the baseline, this illustrates the quantitative role of the use of faster commutes with rising urban productivity when combined with structural change. Figure \ref{fig:model-sensi-commute} shows the results aggregated across cities in this alternative calibration together with the baseline for comparison. Figure \ref{fig:model-sensi-commute-speed} makes clear that increasing the elasticity of commuting costs to income severely limits the increase in the average commuting speed over the period. As the cost of faster commutes increases more, urban workers do not relocate away from central locations towards the suburbs of the city as much. This severely limits the sprawl of the city and the fall of the average urban density (Figure \ref{fig:model-sensi-commute-avgd})--- the counterfactual change in (log) average urban density being 30\% of the baseline and about 25\% of the data since 1870.\footnote{In this counterfactual, the average commuting speed still increases slightly (Figure \ref{fig:model-sensi-commute-speed}): with structural change, rural workers relocated in further away suburban locations are commuting faster. Setting the elasticity of commuting costs to distance, $\xi_\ell$, also to unity gets rid of this interaction between structural change and faster commutes. Without any increase in commuting speed ($\xi_w=\xi_\ell=1$), results are however quite similar since most of the commuting cost channel is driven by the more direct income-effects of rising urban wages.}
+
+Thus, when combined with rural productivity growth, the use of faster commutes and the corresponding decline in commuting costs (as a share of the urban wage) is quantitatively important to account for the overall decline in urban density---particularly so in central locations. In this alternative experiment, as the urban area expands much less but urban population grows essentially as much due to structural change, urban land values and housing prices increase much more than in the baseline (Figure \ref{fig:model-sensi-commute-HPI}).\footnote{For the recent period, this counterfactual generates an `agricultural productivity gap' about twice as large as in the baseline. Fringe residents face higher commuting costs and central residents higher housing prices.} This mirrors the role of improvements in commuting modes to limit the increase in urban land values emphasized in \cite{heblichreddingsturm2018} and \cite{milessefton2020}. Bottom line, our findings show that both structural change and the fall in commute costs contribute crucially to the fall in average urban density. Structural change is a critical ingredient for its fall but, at the same time, without the use of faster commutes, the decline in urban density would be very short of the data.
+%\footnote{Higher urban housing prices generate an agricultural productivity gap about twice as large as in the baseline in the recent period. Equivalently, the urban resident at the fringe faces much higher commuting costs.}
+
+\textbf{Disentangling the effect of farmland prices on urban density}. The structural change channel involves different effects: on the one hand, the price of farmland at the urban fringe (relative to income) drops and, on the other hand, the spending share on housing increases (as subsistence needs become less relevant and the rural good expenditure share falls). By limiting structural change with lower rural productivity growth, we get rid of both mechanisms. In order to pin down the aggregate effect of farmland prices on urban density, our approach is to first estimate the response of urban density to an exogenous aggregate increase in land rental prices at the fringe. Specifically, we perform a comparative static exercise where we exogenously increase the rental price of farmland by a fixed percentage in all regions at different dates $t \in \{1920, 1970, 2020\}$ relative to the baseline simulation.\footnote{Note that this experiment is a partial equilibrium exercise, land markets do not clear in each region $k$ when we set exogenously the farmland price. Other model equations are left unchanged.} For 2020, we find that a $10\%$ exogenous increase in the rental price at the urban fringe of all regions increases urban density by about $3\%$ on average---an elasticity close to the cross-sectional one (Table \ref{tab:densityruralprice}). The same elasticity is also close to 1/3 for earlier dates. 
+
+
+While evidence of the importance of farmland rental prices for urban density, we provide a more quantitative interpretation asking by how much urban density would have declined if aggregate farmland rental prices over household income had not dropped. We perform this exogenous counterfactual evolution in farmland prices, common across regions, over the periods 1870-1920, 1920-1970 and 1970-2020. Due to faster productivity growth and structural change, the counterfactual increase of the farmland price is an order of magnitude larger for the interim period relative to the other ones---an increase above 300\% in 1970 to keep farmland prices over income constant over 1920-1970, close to 5 times (resp. 15 times) larger than the increase in 2020 (resp. 1920). Then, comparing the counterfactual change in average urban density (in log) to the baseline is suggestive of the quantitative magnitude of the farmland price mechanism. While this mechanism makes up for about 75\% of the decline over 1870-1920, our counterfactual experiments suggest that it plays less of a role in the later periods---still representing a significant share, about 30\% (34\% over 1920-1970 and 26\% over 1970-2020). The number is significantly higher in the 1870-1920 period for two reasons. First, other channels lowering density, among which faster commutes, play less of a role at the beginning of the sample than in the later periods. Subsistence needs bind more initially and individuals move less to the suburbs to enjoy large homes when urban income and commuting speed increase---mitigating the contribution of the commuting costs channel. Second, composition effects due to the reallocation of workers across cities do not vanish in the aggregate for the 1870-1920 period. As individuals move to larger and denser cities growing faster, this tends to increase average urban density over this period---both in the baseline and in the counterfactual. As a result, the remaining unexplained fall in density is particularly low over the 1870-1920 period.\footnote{Isolating composition effects over 1870-1920 shows that the farmland price mechanism plays almost the same role as other channels lowering density---as opposed to later periods, when the commuting costs channel matters more. Composition effects being rather small post-1920, the farmland price mechanism accounts for about 30\% of the fall, while other channels make up for the rest.}
+
+
+
+
+
+%\footnote{Extrapolating the estimated elasticity and doing a back-of-the envelope calculation for the 1840-2020 period, we find that the farmland price mechanism also accounts for about a third of the urban density decline since 1840.}
+
+%\textbf{Disentangling the effect of farmland prices on urban density}. The structural change channel involves different effects: on the one hand, the price of farmland at the urban fringe (relative to income) drops and, on the other hand, the spending share on housing increases (as subsistence needs become less relevant and the rural good expenditure share falls). By limiting structural change in the first counterfactual, we get rid of both mechanisms. In order to pin down the effect of farmland prices on urban density, our approach is to first estimate the elasticity of average urban density to an exogenous increase in land rental prices at the fringe. Specifically, we perform a comparative static exercise where we exogenously increase the rental price of farmland by a fixed percentage in all regions in 2020 relative to the baseline simulation.\footnote{Note that this experiment is a partial equilibrium exercise, land markets do not clear in each region $k$ when we set exogenously the farmland price. Other model equations are left unchanged.} We find that a $10\%$ exogenous increase in the rental price at the urban fringe of all regions increases urban density by $3.25\%$ on average---an aggregate elasticity close to $1/3$, not too different from the cross-sectional one (Table \ref{tab:densityruralprice}). While evidence of the importance of farmland rental prices for urban density, we provide a more quantitative interpretation asking by how much urban density would have declined if aggregate farmland rental prices over income had stayed constant since 1970? This allows us to quantify the importance of the reallocation of land values away from agriculture (driven by structural change) for the urban density decline. Since 1970, farmland rental prices (over income) dropped by about $40\%$ on average, so simple calculations based on the estimated aggregate elasticity, gives that urban density in 2020 would have been about $20\%$ higher in the counterfactual with fixed farmland rental price over income. This implies that the farmland price mechanism accounts for about $35\%$ of the urban density decline since 1970---shedding further light on the quantitative relevance of the farmland price mechanism to explain the evolution of urban density.
+	
+
+	%\greenie{Alternatively, if we change the preferences and choose the parameters cbar and sbar that give a constant housing expenditure share and the same reallocation of workers, we get that average urban density would also decline by a lower rate, about xxx of the baseline one.}
+
+
+
+\subsection{Sensitivity and Extensions}\label{sec:extensions}
+
+%[MUCH OF THIS IS ALREADY COPIED INTO APPENDIX. NEED TO DECIDE WHAT IS WORTH KEEPING HERE AND WHAT CAN GO TO APPENDIX]
+
+We next investigate the robustness of the findings to some preference and technology parameters, to the presence of agglomeration/congestion forces and to a more general commuting cost specification. For sake of space,  details about the computations and results for these robustness checks are relegated to Appendix \ref{B-sec:sensitivity}.
+
+\textbf{Sensitivity to preference and technology parameters.} Data variations to estimate accurately the elasticity of substitution $\sigma$ between urban and rural goods are lacking and we perform sensitivity with a lower (resp. a higher) values, keeping all other parameters to the baseline. Results are robust to alternative substitution patterns between both goods---the decline in average urban density being only slightly larger with a lower $\sigma$ of 0.5. Using a more general CES production function in the rural sector, we also perform sensitivity with respect to the elasticity of substitution between land and labor in the rural sector, $\omega$. Values used in the literature typically range between 0 and 1 (\cite{bustosetal2016} and \cite{leukhinaturnovsky2016}). The baseline assumes $\omega=1$ and we perform sensitivity analysis with alternative values. With a lower $\omega$, the farmland rental price (relative to income) falls more over time as land and labor are more complement in the rural sector. With a lower opportunity cost of expanding the city, the urban area increases more and the average urban density falls more---getting closer to the data.
+
+With respect to the housing supply elasticity, we perform a sensitivity analysis assuming a constant value in the mid-range of empirical estimates, $\epsilon(\ell_k) = \epsilon_r = 3$ in all locations. Results show that keeping all parameters constant but changing the housing supply elasticity barely affects the aggregate implications. However, compared to our baseline simulation, a more elastic housing supply at the center leads to a larger provision of housing in these locations. The center is then significantly denser than in the data---the within-city density gradient becomes significantly steeper than in the data.
+
+\textbf{Congestion and Agglomeration}. We extend the model to account for possible urban congestion/agglomeration forces. We consider additional urban congestion costs by assuming that commuting costs are increasing with urban population, $a(L_{u,k})= a\cdot L_{u,k}^{\mu}$. This summarizes the potential channels through which larger cities might involve longer and slower commutes. We set externally $\mu=0.05$ and we re-estimate the commuting cost function parameter $a$ as well as the region-specific sectoral productivities to make sure that we shift neither the level of the commuting costs nor aggregate sectoral productivity, while still matching cross-sectional outcomes. Congestion forces reduce the expansion in area and the extent of suburbanization. By rising commuting costs, they also increase urban housing prices relative to the baseline.
+
+% However, via general equilibrium forces, they also make rural goods and rural land less valuable---mitigating the direct effect of congestion costs on urban expansion.   
+
+We also introduce urban agglomeration forces by assuming that urban productivity increases externally with urban employment in city $k$, $\theta_{u,k}(L_{u,k})= \theta_{u,k} \cdot L_{u,k}^{\lambda}$. We set $\lambda=0.05$, in the range of empirical estimates for France (\cite{combesetal2010}). We show that if one re-estimates the region-specific productivity parameters to match the data in presence of agglomeration, outcomes are virtually identical. Given that the estimation targets the urban population distribution and aggregate productivity, our results remain robust to any reasonable magnitude of agglomeration forces. Instead of targeting aggregate productivity in the estimation, we also investigate the equilibrium effects of agglomeration forces on aggregate outcomes when, for $\lambda>0$, aggregate urban productivity increases relative to the baseline as workers move towards cities. While the equilibrium effects of agglomeration forces are important for the allocation of urban employment across cities, these effects remain small in the aggregate for the allocation across sectors---despite the very large urban expansion driven by structural change. Agglomeration forces make all cities more productive over time as workers reallocate in the urban sector. However, higher urban incomes make also rural goods more valuable increasing rural workers' wage almost one for one. General equilibrium forces thus prevent stronger worker reallocation towards the urban sector despite agglomeration benefits.
+
+
+
+
+% \begin{figure}[h!]
+% 	\advance\leftskip-1.6cm
+% 	\advance\rightskip-1.6cm
+	
+% 	\subfloat[City area (1840=1).\label{fig:cf-city-comp-space}]{\begin{centering}
+% 			\includegraphics[scale=0.5]{\modplots/CityArea_comp_space.pdf}\par\end{centering}
+		
+% 	}\hfill{}\subfloat[Average urban density (1840=1).\label{fig:cf-udens-comp-space}]{\begin{centering}
+% 			\includegraphics[scale=0.5]{\modplots/AvgUrbDens_comp_space.pdf}\par\end{centering}
+		
+% 	}\hfill{}\subfloat[Central density (1840=1).\label{fig:cf-ctrdens-comp-space}]{\begin{centering}
+% 			\includegraphics[scale=0.5]{\modplots/CTRdens_comp_space.pdf}\par\end{centering}	
+		
+		
+		
+% 	}\hfill{}\subfloat[Relative price of rural good (1840=1).\label{fig:bench-relp}]{\begin{centering}
+% 			\includegraphics[scale=0.5]{\modplots/AgrPrice_comp_space.pdf}\par\end{centering}
+		
+% 	}\hfill{}\subfloat[Rental price of farmland (1840=1).\label{fig:bench-farmland-sigma}]{\begin{centering}
+% 			\includegraphics[scale=0.5]{\modplots/FarmLandRents_comp_space.pdf}\par\end{centering}
+		
+		
+% 	}\hfill{}\subfloat[Real Housing Price Index (1870=100).\label{fig:cf-housingprice-comp-space}]{\begin{centering}
+% 			\includegraphics[scale=0.5]{\modplots/HouseIndex_comp_space.pdf}\par\end{centering}
+		
+% 	}
+% 	\caption{Agglomeration and congestion forces.\label{fig:space_comp}}
+% 	\vspace{0cm}
+% 	\advance\leftskip 1.5cm
+% 	\advance\rightskip 1.5cm
+% 	{\footnotesize \textit{Notes}: The solid line represents outcomes in presence of agglomeration forces, with parameter $\lambda=0.05$. The solid line with dots represents outcomes in presence of congestion forces, with parameter $\mu=0.05$. Other parameters set to their baseline value of Table \ref{tab:params} up to a normalization of the initial urban productivity. For comparison, outcomes of the baseline simulation are shown with a dotted line.}
+	
+% 	\vspace{-0.25cm}
+% \end{figure}
+
+\textbf{Commuting distance and residential location}. Guided by the structure of French cities, our baseline results hinge on the assumption of a monocentric model where urban individuals commute to the city center to work. While endogenizing firms' location across space is beyond the scope of the paper, one can still partly relax the monocentric assumption by assuming that commuting distance at location $\ell_k$ in city $k$, $d_k(\ell_k)$, does not map one for one with residential distance $\ell_k$ from the central location. Using data available for the recent period to investigate the link between commuting distance and residential location (see Appendix \ref{A-sec:DADS} for details), we find that households residing further away do commute longer distances on average. However, commuting distance increases less than one for one with the distance of residence from the city center. Moreover, individuals residing close to the center commute longer distances than the distance of their home from the central location. Lastly, data show that commuting distance increases less with the distance of residence from the center in larger cities. Based on these observations, we model commuting distance, in location $\ell_k$ of city $k$, $d_{k,t}(\ell_k)$ in a reduced-form way as follows,
+\begin{equation}
+d_{k,t}(\ell_k)=d_0(\phi_{k,t})+d_1(\phi_{k,t})\cdot\ell_k, \label{eq:commdistanceextension}
+\end{equation}
+with $d_0(\phi)$ being a positive and increasing function of $\phi$ satisfying $\lim_{\phi \rightarrow 0} d_0(\phi)=0$, and $d_1(\phi)$ being a decreasing function belonging to $(0,1)$ with $\lim_{\phi \rightarrow 0} d_1(\phi)=1$. $d_0$ represents the (minimum) commuting distance traveled by an individual living in the center, while $d_1$ is the slope between commuting distance and residential distance from the center. We set the functional forms of $d_0$ and $d_1$ under a specification that fits recent commuting data and re-estimate the commuting cost parameter $a$ to maintain the level of commuting costs. As before, to give the best chances to this extension to match cross-sectional data while preserving aggregate structural change forces for comparison to the baseline, we re-estimate sectoral region-specific productivities holding aggregate productivity fixed. Quantitatively, cities expand more in area in the last decades in this extension, bringing the model closer to the data. As a consequence of a larger sprawling, the average urban density falls more. This is driven by a larger fall of central density: with urban expansion, residents close to the center end up commuting larger distances---implicitly due to the reallocation of jobs away from the center---, making central locations less attractive relative to the suburbs. As a result, this extension provides a slightly better fit of cross-sectional data. Relative to the baseline, commuting distances in the center (resp. at the fringe) are larger (resp. lower) in larger cities. This, in turn, increases the area of more populated cities, reducing their average density and bringing the model closer to the data. Larger cities are still noticeably denser than in the data, but less so compared to the baseline monocentric model.
+
+
+% \begin{figure}[h]
+% 	\begin{adjustbox}{center}
+% 		\begin{subfigure}{\pthree\textwidth}
+% 			\includegraphics[width = \linewidth]{\modplots/sensitivity-d1d2/avgd_n.pdf}
+% 			\caption{Average urban density (1840=1).\label{fig:model-sensi-d1d2-avgd}}
+% 		\end{subfigure}
+% 		% \hspace{0.1cm}
+% 		\begin{subfigure}{\pthree\textwidth}
+% 			\includegraphics[width = \linewidth]{\modplots/sensitivity-d1d2/d0_n.pdf}
+% 			\caption{Central Density (1840=1).\label{fig:model-sensi-d1d2-d0}}
+% 		\end{subfigure}
+% 		% \hspace{0.1cm}
+% 		\begin{subfigure}{\pthree\textwidth}
+% 			\includegraphics[width = \linewidth]{\modplots/sensitivity-d1d2/dr_n.pdf}
+% 			\caption{Fringe Density.\label{fig:model-sensi-d1d2-dr}}
+% 		\end{subfigure}
+% 	\end{adjustbox}
+% 	\caption{sensitivity to d1d2.\label{fig:model-sensi-d1d2}}
+	
+% 	{\footnotesize \textit{Notes}: sensitivity to d1d2 explanations}
+% \end{figure}
+
+\end{document} 
+
