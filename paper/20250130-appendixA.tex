@@ -86,17 +86,20 @@
 
 
 % paths
-\newcommand{\imgs}{../../slides/imgs}
-\newcommand{\modplotsbaseline}{../../output/model/plots/\round/baseline}
-\newcommand{\modplots}{../../output/model/plots/\round}
-\newcommand{\modtables}{../../output/model/tables}
-\newcommand{\dataplots}{../../output/data/plots}
-\newcommand{\nicoplots}{../données_090620}
-\newcommand{\picsvids}{../../output/pics-vids}
+\newcommand{\images}{../data/images}
+\newcommand{\modplots}{../output/model/plots/\round/baseline}
+\newcommand{\modtables}{../output/model/tables}
+\newcommand{\dataplots}{../output/data/plots}
+% \newcommand{\nicoplots}{../données_090620}
+% \newcommand{\picsvids}{../../output/pics-vids}
 
-\newcommand{\datatables}{../../output/data/tables}
-\newcommand{\marcmatlab}{../../MatlabFiles_Marc/Spring2021}
-\newcommand{\screenshots}{../../data/present-screenshots}
+\newcommand{\datatables}{../output/data/tables}
+% \newcommand{\marcmatlab}{../../MatlabFiles_Marc/Spring2021}
+\newcommand{\screenshots}{../data/images}
+% \newcommand{\screenshots}{../../data/present-screenshots}
+
+
+% still point to old outputs folder!
 \newcommand{\ENL}{../../output/CASD/2021-03-31/ENL}
 \newcommand{\DADS}{../../output/CASD/2021-07-13/DADS}
 \newcommand{\DADSpanel}{../../output/CASD/2022-07-08}
@@ -176,7 +179,7 @@ A second difficulty arises because the French territory varied since 1790: some 
 
 \begin{figure}
 	\begin{center}
-		\includegraphics[height=0.8\textheight]{\picsvids/recense-agr-1892.png}
+		\includegraphics[height=0.8\textheight]{\images/recense-agr-1892.png}
 	\end{center}\caption{Land Use in the 1892 Recensement Agricole.\label{A-fig:recensement}}
 \end{figure}
 
@@ -191,7 +194,7 @@ The measurement in 1840 constitutes our first observation. However, in the 1840 
 	\hspace{-15mm}
 	\begin{subfigure}{0.55\textwidth}
 		%\begin{center}
-			\includegraphics[width= \linewidth]{\modplots/Share_Land_Agr1840_FRA.pdf}
+			\includegraphics[width= \linewidth]{\dataplots/figureA2a.pdf}
 		%\end{center}
 		\vspace{-0.65cm}
 		\caption{Share of Land used in Agriculture (1840-2015)\label{A-fig:shares_land_long}}
@@ -199,7 +202,7 @@ The measurement in 1840 constitutes our first observation. However, in the 1840 
 	\hspace{5mm}
 	\begin{subfigure}{0.55\textwidth}
 		%\begin{center}
-			\includegraphics[width= \linewidth]{\modplots/Share_Emp_Agr100_FRA1806.pdf}
+			\includegraphics[width= \linewidth]{\dataplots/figureA2b.pdf}
 		%\end{center}
 		\vspace{-0.65cm}
 		\caption{Share of Employment in Agriculture (1806-2018)}\label{A-fig:shares_emp_long}
@@ -210,7 +213,7 @@ The measurement in 1840 constitutes our first observation. However, in the 1840 
 
 \subsection{Sectoral Employment}\label{A-sec:sectoral-employment}
 
-\textbf{Sources}. Data on employment are available in three different sources covering different time periods: \cite{marchand1991deux} (`Deux siècles de travail en France') for the period 1806-1990; \cite{herrendorf2014growth} for the period 1856-2006; OECD for the period 1950-2018. When overlapping, the different sources are largely consistent with each other.\footnote{\cite{marchand1991deux} gives a slightly lower share of employment in agriculture in the first half of the 20th century relative to \cite{herrendorf2014growth}. Our results do not depend on the use of one series or the other.} We use the three sources allowing to span the entire 1806-2018 period. For the pre-WW2 period, data available in \cite{marchand1991deux} and \cite{herrendorf2014growth} are on an irregular basis---typically one or two observations per decade (corresponding to Census years). Annual data are available starting 1950.
+\textbf{Sources}. Data on employment are available in three different sources covering different time periods: \cite{marchand1991deux} (`Deux siècles de travail en France') for the period 1806-1990; \cite{herrendorf2014growth} for the period 1856-2007; OECD for the period 1950-2018. When overlapping, the different sources are largely consistent with each other.\footnote{\cite{marchand1991deux} gives a slightly lower share of employment in agriculture in the first half of the 20th century relative to \cite{herrendorf2014growth}. Our results do not depend on the use of one series or the other.} We use the three sources allowing to span the entire 1806-2018 period. For the pre-WW2 period, data available in \cite{marchand1991deux} and \cite{herrendorf2014growth} are on an irregular basis---typically one or two observations per decade (corresponding to Census years). Annual data are available starting 1950.
 
 Over the nineteenth century (until 1901), we use the data from \cite{marchand1991deux} as the series goes further back in time. Over the period 1901-1950, we use the data from \cite{herrendorf2014growth}. Over the period 1950-2018, we use data provided by the OECD on an annual basis, where the measure of employment is expressed in full-time equivalent. 
 
@@ -264,7 +267,7 @@ Lastly, to smooth the noise in the initial decades when comparing model to data,
 
 \begin{figure}
 	\begin{center}
-		\includegraphics[width=0.8\textwidth]{\modplots/Price_Agri_FRA.pdf}
+		\includegraphics[width=0.8\textwidth]{\dataplots/figureA3.pdf}
 	\end{center}
 	\vspace{-0.5cm}
 	\caption{Relative prices of agricultural goods, 1949=100 (1815-2019).}
@@ -285,7 +288,7 @@ Due to the mere presence of a price index, this series is defined up to a multip
 
 \begin{figure}
 	\begin{center}
-		\includegraphics[width=0.8\textwidth]{\modplots/Thetalong_FRA1840.pdf}
+		\includegraphics[width=0.8\textwidth]{\dataplots/figureA4.pdf}
 	\end{center}
 	\vspace{-0.5cm}
 	\caption{Rural and Urban Aggregate Productivity, 1840=1 (1840-2019).}
@@ -321,7 +324,7 @@ Due to the mere presence of a price index, this series is defined up to a multip
 
 \begin{figure}[h]
 	\begin{center}
-		\includegraphics[width=0.8\textwidth]{\modplots/spendingshare.pdf}
+		\includegraphics[width=0.8\textwidth]{\dataplots/figureA5.pdf}
 	\end{center}
 	\vspace{-0.5cm}
 	\caption{Spending Shares for Rural, Urban and Housing goods.}
@@ -356,14 +359,14 @@ With the master list of cities in place, we proceed as follows to obtain two mea
 
 \begin{figure}[p]
 	\centering
-	\includegraphics[height=0.45\textheight]{\screenshots/reims-EM.png}
+	\includegraphics[height=0.45\textheight]{\images/reims-EM.png}
 	\caption{Area measurement of Reims using Etat Major map\label{A-fig:Reims-EM}}
 \end{figure}
 
 
 \begin{figure}[p]
 	\centering
-	\includegraphics[height=0.45\textheight]{\screenshots/reims-1950.png}
+	\includegraphics[height=0.45\textheight]{\images/reims-1950.png}
 	\caption{Area measurement of Reims using 1950 map\label{A-fig:Reims-1950}}
 \end{figure}
 
@@ -372,14 +375,14 @@ With the master list of cities in place, we proceed as follows to obtain two mea
 
 \begin{figure}[p]
 	\centering
-	\includegraphics[height=0.45\textheight]{\screenshots/valence-EM.png}
+	\includegraphics[height=0.45\textheight]{\images/valence-EM.png}
 	\caption{Area measurement of Valence using Etat Major map\label{A-fig:valence-EM}}
 \end{figure}
 
 
 \begin{figure}[p]
 	\centering
-	\includegraphics[height=0.45\textheight]{\screenshots/valence-1950.png}
+	\includegraphics[height=0.45\textheight]{\images/valence-1950.png}
 	\caption{Area measurement of Valence using 1950 map\label{A-fig:valence-1950}}
 \end{figure}
 
@@ -406,10 +409,10 @@ The next data point for the 1950 cities is obtained from the Census in 1954. Giv
 
 
 
-\input{\datatables/france-pop-1950.tex}
+\input{\datatables/tableA1.tex}
 \pagebreak
 
-\input{\datatables/paris-pop-1950.tex}
+\input{\datatables/tableA2.tex}
 
 
 \textbf{Measurement issues.} If not contiguous to the main city, nearby municipalities are considered as separate for our measure of urban area by definition. However, there are always a few low-density villages in the immediate surroundings of a large city. Their exclusion (or not) from the urban area would lead to different measurements for population and area. In principle, measurement error can go both ways. However, given that cities are measured as growing mostly out of their main municipality until post-1950 (with the clear exception of Paris), we might be slightly understating population and area of some cities in the earlier periods (resp. slightly overstating average density).
@@ -461,25 +464,25 @@ We show example output for built-up area classifications for two cities in Figur
 
 \begin{figure}
 	\centering
-	\includegraphics[height=0.4\textheight]{\dataplots/GHSL-Built-Marseille-edit.pdf}
+	\includegraphics[height=0.4\textheight]{\dataplots/figureA10.pdf}
 	\caption{\texttt{GHS-BUILT} raster map of Marseille. The color scale represents percentage built-up in each grid cell.\label{A-fig:built-marseille}}
 \end{figure}
 
 
 \begin{figure}
 	\centering
-	\includegraphics[height=0.45\textheight]{\dataplots/GHSL-Built-Bordeaux.pdf}
+	\includegraphics[height=0.45\textheight]{\dataplots/figureA11.pdf}
 	\caption{\texttt{GHS-BUILT} raster map of Bordeaux.\label{A-fig:built-bordeaux}}
 \end{figure}
 
 
 \begin{figure}
-	\includegraphics[width=\textwidth]{\dataplots/densities-violins.pdf}
+	\includegraphics[width=\textwidth]{\dataplots/figureA12.pdf}
 	\caption{Distribution of Urban Density over Time. This \emph{violin plot} represents the distribution of densities at each date, labeling the extreme values. The horizontal line denotes the median value.\label{A-fig:density-dist}}
 \end{figure}
 
 \begin{figure}
-	\includegraphics[width=\textwidth]{\dataplots/densities-time-top5then-city.pdf}
+	\includegraphics[width=\textwidth]{\dataplots/figureA13.pdf}
 	\caption{Density in the largest five cities in 1876 over time.\label{A-fig:density-top5}}
 \end{figure}
 
@@ -496,11 +499,11 @@ Figure \ref{A-fig:gradientlyon} illustrates the negative relationship between de
 
 \begin{figure}[h]
 	\begin{subfigure}{0.5\textwidth}
-		\includegraphics[width = \linewidth]{\dataplots/density-gradient-lyon.pdf}
+		\includegraphics[width = \linewidth]{\dataplots/figureA14a.pdf}
 		\caption{Lyon\label{A-fig:gradientlyon}}
 	\end{subfigure}%
 	\begin{subfigure}{0.5\textwidth}
-		\includegraphics[width = \linewidth]{\dataplots/density-gradient-lille.pdf}
+		\includegraphics[width = \linewidth]{\dataplots/figureA14b.pdf}
 		\caption{Lille\label{A-fig:gradientlille}}
 	\end{subfigure}
 	\caption{Density gradients.\label{A-fig:gradient}}
@@ -543,12 +546,12 @@ Additionally, we can rely on historical data compiled by Shlomo Angel and co-aut
 report in Figure \ref{A-fig:shlomo} that our manual measures correspond closely to their obtained measures despite different measurement strategies. 
 
 \begin{figure}[p]
-	\includegraphics[width=\textwidth]{\dataplots/densities-time-cutoff.pdf}
+	\includegraphics[width=\textwidth]{\dataplots/figureA15.pdf}
 	\caption{Median urban density for different cutoff parameter values. The parameter indicates the percentage of a grid cell (250x250 meter) that has to be built-up in order to be classified as \emph{urban area}. \label{A-fig:cutoff}}
 \end{figure}
 
 \begin{figure}[p]
-	\includegraphics[width=\textwidth]{\dataplots/densities-time-wtd-cutoff.pdf}
+	\includegraphics[width=\textwidth]{\dataplots/figureA16.pdf}
 	\caption{Weighted mean urban density for different cutoff parameter values. The parameter indicates the percentage of a grid cell (250x250 meter) that has to be built-up in order to be classified as \emph{urban area}.\label{A-fig:cutoff-wtd}}
 \end{figure}
 
@@ -556,18 +559,18 @@ report in Figure \ref{A-fig:shlomo} that our manual measures correspond closely 
 
 \begin{figure}
 	\centering
-	\includegraphics[height=0.42\textheight]{\screenshots/reims-now.png}
+	\includegraphics[height=0.42\textheight]{\images/reims-now.png}
 	\caption{Area measurement of Reims using modern day photograph - used only for cross-checking GHSL measures.\label{A-fig:Reims-now}}
 \end{figure}
 
 
 \begin{figure}
-	\includegraphics[width=\textwidth]{\dataplots/areas-manual-satellite.pdf}
+	\includegraphics[width=\textwidth]{\dataplots/figureA18.pdf}
 	\caption{Comparing manually obtained area measures for each of our cities with automatically obtained ones via GHSL data.\label{A-fig:manual-vs-satellite}}
 \end{figure}
 
 \begin{figure}
-	\includegraphics[width=\textwidth]{\dataplots/shlomo-paris.pdf}
+	\includegraphics[width=\textwidth]{\dataplots/figureA19.pdf}
 	\caption{Comparing our measures with Shlomo Angel's data used in \cite{angel2012atlas} and \cite{angel2010persistent}. We are reassured that our manual measurement exercise aligns closely with what they obtained. Also, their final data point is reassuringly close to our first satellite measure.\label{A-fig:shlomo}}
 \end{figure}
 
@@ -581,13 +584,13 @@ The use of the data is very similar to the GHSL data in Section \ref{A-sec:GHSL}
 
 \begin{figure}[h!]
 	\centering
-	\includegraphics[width=0.78\textwidth]{\dataplots/CLC-Reims.pdf}
+	\includegraphics[width=0.78\textwidth]{\dataplots/figureA20.pdf}
 	\caption{Land use measures from CLC data for Reims. The white area represents our definition of the Reims Urban area in the last GHLS periods (2015), hence it is our definition of \emph{inside vs outside} of the city. For instance, the red areas labelled \emph{discontinuous urban fabric} are not part of our definition of the city.\label{A-fig:CLC-paris}}
 \end{figure}
 
 
 \begin{figure}[h!]
-	\includegraphics[width=\textwidth]{\dataplots/CLC-landuse-top100-agg.pdf}
+	\includegraphics[width=\textwidth]{\dataplots/figureA21.pdf}
 	\caption{Average land use measure from CLC data for our sample of top 100 French cities. This plot uses our own aggregation from 45 CLC labels into 11 exhaustive classes. We group all categories corresponding to agriculture into green bars.\label{A-fig:CLC}}
 \end{figure}
 
@@ -604,7 +607,7 @@ Post 1950, we use data from the Ministry of Agriculture, which provides at the l
 
 \begin{figure}[h!]
 	\begin{adjustbox}{center}
-		\includegraphics[width=1.2\textwidth]{\dataplots/map-pra-all.pdf}
+		\includegraphics[width=1.2\textwidth]{\dataplots/figureA22.pdf}
 	\end{adjustbox}
 	\caption{Arable land value per hectare.}
 	\label{A-fig:arablevalueall}
@@ -621,12 +624,12 @@ Post 1950, we use data from the Ministry of Agriculture, which provides at the l
 \begin{figure}[h]
 	\begin{adjustbox}{center}	
 		\begin{subfigure}{0.6\textwidth}
-			\includegraphics[width = \linewidth]{\dataplots/wheat-yield-2000.pdf}
+			\includegraphics[width = \linewidth]{\dataplots/figureA23a.pdf}
 			\caption{Wheat yields (2000).}
 		\end{subfigure}
 		\hspace{-1cm}
 		\begin{subfigure}{0.6\textwidth}
-			\includegraphics[width = \linewidth]{\dataplots/wheat-share-2000.pdf}
+			\includegraphics[width = \linewidth]{\dataplots/figureA23b.pdf}
 			\caption{Share of land used for wheat (2000).}
 		\end{subfigure}	
 	\end{adjustbox}		
@@ -649,7 +652,7 @@ Post 1950, we use data from the Ministry of Agriculture, which provides at the l
 
 \begin{figure}[h!]
 	\begin{center}
-		\includegraphics[width=0.65\textwidth]{\modplots/Screenshot-pra-paris.png}
+		\includegraphics[width=0.65\textwidth]{\images/Screenshot-pra-paris.png}
 		
 	\end{center}
 	\caption{Petites Régions Agricoles (PRAs) around the Parisian Urban Area.}
@@ -659,7 +662,7 @@ Post 1950, we use data from the Ministry of Agriculture, which provides at the l
 
 \begin{figure}[h!]
 	\begin{center}
-		\includegraphics[width=0.85\textwidth]{\dataplots/map-prices.pdf}
+		\includegraphics[width=0.85\textwidth]{\dataplots/figureA25.pdf}
 	\end{center}
 	\caption{Arable land value per hectare (2000).}
 	\label{A-fig:arablevalue}
@@ -686,7 +689,8 @@ In the baseline specification shown in Table \ref{tab:densityruralprice} in the 
 
 \begin{table}[h!]
 	\begin{center}
-		\input{\datatables/tableA3-editnico.tex}
+		% \input{\datatables/tableA3-editnico.tex}
+		\input{\datatables/tableA3.tex}
 		\caption{Urban density and rural land values.\label{A-tab:densityruralpriceAPP}}
 	\end{center}
 	{\footnotesize \textit{Notes}: Results of Regression Eq. \ref{A-reg:densityruralpriceapp} for years $t \in \{1975, 1990, 2000, 2015\}$. Data on local farmland value $\bar{\rho}_{r,k,t}$ is the price of arable land in the `Petite Region Agricole (PRA) of city $k$.  Average urban density is measured using GHSL data for a sample of 200 cities. For IV-Regressions (columns (4) to (6)), local farmland values are instrumented by wheat yields on the restricted sample of cities in départements with wheat as one of the main crop in 2000 ($(S_{r,wheat}/S_r)_{k,2000}>20\%$). Controls are urban wages (in log), $w_{u,k,t}$, in city $k$ (Column (2) and (5)) together with Regional dummies (Column (3) and (6)). Standard errors are clustered at the département level. Signif. Codes: ***=0.01, **=0.05, *=0.1.}
@@ -707,7 +711,8 @@ Results of the second-stage (Eq. \ref{A-reg:densityruralpriceapp}) are shown in 
 
 \begin{table}[h!]
 	\begin{center}
-	\input{\datatables/tableA4-editnico.tex}
+	% \input{\datatables/tableA4-editnico.tex}
+	\input{\datatables/tableA4.tex}
 		\caption{First-Stage. Arable land values and wheat yields.\label{A-tab:1SLSyield}}
 	\end{center}
 	{\footnotesize \textit{Notes}: Results of the first-stage Regression Eq. \ref{A-reg:firststageyield} for years $t \in \{1975, 1990, 2000, 2015\}$. Data on local farmland value $\bar{\rho}_{r,k,t}$ is the price of arable land in the `Petite Region Agricole (PRA) of city $k$.  Data on wheat yield is the yield (per ha) in the département of city $k$. Restricted sample of 81 cities in départements with wheat as one of the main crop in 2000 ($(S_{r,wheat}/S_r)_{k,2000}>20\%$). Controls are urban wages (in log), $w_{u,k,t}$, in city $k$ (Column (2)) together with Regional dummies (Column (3)). Standard errors are clustered at the département level. Signif. Codes: ***=0.01, **=0.05, *=0.1.}
@@ -743,19 +748,23 @@ Results of the second stage with département/city FE are shown in Table \ref{A-
 
 While this shift-share strategy provides instruments along the time-dimension for each location (each département where the city is located), this comes at the cost of not providing immediate economic interpretation regarding coefficients in the first-stage. Estimated coefficient in the first-stage are shown in Table \ref{A-tab:1SLSshiftshare}. They are mostly negative but could in principle go either way depending on conflicting forces: on one side, specialization in the crops with the largest increase in yields tend to appreciate farmland values; on the other side, a faster increase in aggregate yields of a given crop would decrease its relative price, exerting downward pressure on farmland prices in the locations specialized in such a crop. One would need a model of crop choice with well-defined preferences across crops to shed light on estimated coefficients in the first-stage---a task beyond our paper. This strategy also comes at the cost of an overall weaker instrument and weaker first-stage compared to the baseline strategy using cross-sectional variations---the time-span (1975-2015) with only 4 dates of observation being fairly limited.
 
-
+% \input{\datatables/tableA5.tex}
 
 \begin{table}[h!]
 	\begin{center}
-		\input{\datatables/tableA5-editnico.tex}
+		\input{\datatables/tableA5.tex}
+		% \input{\datatables/tableA5-editnico.tex}
 		\caption{Urban density and rural land values: robustness with alternative IV.\label{A-tab:2SLSshiftshare}}
 	\end{center}
 	{\footnotesize \textit{Notes}: Results of IV-Regressions (shift-share IV) for Eq. \ref{A-reg:densityruralpriceapp} with more granular FE (département or city-FE) for years $t \in \{1975, 1990, 2000, 2015\}$. Data on local farmland value $\bar{\rho}_{r,k,t}$ is the price of arable land in the `Petite Region Agricole (PRA) of city $k$.  Average urban density is measured using GHSL data for a sample of 200 cities. Local farmland values are instrumented by the shift-share instruments (\ref{A-reg:shiftshareIV}) on the restricted sample of cities in départements with cereals as main crops in 2000 ($(S_{r,cereal}/S_r)_{k,2000}>30\%$). Regressions include Département FE (Columns (1) and (2)), city-FE (column (3))  controlling for urban wages (in log), $w_{u,k,t}$, in city $k$ (Columns (2) and (3)). Standard errors are clustered at the département level. Signif. Codes: ***=0.01, **=0.05, *=0.1.}
 \end{table}
 
+
+
 \begin{table}[hp!]
 	\begin{center}
-		\input{\datatables/tableA6-editnico.tex}
+		\input{\datatables/tableA6.tex}
+		% \input{\datatables/tableA6-editnico.tex}
 		\caption{First-Stage: robustness with alternative IV.\label{A-tab:1SLSshiftshare}}
 	\end{center}
 	{\footnotesize \textit{Notes}: Results of the first-stage regression (shift-share IV) with more granular FE (département or city-FE) for years $t \in \{1975, 1990, 2000, 2015\}$. Data on local farmland value $\bar{\rho}_{r,k,2000}$ is the price of arable land in the `Petite Region Agricole (PRA) of city $k$.  Shift-share instruments (\ref{A-reg:shiftshareIV}) on the restricted sample of cities in départements with cereals as main crops in 2000 ($(S_{r,cereal}/S_r)_{k,t}>30\%$). Regressions include Département FE (Columns (1) and (2)), city-FE (column (3))  controlling for urban wages (in log), $w_{u,k,t}$, in city $k$ (Columns (2) and (3)). Standard errors are clustered at the département level. Signif. Codes: ***=0.01, **=0.05, *=0.1.}
@@ -983,7 +992,7 @@ As summarized in Figure \ref{A-fig:mode}, the estimated fraction of workers usin
 
 \begin{figure}[h!]
 	\begin{center}
-		\includegraphics[width=0.7\textwidth]{\modplots/mode_paris.pdf}
+		\includegraphics[width=0.7\textwidth]{\dataplots/figureA29.pdf}
 	\end{center}
 	\vspace{-0.5cm}
 	\caption{Transportation mode use in the Parisian urban area.\label{A-fig:mode}}
@@ -1031,15 +1040,15 @@ The use of bikes and motorbikes was almost inexistent prior to 1890. The number 
 	\hspace{-15mm}
 	\begin{subfigure}{0.55\textwidth}
 %	\begin{center}
-	\includegraphics[width=0.93\textwidth]{\modplots/speed_paris1.pdf}
+	% \includegraphics[width=0.93\textwidth]{\dataplots/speed_paris1.pdf}
 %\end{center}
 \vspace{-0.1cm}
-\caption{Speed across transportation modes.\label{A-fig:speed1}}
+\caption{MISSING FIGURE Speed across transportation modes.\label{A-fig:speed1}}
 	\end{subfigure}%
 	\hspace{5mm}
 	\begin{subfigure}{0.55\textwidth}
 %	\begin{center}
-	\includegraphics[width=0.93\textwidth]{\modplots/speed_paris2.pdf}
+	\includegraphics[width=0.93\textwidth]{\dataplots/figureA30b.pdf}
 %\end{center}
 \vspace{-0.1cm}
 \caption{Evolution of average speed across mode categories.\label{A-fig:speed2}}
@@ -1051,7 +1060,7 @@ The use of bikes and motorbikes was almost inexistent prior to 1890. The number 
 		Right-panel: Public includes all public transportation modes. The speed for public transportation is a weighted average of the different public modes (weighted by their modal use). Private includes private car (horse-drawn and motorized), bikes and motorbikes. The speed for private transportation is a weighted average of the different private modes (weighted by their modal use). The average speed sums the speed of the different categories (walk, public, private) weighted by the modal use at the different dates. Average speed of the different commuting modes is measured using EGT data post-1976. Values pre-1976 are based on the 1976-value from EGT data for modes still operating in 1976 and based on historical description for other modes.}
 \end{figure}
 \pagebreak
-\bibliography{refs}
+\bibliography{../refs}
 \bibliographystyle{aer}
 
 
