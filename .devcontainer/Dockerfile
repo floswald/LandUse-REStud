@@ -73,6 +73,10 @@ ENV GKSwstype="nul"
 RUN mkdir -p /workspace/data /workspace/output /workspace/code && \
     chown -R statauser:stata /workspace
 
+# Copy setup script
+COPY .devcontainer/setup-packages.sh /usr/local/bin/setup-packages.sh
+RUN chmod +x /usr/local/bin/setup-packages.sh
+
 # Copy static files that don't change often
 COPY LICENSE.txt /home/statauser/LICENSE.txt
 COPY README.pdf /home/statauser/README.pdf
@@ -87,9 +91,6 @@ RUN echo 'R_LANDUSE=/workspace' > /home/statauser/.Renviron && \
 USER statauser
 WORKDIR /workspace
 
-
-# unset stata entrypoint
 ENTRYPOINT []
-
 # Default command
 CMD ["/bin/bash"]

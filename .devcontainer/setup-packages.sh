@@ -15,7 +15,7 @@ echo "Installing R packages..."
 Rscript -e "install.packages('renv', lib='${R_LIBS_USER}', repos='https://cloud.r-project.org')"
 
 # Add libs location to .Rprofile
-echo ".libPaths('${R_LIBS_USER}')" >> code/LandUseR/.Rprofile
+# echo ".libPaths('${R_LIBS_USER}')" >> code/LandUseR/.Rprofile
 
 # Restore R environment
 Rscript -e ".libPaths('${R_LIBS_USER}'); renv::restore(project = 'code/LandUseR', prompt = FALSE, clean = FALSE)"
@@ -31,5 +31,12 @@ echo "Testing installations..."
 julia --version
 R --version
 stata-mp -b do code/stata/hello.do || true
+
+# Setup terminal aliases and prompt
+echo "Setting up terminal..."
+echo 'alias ll="ls -la"' >> ~/.bashrc
+echo 'alias la="ls -A"' >> ~/.bashrc
+echo 'alias l="ls -CF"' >> ~/.bashrc
+echo 'export PS1="\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ "' >> ~/.bashrc
 
 echo "Setup complete!"

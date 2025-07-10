@@ -1,30 +1,39 @@
 {
-  "name": "Stata R Julia Development",
-  "dockerFile": "Dockerfile",
-  
-  // Mount your project folders
-  "mounts": [
-      "source=${localWorkspaceFolder}/data,target=/workspace/data,type=bind",
-      "source=${localWorkspaceFolder}/output,target=/workspace/output,type=bind",
-      "source=${localWorkspaceFolder}/code,target=/workspace/code,type=bind"
-  ],
-  
-  // Use the required user
-  "containerUser": "statauser",
-  
-  // Set working directory
-  "workspaceFolder": "/workspace",
-  
-  // Install packages after container is created
-  "postCreateCommand": "bash .devcontainer/setup-packages.sh",
-  
-  // Optional: Add VS Code extensions
-  "customizations": {
-      "vscode": {
-          "extensions": [
-              "REditorSupport.r",
-              "julialang.language-julia"
-          ]
-      }
-  }
+    "name": "Stata R Julia Development",
+    "image": "land-use",
+    
+    // Mount your project folders
+    "mounts": [
+        "source=${localWorkspaceFolder}/data,target=/workspace/data,type=bind",
+        "source=${localWorkspaceFolder}/output,target=/workspace/output,type=bind",
+        "source=${localWorkspaceFolder}/code,target=/workspace/code,type=bind"
+    ],
+    
+    // Use the required user
+    "containerUser": "statauser",
+    
+    // Set working directory
+    "workspaceFolder": "/workspace",
+    
+    // Optional: Add VS Code extensions and terminal improvements
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "REditorSupport.r",
+                "julialang.language-julia"
+            ],
+            "settings": {
+                "terminal.integrated.defaultProfile.linux": "bash",
+                "terminal.integrated.profiles.linux": {
+                    "bash": {
+                        "path": "bash",
+                        "args": ["-l"]
+                    }
+                }
+            }
+        }
+    },
+    
+    // Run setup script
+    "postCreateCommand": "setup-packages.sh"
 }
