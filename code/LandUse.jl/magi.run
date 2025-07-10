@@ -1,0 +1,13 @@
+#!/bin/bash
+#SBATCH --job-name=landuse
+#SBATCH --output=est.out
+#SBATCH --error=est.err
+#SBATCH --partition=COMPUTE-SHORT
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=8
+#SBATCH --cpus-per-task=1
+#SBATCH --mem-per-cpu=3G   # memory per cpu-core
+#SBATCH --mail-type=fail         # send email if job fails
+#SBATCH --mail-user=florian.oswald@gmail.com
+
+julia --project=. run.jl estimate --nwork=8 --maxsteps=10

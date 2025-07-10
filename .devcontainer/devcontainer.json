@@ -1,0 +1,16 @@
+{
+  "name": "Stata + Julia + R DevContainer",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": ".."
+  },
+  "settings": {
+    "terminal.integrated.defaultProfile.linux": "bash"
+  },
+  "extensions": [
+    "julialang.language-julia",
+    "Ikuyadeu.r"
+  ],
+  "postCreateCommand": "julia --version && R --version && stata-mp -b do code/stata/hello.do || true",
+  "remoteUser": "statauser"
+}

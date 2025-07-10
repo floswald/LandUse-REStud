@@ -1,0 +1,58 @@
+Package: LandUseR
+Title: Measurement for Coeurdacier, Oswald and Teignier
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "Florian",
+           family = "Oswald",
+           role = c("aut", "cre"),
+           email = "florian.oswald@gmail.com",
+           comment = c(ORCID = "https://orcid.org/0000-0001-7737-2038"))
+Description: This package combines functions for manual and satellite measurements used in "Structural Change, Land Use and Urban Expansion" by Coerdacier, Oswald and Teignier.
+License: MIT
+Encoding: UTF-8
+LazyData: true
+Imports: 
+    dplyr,
+    raster,
+    sf,
+    readxl,
+    rnaturalearth,
+    roxygen2,
+    cowplot,
+    tidyr,
+    googlesheets4,
+    googledrive,
+    progress,
+    rasterVis,
+    data.table,
+    magrittr,
+    ggplot2,
+    futile.logger,
+    purrr,
+    knitr,
+    kableExtra,
+    pkgdown,
+    here,
+    geojsonsf,
+    readODS,
+    fixest,
+    mapview,
+    quantreg,
+    modelsummary,
+    stars,
+    tmap,
+    directlabels,
+    igraph,
+    readr,
+    broom,
+    classInt,
+    lubridate,
+    ggrepel,
+    haven,
+    corrplot
+RoxygenNote: 7.3.2
+Roxygen: list(markdown = TRUE)
+Suggests: 
+    testthat,
+    rmarkdown
+VignetteBuilder: knitr

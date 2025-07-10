@@ -1,0 +1,100 @@
+---
+title: "PRAs and Cities in France"
+author: "Florian Oswald"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{PRA-France}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, fig.width = 7, fig.height=6)
+```
+
+# Checking All PRA Prices for 100 City Sample
+
+
+>You can click on the map. clicking on shapes gives PRA information, clicking on red points gives city information.
+
+```{r,warning=FALSE,message=FALSE}
+library(LandUseR)
+library(mapview)
+maps <- pra_check(paris = FALSE,topn = 100)
+```
+
+## 1950
+
+
+```{r}
+maps$prices[["1950"]]
+```
+
+
+## 1975
+
+
+```{r}
+maps$prices[["1975"]]
+```
+
+## 1990
+
+```{r}
+maps$prices[["1990"]]
+```
+
+## 2000
+
+```{r}
+maps$prices[["2000"]]
+```
+
+
+## 2015
+
+```{r}
+maps$prices[["2015"]]
+```
+
+
+# Checking All PRA Prices for 200 City Sample
+
+```{r,warning=FALSE,message=FALSE}
+maps <- pra_check(paris = FALSE,topn = 200)
+```
+
+## 1950
+
+
+```{r}
+maps$prices[["1950"]]
+```
+
+
+## 1975
+
+
+```{r}
+maps$prices[["1975"]]
+```
+
+## 1990
+
+```{r}
+maps$prices[["1990"]]
+```
+
+## 2000
+
+```{r}
+maps$prices[["2000"]]
+```
+
+
+## 2015
+
+```{r}
+maps$prices[["2015"]]
+```

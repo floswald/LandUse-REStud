@@ -1,0 +1,71 @@
+---
+title: "Pra in Paris"
+author: "Florian Oswald"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{PRA-Paris}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Checking All PRA Paris
+
+```{r,warning=FALSE,message=FALSE}
+library(LandUseR)
+library(mapview)
+pmaps <- pra_check(paris = TRUE, disk = TRUE)
+```
+
+## PRA Setup in Paris
+
+**Which Communes make up which PRA around Paris?**
+
+```{r}
+pmaps$pras
+```
+
+
+## 1950
+
+you can click on the map to find out the name of the PRA.
+
+```{r}
+pmaps$prices[["1950"]]
+```
+
+
+
+## 1975
+
+```{r}
+pmaps$prices[["1975"]]
+```
+
+
+
+## 1990
+
+```{r}
+pmaps$prices[["1990"]]
+```
+
+
+## 2000
+
+```{r}
+pmaps$prices[["2000"]]
+```
+
+
+
+## 2015
+
+```{r}
+pmaps$prices[["2015"]]
+```
+

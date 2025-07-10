@@ -1,0 +1,288 @@
+$ ./run_all.sh
+
+WELCOME!
+========
+
+this script will attempt to run the entire replication package in one go.
+
+step 0.1: which R are you running?
+=======================
+
+[1] TRUE
+step 0.1: done. 
+
+step 0.2: setup of renv
+=======================
+
+- The project is out-of-sync -- use `renv::status()` for details.
+The following package(s) will be installed:
+- renv [1.1.4]
+These packages will be installed into "~/Library/Caches/org.R-project.R/R/renv/library/LandUseR-0c2ff004/macos/R-4.4/aarch64-apple-darwin20".
+
+# Installing packages --------------------------------------------------------
+- Installing renv ...                           OK [linked from cache]
+Successfully installed 1 package in 78 milliseconds.
+- The library is already synchronized with the lockfile.
+Installing package into ‘/Users/floswald/Library/Caches/org.R-project.R/R/renv/library/LandUseR-0c2ff004/macos/R-4.4/aarch64-apple-darwin20’
+(as ‘lib’ is unspecified)
+* installing *source* package ‘LandUseR’ ...
+** using staged installation
+** R
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (LandUseR)
+- The project is out-of-sync -- use `renv::status()` for details.
+[1] TRUE
+
+step 0 done: R ready to go.
+===========================
+
+step 1: stata.
+==============
+
+
+stata done.
+===========
+
+step 2: R data generation
+=========================
+
+Warning messages:
+1: replacing previous import ‘data.table::first’ by ‘dplyr::first’ when loading ‘LandUseR’ 
+2: replacing previous import ‘data.table::last’ by ‘dplyr::last’ when loading ‘LandUseR’ 
+3: replacing previous import ‘data.table::between’ by ‘dplyr::between’ when loading ‘LandUseR’ 
+Loading required namespace: igraph                                            
+New names:
+• `` -> `...2`
+• `` -> `...3`
+New names:
+• `` -> `...2`
+• `` -> `...3`
+`geom_smooth()` using formula = 'y ~ x'
+`geom_smooth()` using formula = 'y ~ x'
+New names:
+• `` -> `...2`
+• `` -> `...3`
+Map saved to /Users/floswald/Downloads/ReplicationPackage/output/data/plots/figureA20.pdf
+Size: 14 by 9 inches
+Map saved to /Users/floswald/Downloads/ReplicationPackage/output/data/plots/map-pra-all-2015.pdf
+Size: 14 by 9 inches
+There were 50 or more warnings (use warnings() to see the first 50)
+
+step 2 done
+===========
+
+step 3: julia structural model - this is long a job!
+
+┌ Warning: The project dependencies or compat requirements have changed since the manifest was last resolved.
+│ It is recommended to `Pkg.resolve()` or consider `Pkg.update()` if necessary.
+└ @ Pkg.API /Users/julia/.julia/scratchspaces/a66863c6-20e8-4ff4-8a62-49f30b1f605e/agent-cache/default-macmini-aarch64-4.0/build/default-macmini-aarch64-4-0/julialang/julia-release-1-dot-8/usr/share/julia/stdlib/v1.8/Pkg/src/API.jl:1535
+Precompiling project...
+  1 dependency successfully precompiled in 56 seconds. 342 already precompiled.
+┌ Warning: The project dependencies or compat requirements have changed since the manifest was last resolved.
+│ It is recommended to `Pkg.resolve()` or consider `Pkg.update()` if necessary.
+└ @ Pkg.API /Users/julia/.julia/scratchspaces/a66863c6-20e8-4ff4-8a62-49f30b1f605e/agent-cache/default-macmini-aarch64-4.0/build/default-macmini-aarch64-4-0/julialang/julia-release-1-dot-8/usr/share/julia/stdlib/v1.8/Pkg/src/API.jl:1535
+[ Info: This is LandUse.jl, Revision 3
+┌ Info: 
+│ Welcome to LandUse.jl - This will create all model output
+│ 
+│ We make the following assumptions: 📝
+│ 
+│ 1. Call `pkgroot` the root of this replication package.
+│ 2. You successfully executed `pkgroot/code/stata/replication_aggregate_main.do`
+│ 3. You successfully installed the `pkgroot/code/LandUseR/` package and executed function `LandUseR::run_data()`
+│ 4. We call the values in `pkgroot/code/LandUse.jl/src/params.json` the *optimal parameter value*. 
+│ We obtained those values by running the estimation algorithm on the S-CAPAD cluster and takes those as given now.
+│ 
+│ 👉 All good? Then let's roll!
+└ 
+Country Model 100%[==================================================] Time: 0:00:34
+[ Info: Iterating on Prices
+[ Info: start iteration 1
+Country Model 100%[==================================================] Time: 0:00:33
+[ Info: end iteration 1: difference ℙ = 2.4927466757418415e-8
+[ Info: writing to /Users/floswald/Downloads/ReplicationPackage/code/LandUse.jl/src/../../../output/model/tables/params-2-digits-baseline.tex
+[ Info: runs all extensions ; writes results to disk. This is going to take some time. ☕️ 🍜 🍔
+[ Info: λ irrelevant
+[ Info: running model with Agglomeration forces λ = 0.05
+Country Model 100%[==================================================] Time: 0:00:32
+[ Info: not iterating for ℙ
+[ Info: λ relevant - aggregate effect
+[ Info: running model with Agglomeration forces λ = 0.05
+Country Model 100%[==================================================] Time: 0:00:50
+[ Info: not iterating for ℙ
+[ Info: running model with congestion forces μ = 0.05
+Country Model 100%[==================================================] Time: 0:00:32
+[ Info: not iterating for ℙ
+[ Info: avg city size Baseline in 2010 = [0.17259477182430347]
+[ Info: avg city size Agglomeration in 2010 = [0.17259477182422606]
+[ Info: avg city size Aggregate Effect in 2010 = [0.17944698194225014]
+[ Info: avg city size Congestion in 2010 = [0.1781057333887182]
+[ Info: avg city size Baseline in 2010 = [0.17259477182430347]
+[ Info: avg city size Congestion in 2010 = [0.1781057333887182]
+[ Info: export to /Users/floswald/Downloads/ReplicationPackage/code/LandUse.jl/src/../../../output/model/plots/revision3/sensitivity-agglomeration/Agglomeration.csv done
+[ Info: export to /Users/floswald/Downloads/ReplicationPackage/code/LandUse.jl/src/../../../output/model/plots/revision3/sensitivity-agglomeration/Aggregate Effect.csv done
+[ Info: export to /Users/floswald/Downloads/ReplicationPackage/code/LandUse.jl/src/../../../output/model/plots/revision3/sensitivity-agglomeration/Congestion.csv done
+[ Info: ξ stepper. (estimateθu,estimateθr) = (false,false)
+ξw Country Model  19%[=========>                                        ]  ETA: 0:00:19[ Info: turning on 4x4 drive 🚚
+ξw Country Model 100%[==================================================] Time: 0:00:27
+[ Info: ξ stepper. (estimateθu,estimateθr) = (false,false)
+ξw Country Model 100%[==================================================] Time: 0:00:24
+[ Info: avg city size Baseline in 2010 = [0.17259477182430347]
+[ Info: avg city size Baseline in 1840 = [0.0034012312953672283]
+[ Info: avg city size ξw=1 in 2010 = [0.1283248189827854]
+[ Info: avg city size ξw=1 in 1840 = [0.0054808977105407445]
+[ Info: avg city size ξw=ξl=1 in 2010 = [0.22151383568648236]
+[ Info: avg city size ξw=ξl=1 in 1840 = [0.008113375193427905]
+[ Info: Reporting Ratios: (dens(1870,cf) / dens(2020,cf)) / (dens(1870,base) / dens(2020,base))
+[ Info: Scenario: ξw=1
+[ Info: log (cf1870/cf2020) / log (base1870/base2020): 0.294
+[ Info: (cf1870/cf2020) / (base1870/base2020): 0.292
+[ Info: log (cf1870/cf2020) / log (data1870/data2020): 0.238
+[ Info: (cf1870/cf2020) / (data1870/data2020): 0.195
+[ Info: Scenario: ξw=ξl=1
+[ Info: log (cf1870/cf2020) / log (base1870/base2020): 0.278
+[ Info: (cf1870/cf2020) / (base1870/base2020): 0.284
+[ Info: log (cf1870/cf2020) / log (data1870/data2020): 0.226
+[ Info: (cf1870/cf2020) / (data1870/data2020): 0.189
+Country Model 100%[==================================================] Time: 0:00:51
+[ Info: not iterating for ℙ
+[ Info: avg city size Baseline in 2010 = [0.17259477182430347]
+[ Info: avg city size d0=0.05, d1=2.0 in 2010 = [0.16974033498180605]
+[ Info: export to /Users/floswald/Downloads/ReplicationPackage/code/LandUse.jl/src/../../../output/model/plots/revision3/sensitivity-d1d2/d0=0.05, d1=2.0.csv done
+[ Info: ϵ stepper
+ϵ Model  95%[===============================================>  ]  ETA: 0:00:01[ Info: export to /Users/floswald/Downloads/ReplicationPackage/code/LandUse.jl/src/../../../output/model/plots/revision3/sensitivity-epsilonr/ϵ=3.csv done
+[ Info: running R3's counterfactual
+low θr	Country Model  16%[=======>                                          ]  ETA: 0:00:11[ Info: turning on 4x4 drive 🚚
+low θr	Country Model 100%[==================================================] Time: 0:00:48
+[ Info: export to /Users/floswald/Downloads/ReplicationPackage/code/LandUse.jl/src/../../../output/model/plots/revision3/sensitivity-R3-fixedtheta/R3-θfixed.csv done
+[ Info: sensitivity θr with 20.0% of baseline growth
+Pop dist convergence it=1: Time: 0:00:11 (170 iterations)
+Pop dist convergence it=2: Time: 0:00:09 (177 iterations)
+Pop dist convergence it=3: Time: 0:00:09 (179 iterations)
+Pop dist convergence it=4: Time: 0:00:09 (170 iterations)
+Pop dist convergence it=5: Time: 0:00:09 (169 iterations)
+Pop dist convergence it=6: Time: 0:00:09 (177 iterations)
+Pop dist convergence it=7: Time: 0:00:11 (200 iterations)
+Pop dist convergence it=8: Time: 0:00:11 (216 iterations)
+Pop dist convergence it=9: Time: 0:00:12 (234 iterations)
+Pop dist convergence it=10: Time: 0:00:13 (251 iterations)
+Pop dist convergence it=11: Time: 0:00:15 (268 iterations)
+Pop dist convergence it=12: Time: 0:00:16 (291 iterations)
+Pop dist convergence it=13: Time: 0:00:17 (325 iterations)
+Pop dist convergence it=14: Time: 0:00:30 (600 iterations)
+Pop dist convergence it=15: Time: 0:00:32 (628 iterations)
+Pop dist convergence it=16: Time: 0:00:36 (682 iterations)
+Pop dist convergence it=17: Time: 0:00:37 (728 iterations)
+Pop dist convergence it=18: Time: 0:00:38 (753 iterations)
+Pop dist convergence it=19: Time: 0:00:39 (762 iterations)
+low θr	Country Model 100%[==================================================] Time: 0:00:47
+[ Info: sensitivity θr with 4.0% of baseline growth
+Pop dist convergence it=1: Time: 0:00:09 (170 iterations)
+Pop dist convergence it=2: Time: 0:00:09 (173 iterations)
+Pop dist convergence it=3: Time: 0:00:09 (171 iterations)
+Pop dist convergence it=4: Time: 0:00:08 (159 iterations)
+Pop dist convergence it=5: Time: 0:00:08 (157 iterations)
+Pop dist convergence it=6: Time: 0:00:09 (163 iterations)
+Pop dist convergence it=7: Time: 0:00:09 (178 iterations)
+Pop dist convergence it=8: Time: 0:00:10 (190 iterations)
+Pop dist convergence it=9: Time: 0:00:11 (208 iterations)
+Pop dist convergence it=10: Time: 0:00:11 (210 iterations)
+Pop dist convergence it=11: Time: 0:00:11 (219 iterations)
+Pop dist convergence it=12: Time: 0:00:12 (230 iterations)
+Pop dist convergence it=13: Time: 0:00:13 (235 iterations)
+Pop dist convergence it=14: Time: 0:00:20 (395 iterations)
+Pop dist convergence it=15: Time: 0:00:20 (397 iterations)
+Pop dist convergence it=16: Time: 0:00:21 (411 iterations)
+Pop dist convergence it=17: Time: 0:00:21 (423 iterations)
+Pop dist convergence it=18: Time: 0:00:21 (424 iterations)
+Pop dist convergence it=19: Time: 0:00:21 (420 iterations)
+low θr	Country Model  53%[==========================>                       ]  ETA: 0:00:09┌ Warning: 🚨 Could not run model 0.04 without θu estimation; This is fine (consistent with our results in the paper). I leave this in for documentation reasons. We tried to run that without re-estimation, but failed for numerical issues as demonstrated.
+│ 
+│ 👉 Nothing to worry about, keep going!
+└ @ LandUse ~/Downloads/ReplicationPackage/code/LandUse.jl/src/sensi-lowthetar.jl:499
+[ Info: Avg density 2020. Baseline: 0.13, 20.0%: 0.3, 4.0%: 0.85
+[ Info: Speed increase.   Baseline: 4.78, 20.0%: 4.01, 4.0%: 2.79
+[ Info: plotting sensitivity to θr noθu.
+[ Info: Avg density 2020. Baseline: 0.13, 20.0%: 0.3, 20.0%-noθu: 0.38
+[ Info: Speed increase.   Baseline: 4.78, 20.0%: 4.01, 20.0%-noθu: 4.29
+[ Info: export to /Users/floswald/Downloads/ReplicationPackage/code/LandUse.jl/src/../../../output/model/plots/revision3/sensitivity-thetar/20.0%.csv done
+[ Info: export to /Users/floswald/Downloads/ReplicationPackage/code/LandUse.jl/src/../../../output/model/plots/revision3/sensitivity-thetar/20.0%-noθu.csv done
+[ Info: export to /Users/floswald/Downloads/ReplicationPackage/code/LandUse.jl/src/../../../output/model/plots/revision3/sensitivity-thetar/4.0%.csv done
+[ Info: no population growth in baseline
+┌ Warning: turning on 4x4 drive 🚚
+└ @ LandUse ~/Downloads/ReplicationPackage/code/LandUse.jl/src/sensi-nopopgrowth.jl:220
+no pop growth Model 100%[==================================================] Time: 0:00:44
+[ Info: baseline with ω=0.5
+[ Info: ω stepper
+sensitivity ω Model  95%[===============================================>  ]  ETA: 0:00:01[ Info: no population growth in baseline with ω=0.5
+[ Info: ω stepper
+[ Info: running with flat population growth
+sensitivity ω Model  95%[===============================================>  ]  ETA: 0:00:01[ Info: σc stepper
+sensitivity σ Model  95%[===============================================>  ]  ETA: 0:00:01[ Info: σc stepper
+sensitivity σ Model  95%[===============================================>  ]  ETA: 0:00:01[ Info: export to /Users/floswald/Downloads/ReplicationPackage/code/LandUse.jl/src/../../../output/model/plots/revision3/sensitivity-sigma/σ=0.5.csv done
+[ Info: export to /Users/floswald/Downloads/ReplicationPackage/code/LandUse.jl/src/../../../output/model/plots/revision3/sensitivity-sigma/σ=2.0.csv done
+[ Info: ω stepper
+sensitivity ω Model  95%[===============================================>  ]  ETA: 0:00:01[ Info: ω stepper
+sensitivity ω Model  95%[===============================================>  ]  ETA: 0:00:01[ Info: export to /Users/floswald/Downloads/ReplicationPackage/code/LandUse.jl/src/../../../output/model/plots/revision3/sensitivity-omega/ω=3.0.csv done
+[ Info: export to /Users/floswald/Downloads/ReplicationPackage/code/LandUse.jl/src/../../../output/model/plots/revision3/sensitivity-omega/ω=0.33.csv done
+Increasing ρr in 1920 by 20.4% 100%[========================================] Time: 0:00:20
+┌ Info: max error Lu - iDensity
+└   maximum(ds.iDensity .- ds.Lu) = 7.199218998721335e-11
+Increasing ρr in 1970 by 315.5% 100%[========================================] Time: 0:05:45
+┌ Info: max error Lu - iDensity
+└   maximum(ds.iDensity .- ds.Lu) = 2.4368063122892636e-10
+Increasing ρr in 2020 by 67.5% 100%[========================================] Time: 0:02:01
+┌ Info: max error Lu - iDensity
+└   maximum(ds.iDensity .- ds.Lu) = 2.412896549230936e-10
+[ Info: extensions done! ✅
+[ Info: all done in 33.01 minutes ✅✅
+
+step 3 done
+===========
+
+step 4 R assembling tables
+==========================
+
+NOTE: 34 observations removed because of NA values (RHS: 34).
+NOTE: 10 observations removed because of NA values (RHS: 10).
+NOTE: 49 observations removed because of NA values (RHS: 34, Weights: 15).
+NOTE: 14 observations removed because of NA values (RHS: 10, Weights: 4).
+NOTE: 3 observations removed because of NA values (RHS: 3).
+NOTE: 34 observations removed because of NA values (RHS: 34).
+NOTE: 34 observations removed because of NA values (RHS: 34).
+NOTE: 10 observations removed because of NA values (RHS: 10).
+NOTE: 10 observations removed because of NA values (RHS: 10).
+NOTE: 3 observations removed because of NA values (RHS: 3).
+NOTE: 3 observations removed because of NA values (RHS: 3).
+NOTE: 3 observations removed because of NA values (RHS: 3).
+NOTE: 34 observations removed because of NA values (RHS: 34).
+NOTE: 10 observations removed because of NA values (RHS: 10).
+NOTE: 34 observations removed because of NA values (RHS: 34).
+NOTE: 34 observations removed because of NA values (RHS: 34).
+NOTE: 34 observations removed because of NA values (RHS: 34).
+NOTE: 10 observations removed because of NA values (RHS: 10).
+NOTE: 10 observations removed because of NA values (RHS: 10).
+NOTE: 10 observations removed because of NA values (RHS: 10).
+NOTE: 10 observations removed because of NA values (RHS: 10).
+NOTE: 10 observations removed because of NA values (RHS: 10).
+NOTE: 14 observations removed because of NA values (RHS: 14).
+NOTE: 14 observations removed because of NA values (RHS: 14).
+Warning messages:
+1: replacing previous import ‘data.table::first’ by ‘dplyr::first’ when loading ‘LandUseR’ 
+2: replacing previous import ‘data.table::last’ by ‘dplyr::last’ when loading ‘LandUseR’ 
+3: replacing previous import ‘data.table::between’ by ‘dplyr::between’ when loading ‘LandUseR’ 
+
+All done.
+=========
+
+
+real	63m23.247s
+user	62m19.187s
+sys	6m22.342s

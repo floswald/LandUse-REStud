@@ -1,0 +1,219 @@
+{
+	"S" : {
+		"value" : 1.0,
+		"description" : "Space per region",
+		"symbol" : "S"
+	},"L" : {
+		"value" : 1.0,
+		"description" : "Initial Population per region",
+		"symbol" : "L"
+	},"Lt" : {
+		"value" : [1.0],
+		"description" : "Total Population by year",
+		"symbol" : "L"
+	},
+	"γ" : {
+		"value" : 0.30122142499462845,
+		"description" : "Utility Weight of Housing",
+		"symbol" : "\\gamma"
+	},
+	"σ" : {
+		"value" : 0.9999,
+		"description" : "Land-Labor Elasticity of Substitution",
+		"symbol" : "\\omega"
+	},
+	"σc" : {
+		"value" : 1.0086678018068012,
+		"description" : "Elasticity of Substitution Urban and Rural Good",
+		"symbol" : "\\sigma"
+	},
+	"a" : {
+		"value" : 1.6883422541695259,
+		"description" : "Commuting Costs Base Parameter",
+		"symbol" : "a"
+	},
+	"ηm" : {
+		"value" : 1.0,
+		"description" : "elasticity of F commuting cost wrt mode",
+		"symbol" : "\\eta_m"
+	},
+	"ξl" : {
+		"value" : 0.55,
+		"description" : "Elasticity of commuting cost wrt location",
+		"symbol" : "\\xi_l"
+	},
+	"ξw" : {
+		"value" : 0.75,
+		"description" : "Elasticity of commuting cost wrt urban wage",
+		"symbol" : "\\xi_w"
+	},
+	"ν" : {
+		"value" : 0.022007011125890943,
+		"description" : "Preference Weight for Rural Consumption Good",
+		"symbol" : "\\nu"
+	},
+	"cbar" : {
+		"value" : 0.6777258996849997,
+		"description" : "Rural Consumption Good Subsistence Level",
+		"symbol" : "\\underline{c}"
+	},
+	"sbar" : {
+		"value" :  0.1708174340649497,
+		"description" : "Initial Urban Good Endowment",
+		"symbol" : "\\underline{s}"
+	},
+	"α" : {
+		"value" : 0.75,
+		"description" : "Labor Weight in Rural Production",
+		"symbol" : "\\alpha"
+	},
+	"useless" : {
+		"value" : 0.0,
+		"description" : "Useless Land",
+		"symbol" : "useless"
+	},
+	"λ" : {
+		"value" : 0.0,
+		"description" : "Agglomeration Force",
+		"symbol" : "\\lambda"
+	},
+	"μ" : {
+		"value" : 0.0,
+		"description" : "Congestion",
+		"symbol" : "\\mu"
+	},
+	"Ψ" : {
+		"value" : 1.0,
+		"description" : "Urban Amenities relative to Rural",
+		"symbol" : "\\Psi"
+	},
+	"T" : {
+		"value" : [1840,10,2020],
+		"description" : "Start year, increments, end year",
+		"symbol" : "\\mathcal{T}"
+	},
+	"sT" : {
+		"value" : 2350,
+		"description" : "Final year of forward Simulation",
+		"symbol" : "\\mathcal{sT}"
+	},
+	"sS" : {
+		"value" : 2030,
+		"description" : "First year of forward Simulation",
+		"symbol" : "\\mathcal{sS}"
+	},
+	"θut" : {
+		"value" : [0.32],
+		"description" : "idiosyncratic urban Productivity by period",
+		"symbol" : "\\theta_{u,i,t}"
+	},
+	"θrt" : {
+		"value" : [0.32],
+		"description" : "idiosyncratic rural Productivity by period",
+		"symbol" : "\\theta_{r,i,t}"
+	},
+	"θu_g" : {
+		"value" : 1.15,
+		"description" : "urban Productivity growth by period",
+		"symbol" : "\\theta_{u,i,t}"
+	},
+	"θr_g" : {
+		"value" : 1.15,
+		"description" : "rural Productivity growth by period",
+		"symbol" : "\\theta_{r,i,t}"
+	},
+	"ϵr" : {
+		"value" : 5.0,
+		"description" : "Housing Supply Elasticity in rural area",
+		"symbol" : "\\epsilon_r"
+	},
+	"ϵs" : {
+		"value" : 2.0,
+		"description" : "Housing Supply Elasticity at city center",
+		"symbol" : "\\epsilon(0)"
+	},
+	"nsteps" : {
+		"value" : 2,
+		"description" : "Number of steps in search",
+		"symbol" : "n_steps"
+	},
+	"int_nodes" : {
+		"value" : 64,
+		"description" : "Number of Integration Nodes",
+		"symbol" : "n_I"
+	},
+	"int_bins" : {
+		"value" : 20,
+		"description" : "Number bins for distance",
+		"symbol" : "n_b"
+	},
+	"K" : {
+		"value" : 1,
+		"description" : "Number of Regions",
+		"symbol" : "K"
+	},
+	"kshare" : {
+		"value" : [1.0],
+		"description" : "Region k's share of Total Space",
+		"symbol" : "\\pi_k"
+	},
+	"factors" : {
+		"value" : [1.0],
+		"description" : "Region k's growth offset",
+		"symbol" : "factor_k"
+	},
+	"ζ" : {
+		"value" : 0.5,
+		"description" : "Valuation of commuting time in terms of wages",
+		"symbol" : "\\zeta"
+	},
+	"β" : {
+		"value" : 0.96,
+		"description" : "Annual Discount Factor",
+		"symbol" : "\\beta"
+	},
+	"ma" : {
+		"value" : 15,
+		"description" : "moving average window size for theta smoother",
+		"symbol" : "ma"
+	},
+	"magr" : {
+		"value" : 0.01,
+		"description" : "extrapolating growth rate for rural productivities",
+		"symbol" : "magr"
+	},
+	"magu" : {
+		"value" : 0.01,
+		"description" : "extrapolating growth rate for urban productivities",
+		"symbol" : "magu"
+	},
+	"magt" : {
+		"value" : 6,
+		"description" : "length of moving average for mag",
+		"symbol" : "magt"
+	},
+	"popg" : {
+		"value" : 0.004,
+		"description" : "extrapolating growth rate for population",
+		"symbol" : "popg"
+	},
+	"iters" : {
+		"value" : 1000,
+		"description" : "max solver iterations",
+		"type" : "numerical",
+		"symbol" : "iters"
+	},
+	"trace" : {
+		"value" : true,
+		"description" : "trace solver or not",
+		"type" : "numerical"
+	},
+	"speed_thresholds" : {
+		"value" : [0.25, 0.41],
+		"description" : "commuting speed thresholds"
+	},
+	"ϕ1x" : {
+		"value" : 0.15,
+		"description" : "fraction of initial city that is denoted center"
+	}
+}

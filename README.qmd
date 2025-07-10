@@ -1,170 +1,184 @@
 ---
 title: Replication Package for *Land Use, Structural Change and Urban Expansion*
 date: today
-bibliography: refs.bib
-format:
-  docx: default
-  html: default
-  pdf: default
+bibliography: 
+  - refs.bib
+  - grateful-refs.bib
+number-sections: true
+toc: true
+format: 
+  pdf:
+    keep-tex: true
+    include-in-header: 
+      text: |
+        \usepackage{fvextra}
+        \DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,commandchars=\\\{\}}
+    include-before-body:
+      text: |
+        \RecustomVerbatimEnvironment{verbatim}{Verbatim}{
+        showspaces = false,
+        showtabs = false,
+        breaksymbolleft={},
+        breaklines
+        % Note: setting commandchars=\\\{\} here will cause an error 
+        }
 ---
 
-This replication package accompanies Nicolas Coeurdacier, Florian Oswald and Marc Teignier, REStud 2025
-<!---
-Include as much detail in the article citation as you can.
--->
+This replication package accompanies Coeurdacier, Oswald and Teignier, REStud 2025.
 
-## Authors
+
+# Authors
 
 - Nicolas Coeurdacier
 - Florian Oswald
 - Marc Teignier
 
-## Structure
+# Structure
 
-This replication package has the following format:
+This replication package has the following structure:
 
 ```
 .
 ├── code
-│   ├── CASDr
 │   ├── LandUse.jl
 │   ├── LandUseR
 │   └── stata
-├── data
-│   ├── processed
-│   └── raw
+├── data/
 ├── output
 │   ├── plots
 │   └── tables
-├── README_files
-│   └── libs
-├── README.docx
-├── README.html
 ├── README.pdf
 ├── README.qmd
 └── refs.bib
 ```
 
+# Data availability and provenance statements
 
-
-## Data availability and provenance statements
-
-### Statement about rights
+## Statement about rights
 
 The author(s) of the manuscript have legitimate access to and permission to use the data used in this manuscript.
 
-### Summary of availability
+## Summary of availability
+
+- All data are publicly available.
+- All exhibits in the main text and approved appendices A and B can be reproduced with data shared with this replication package.
 
 
-- Some data **cannot be made** publicly available.
-- All exhibits in the main text and B can be reproduced with data shared with this replication package.
-- 8 out of 40 exhibits in Appendix A require access to confidential data and cannot be reproduced with this package.
+## List of Data Sources {#sec-datadetails}
+
+All data in this list are in the public domain, hence freely accessible, and we have the right to redistribute them as part of our replication package. @sec-datasets provides additional details on specific datasets.
+
+### French Land used in Agriculture. 
+
+We have different data sources for different points in time. These secondary sources all rely on the Recensement Agricole.
+
+- 1840, 1862, 1882 and 1892: 
+    1. @mauguin1890statistique
+    2. @flechey1898statistique
+    3. @hitier1899statistique
+    4. @toutain1993production
+- Interwar period:
+    1. @auge1945statistiques
+    2. @mauco1937modes
+    3. @toutain1993production
+- Post WW2 and until 2000: @desriers2007agriculture
+- after 2000: Website of Agricultural ministry (Agreste), *Utilisation du territoire, Statistique Agricole Annuelle (SAA)* [link to source](https://agreste.agriculture.gouv.fr/agreste-web/disaron/SAANR_1/detail/)
+  
+### Sectoral Employment
+
+- 1806-1990: @marchand1991deux
+- 1856-2006: @herrendorf2014growth
+- 1950-2018: OECD. Employment by main activity via this URL at  [stats.oecd.org](https://stats.oecd.org/OECDStat_Metadata/ShowMetadata.ashx?Dataset=SNA_TABLE3_ARCHIVE&ShowOnWeb=true&Lang=en) which is no longer accessible. The new site [https://data-explorer.oecd.org/](https://data-explorer.oecd.org/) does not contain any historical data anymore. Data are part of our replication package.
+
+### Sectoral National Accounts and Prices
+
+- 1815-1938: @toutain1987produit and @groeningen via [http://www.ggdc.net/](http://www.ggdc.net).
+- INSEE. Sectoral Value Added in Comptes Nationaux Base 2014 since 1949 via [https://www.insee.fr/fr/statistiques/2830197](https://www.insee.fr/fr/statistiques/2830197)
+- Producer Price Index for Agricultural goods (Indice IPPAP). *Serie rétropolée* for 1949-2005 in Insee Méthodes 114  via [https://www.insee.fr/fr/information/2579294](https://www.insee.fr/fr/information/2579294) chained with data post-2005, via [https://www.insee.fr/fr/statistiques/serie/010538626](https://www.insee.fr/fr/statistiques/serie/010538626)
+- Alternative Price Index of Agricultural goods (1810-1952): @sauvy1952variations
+- GDP Deflator & CPI. World Bank Development Indicator (1960-2018) via [https://data.worldbank.org/indicator/NY.GDP.DEFL.ZS](https://data.worldbank.org/indicator/NY.GDP.DEFL.ZS) and INSEE (1820-2018). 
+
+### Consumption Expenditure
+
+- 1896-1939: @villa1993productivite via [http://gesd.free.fr/villadoc.pdf](http://gesd.free.fr/villadoc.pdf)
+- 1959-2017: INSEE Comptes Nationaux Base 2014. *Consommation effective des ménages par fonction aux prix courants.* via [https://catalogue-donnees.insee.fr/fr/catalogue/recherche/DD_CNA_CONSO_MENAGES_COICOP](https://catalogue-donnees.insee.fr/fr/catalogue/recherche/DD_CNA_CONSO_MENAGES_COICOP)
+
+### Land and Housing Wealth
+
+- @piketty2014capital via [https://wid.world/fr/accueil/](https://wid.world/fr/accueil/)
+- Housing Price Index from @knoll2017no via [https://www.macrohistory.net/database/](https://www.macrohistory.net/database/)
+
+### Urban Area and Population Measurement
+
+- 1866: Carte d'Etat Major, via [geoportail](https://www.geoportail.gouv.fr/donnees/carte-de-letat-major-1820-1866)
+- 1950: Aerial photography and Maps, via [geoportail IGN](https://www.ign.fr)
+- Historical Census population counts, via [INSEE](https://www.insee.fr/fr/statistiques/3698339)
+- GHSL-BUILT: @GHSL-built
+- GHSL-POP: @GHSL-pop
+- @angel2012atlas, @angel2010persistent
 
 
-### Details on each data source
+### Farmland Prices, Yields and Agricultural Land Use
 
-Unless specifically pointed out, all data in this list are in the public domain, hence freely accessible, and we have the right to redistribute them with as part of our replication package.
-
-- French Land used in Agriculture. We have different data sources for different points in time.
-    - 1882 and 1892: 
-        1. @mauguin1890statistique
-        2. @flechey1898statistique
-        3. @hitier1899statistique
-    - 1937: @auge1945statistiques
-    - 1840 until WW2: Recencement Agricole, **what is this? is this the sub-section "exploitation agricole" as part of the "recensement generale de la populuatoin"? citation for each year needed**
-    - Interwar period: 
-		1. @toutain1987produit
-		2. @mauco1937modes
-    - post WW2 and until 2000: @desriers2007agriculture
-    - after 2000: Website of Agricultural ministry (Agreste). **What is the correct citation here - need an URL and more info**
-- Sectoral Employment:
-    - 1806-1990: @marchand1991deux
-    - 1856-2006: @herrendorf2014growth
-    - 1950-2018: OECD *need a citation/URL*
-- Sectoral National Accounts and Prices
-    - 1815-1938: @toutain1987produit via [http://www.ggdc.net/](http://www.ggdc.net)
-    - Post WW2: INSEE. *citation of data source/URL needed*
-    - Relative Price of Agricultural goods: @sauvy1952variations
-- Consumption Expenditure:
-    - 1896-1939: @villa1993productivite via  http://gesd.free.fr/villadoc.pdf
-    - 1959-2017: INSEE Comptes Nationaux (Base 2014)
-- Land and Housing Wealth: @piketty2014capital via https://wid.world/fr/accueil/
-- Urban Area and Population Measurement:
-    - 1866: Carte d'Etat Major, via [geoportail](https://www.geoportail.gouv.fr/donnees/carte-de-letat-major-1820-1866)
-    - 1950: Aerial photography, via [geoportail IGN](https://www.ign.fr)
-    - @GHSL-built
-    - @GHSL-pop
-    - @angel2012atlas
-    - @angel2010persistent
-    - We use contemporary (vintage 2018) land use cover data from @corine-2018
-- Farmland Prices, Yields and Agricultural land Use
-    - Local Farmland Values
-        - 1892: Recensement Agricole in 1892 via https://gallica.bnf.fr/ark:/12148/bpt6k855121k/f1.item
-        - Post 1950: Farmland values at *Petite region agricole (PRA)* level
-        - https://agreste.agriculture.gouv.fr/agreste-web/disaron/Chd21010/detail/
-        - What are the citations for the other years? what are the relevant URLs?
-    - Wheat Yields
-        - @schaubergeretal2022
-- Historical Commuting Speed in Paris
-    - 1959: @bertrand1962enquete
-    - Enquete Global Transport 1976, 1983, 1991, 2001, 2010 **missing citation**
-    - 1835, 1856, 1876, 1890, 1910 and 1930:
-        - @martin1894etude
-        - @bertillon1910accroissement
-        - @brunet1986mouvement
-        - @merlin1997transports
-        - @Stats-Paris-1931
-        - @orselli2008usages
-        - @papon2010parcours
-    - 1955, 1990, 2000, 2010:
-        - @bastie1958population
-        - @Stats-Paris-1955
-        - OMNIL 2000 and 2010 **missing**
-        - OMNIL (all modes 2000-2020) **missing**
-- Individual level Data for Urban Areas. All data in this subsection are with **confidential access restriction, hence not shared in this replication package**. You can apply for access following the procedure at [https://www.comite-du-secret.fr](https://www.comite-du-secret.fr).
-    - Commuting Data
-        - Enquête National du Logement (ENL) 
-            - 1984: @ENL-1984
-            - 1988: @ENL-1988
-            - 2006: @ENL-2006
-            - 2013: @ENL-2013
-        - Base Tous Salariés : fichier Postes (formerly known as DADS-Postes). We use a 50% random sample from the 2018 edition, see @Postes-2018.
-    - Urban Productivity and Wages
-        - @PanelEDP
+- Local Farmland Values. Details in @sec-PRA-details
+    - 1892: Recensement Agricole in 1892 via [https://gallica.bnf.fr/ark:/12148/bpt6k855121k/f1.item](https://gallica.bnf.fr/ark:/12148/bpt6k855121k/f1.item)
+    - Post 1950: Farmland values at *Petite region agricole (PRA)* level
+        - [https://agreste.agriculture.gouv.fr/agreste-web/disaron/Chd21010/detail/](https://agreste.agriculture.gouv.fr/agreste-web/disaron/Chd21010/detail/) (post 1999)
+        - Statistique Agricole (Ministère de l’Agriculture) pour 1950, 1975, 1990, 2000. Via Bibliothèque Numérique de la Statistique Publique (bnsp.insee.fr)
+            - [https://www.bnsp.insee.fr/ark:/12148/bc6p06z42hc/f1.pdf](https://www.bnsp.insee.fr/ark:/12148/bc6p06z42hc/f1.pdf)
+            - [https://www.bnsp.insee.fr/ark:/12148/bc6p070rxfv.pdf](https://www.bnsp.insee.fr/ark:/12148/bc6p070rxfv.pdf)
+            - [https://www.bnsp.insee.fr/ark:/12148/bc6p070rf4d/f1.pdf](https://www.bnsp.insee.fr/ark:/12148/bc6p070rf4d/f1.pdf) 
+            - [https://www.bnsp.insee.fr/ark:/12148/bc6p070rbqb/f1.pdf](https://www.bnsp.insee.fr/ark:/12148/bc6p070rbqb/f1.pdf)
+- Wheat Yields
+    - @schaubergeretal2022 (see [nature scientific data](https://doi.org/10.1038/s41597-022-01145-4))
+- Land Use for Wheat: Website of Ministry of Agriculture (Agreste). Data for 2000 from Recensement Agricole via [https://agreste.agriculture.gouv.fr/agreste-web/disaron/RA_6013_1/detail/](https://agreste.agriculture.gouv.fr/agreste-web/disaron/RA_6013_1/detail/)
 
 
+### Historical Commuting Speed in Paris
 
-## Code
+- 1959: @bertrand1962enquete
+- Enquete Global Transport 1976, 1983, 1991, 2001, 2010 Via Réseau Quetelet.  [https://data.progedo.fr/series/adisp/enquete-menages-deplacements-emd](https://data.progedo.fr/series/adisp/enquete-menages-deplacements-emd). 
+- 1835, 1856, 1876, 1890, 1910 and 1930:
+    - @martin1894etude
+    - @bertillon1910accroissement
+    - @brunet1986mouvement
+    - @merlin1997transports
+    - @Stats-Paris-1931
+    - @orselli2008usages
+    - @papon2010parcours
+- 1955, 1990, 2000, 2010:
+    - @bastie1958population
+    - @Stats-Paris-1955
+    - [OMNIL](https://omnil.fr/trafic-annuel-et-journalier) (annual traffic for all modes since 2000)
+
+# Code
 
 The package uses stata, R and julia code; All code is located in the subfolder `code/`.
 
-### Stata
+* We provide a single driver script which will run the entire package top to bottom, after suitable software installation and configuration. This script is located at `code/run_all.sh`
+* We also provide instructions to run the package step by step, i.e., executing the programs in different languages one after the other, by hand.
 
-Data cleaning and production of graphics relating to land use, sectoral employment, national accounts and prices, consumption expenditures, historical commuting speeds and land and housing wealth.
+## Stata
 
-We used stata version **xxx**.
+Data processing and production of graphics relating to land use, sectoral employment, national accounts and prices, consumption expenditures, historical commuting speeds and land and housing wealth.
 
-There is a `main.do` script which will run all stata related code (in each subfolder?)
+We used stata versions 14 as well as 19.5, both giving identical results. We do not use *any* add-on package.
+
+There is a script called `replication_aggregate_main.do` which will run all stata related code. It produces Figures of the main text and of the Appendix and generates a processed dataset `FRA_model.dta` used as input for the julia model and for comparison of that model’s output to data.
 
 
-### R
+## R
 
-There are two `R` packages in the subfolder `code`: `LandUseR` and `CASDr`, the latter of which is used inside the secure CASD environment only. Apart from running the built in unit tests, `CASDr` will not run outside of CASD.
-
-Both `R` packages are used for data cleaning, regression analysis and production of plots for local farmland prices, wheat yields, individual commuting data, and confrontation of model vs data.
+There is an `R` packages in the subfolder `code` called `LandUseR` which is used for data cleaning, measurement of urban extents from raster data, regression analysis and production of plots for local farmland prices, wheat yields, and confrontation of model vs data. There is a single driver script which produces all output from the package.
 
 ## julia
 
-Prepration of data moments for model, implementation of structural model, estimation of parameters and calibration exercise, production of simulation output (figures and tables). There is a single driver script which produces all output from the model.
-
-<!---
-Give a high-level overview of the program files and their purpose. Remove redundant/ obsolete files from the Replication archive.
--->
+The folder `code/LandUse.jl` contains a julia package used for the prepration of data moments for model, implementation of structural model, estimation of parameters and calibration exercise, production of simulation output (figures and tables). There is a single driver script which produces all output from the package.
 
 
-### (Optional, but recommended) License for Code
+# License for Code
 
-The code is licensed under a MIT/BSD/GPL/Creative Commons license. See [LICENSE.txt](LICENSE.txt) for details.
+The code is licensed under [Creative Commons license v4](https://creativecommons.org/licenses/by/4.0/). See [LICENSE.txt](LICENSE.txt) for details.
 
 
 # List of tables and figures
@@ -183,156 +197,683 @@ pick one
 - All numbers provided in text in the paper
 - All tables and figures in the paper
 
-### Main Text Exhibits
+## Main Text Exhibits
 
-| Exhibit   | Language | Program/function | Output in `output/`      | Reproducible |
-|------|------|------|---------|-------|
-| Figure 1  | `stata`  | `code/stata/figure1.do` | plots/figure1.pdf        | yes          |
-| Figure 2  | --       |(no data/code used)      | plots/fig2a(b).pdf       | yes          |
-| Figure 3  | `R`      |`LandUseR::figure3()`    | plots/figure3.pdf        | yes          |
-| Figure 4a  | `R`      |`LandUseR::plot_top100_densities()`    | plots/figure4a.pdf    | yes          |
-| Figure 4b  | `R`      |`LandUseR::figure4b()`    | plots/figure4b.pdf    | yes          |
-| Figure 5  | `R`      |`LandUseR::figure5()`    | plots/figure5a(b).pdf    | yes          |
-| Figure 6  | `stata`      |`code/stata/figure6.do`  | plots/figure6a(b).pdf    | yes          |
-| Table 1   | `julia`  |`LandUse.latex_param()`  | tables/table1.tex        | yes          |
-| Figure 7  | `stata`  |`code/stata/figure7.do`  | plots/figure7.pdf        | yes          |
-| Figure 8  | `julia`  | `LandUse.figure8()`     | plots/figure8a(b,c).pdf  | yes          |
-| Figure 9  | `julia`  | `LandUse.figure9()`     | plots/figure9a(b).pdf    | yes          |
-| Figure 10 | `julia`  | `LandUse.figure10()`    | plots/figure10a(b).pdf   | yes          |
-| Figure 11 | `julia`  | `LandUse.figure11()`    | plots/figure11a(b).pdf   | yes          |
-| Figure 12 | `julia`  | `LandUse.figure12()`    | plots/figure12a(b).pdf   | yes          |
-| Figure 13 | `julia`  | `LandUse.figure13()`    | plots/figure13a(b,c).pdf | yes          |
-| Table 2   | `R`      | `LandUseR::table2()`    | tables/table2.tex        | yes          |
-| Figure 14 | `julia`  | `LandUse.figure14()`    | plots/figure14a(b).pdf   | yes          |
-| Figure 15 | `julia`  | `LandUse.figure15()`    | plots/figure15a(b).pdf   | yes          |
-| Figure 16 | `julia`  | `LandUse.figure16()`    | plots/figure16a(b).pdf   | yes          |
-| Figure 17 | `julia`  | `LandUse.figure17()`    | plots/figure17a(b).pdf   | yes          |
+*All exhibits are reproducible with this package.*
 
-: Main Text exhibits {tbl-colwidths="[10,10,35,35,10]"}
+::: {.callout-note}
 
+# Single Driver Script
 
-### Appendix A Exhibits
+While we give each single function/script to generate a given exhibit in the below table, we strongly recommend using the driver scripts which generate all output. In particular for the structural model output a large amount of computation is required, before any output can be generated - that is, the julia function `LandUse.full_pipeline()` should be run in all cases. See @sec-replicators below.
 
-| Exhibit      | Language | Program/function                    | Output in `output/`                    | Reproducible               |
-|-----------   |----------|-----------                          |---------                               |---------                   |
-| Figure A.1   | --       | no code                             | plots/figureA1.pdf                     | yes                        |
-| Figure A.2   | `stata`  | `code/stata/figureA2.do`            | plots/figureA2a(b).pdf                 | yes                        |
-| Figure A.3   | `stata`  | `code/stata/figureA3.do`            | plots/figureA3.pdf                     | yes                        |
-| Figure A.4   | `stata`  | `code/stata/figure7.do`             | plots/figureA4.pdf                     | identical to figure 7      |
-| Figure A.5   | `stata`  | `code/stata/figureA5.do`            | plots/figureA5.pdf                     | identical to figure 7      |
-| Figure A.6   | --       | no code                             | plots/figureA6.pdf                     | yes                        |
-| Figure A.7   | --       | no code                             | plots/figureA7.pdf                     | yes                        |
-| Figure A.8   | --       | no code                             | plots/figureA8.pdf                     | yes                        |
-| Figure A.9   | --       | no code                             | plots/figureA9.pdf                     | yes                        |
-| Table A.1    | `R`      | `LandUseR::print_pop_1950()`        | tables/tableA1.tex                     | yes                        |
-| Table A.2    | `R`      | `LandUseR::print_paris_pop_1950()`  | tables/tableA2.tex                     | yes                        |
-| Figure A.10  | `R`      | `LandUseR::GHSL_plots()`            | plots/tableA10.pdf                     | yes                        |
-| Figure A.11  | `R`      | `LandUseR::GHSL_plots()`            | plots/tableA11.pdf                     | same function produces both|
-| Figure A.12  | `R`      | `LandUseR::plot_top100_densities()` | plots/figureA12.pdf                    | yes                        |
-| Figure A.13  | `R`      | `LandUseR::plot_top100_densities()` | plots/figureA13.pdf                    | same function              |
-| Figure A.14  | `stata`  | `code/stata/figureA14.do`           | plots/figureA14a(b).pdf                | yes                        |
-| Figure A.15  | `R`      | `LandUseR::plot_top100_cutoff()`    | plots/figureA15.pdf                    | yes                        |
-| Figure A.16  | `R`      | `LandUseR::plot_top100_cutoff()`    | plots/figureA16.pdf                    | same function              |
-| Figure A.17  | --       | no code                             | plots/figureA17.pdf                    | yes                        |
-| Figure A.18  | `R`      | `LandUseR::plot_sat_vs_manual()`    | plots/figureA18.pdf                    | yes                        |
-| Figure A.19  | `R`      | `LandUseR::plot_shlomo()`           | plots/figureA19.pdf                    | yes                        |
-| Figure A.20  | `R`      | `LandUseR::CLC_plots()`             | plots/figureA20.pdf                    | yes                        |
-| Figure A.21  | `R`      | `LandUseR::CLC_measure()`           | plots/figureA21.pdf                    | yes                        |
-| Figure A.22  | `R`      | `LandUseR::map_pra_all()`           | plots/figureA22.pdf                    | yes                        |
-| Figure A.23  | `R`      | `LandUseR::wheat_plots()`           | plots/figureA23a(b).pdf                | yes                        |
-| Figure A.24  | `R`      | `LandUseR::pra_check()`             | plots/figureA24.pdf                    | yes                        |
-| Figure A.25  | `R`      | `LandUseR::map_pra_prices2000()`    | plots/figureA25.pdf                    | yes                        |
-| Table A.3    | `R`      | `LandUseR::tableA3()`               | tables/tableA3.tex                     | yes                        |
-| Table A.4    | `R`      | `LandUseR::tableA4()`               | tables/tableA4.tex                     | yes                        |
-| Table A.5    | `R`      | `LandUseR::tableA5_A6()`            | tables/tableA5.tex                     | yes                        |
-| Table A.6    | `R`      | `LandUseR::tableA5_A6()`            | tables/tableA6.tex                     | yes                        |
-| Figure A.26a | `R`      | `CASDr::ENLrun(1984)`               | plots/speed-dist-france-dist-1984.tex  | no - CASD                  |
-| Figure A.26b | `R`      | `CASDr::ENLrun(2013)`               | plots/speed-dist-france-dist-2013.tex  | no - CASD                  |
-| Figure A.27  | `R`      | `CASDr::ENL_all_run_panel()`        | plots/speed-dist-france-2013.pdf       | no - CASD                  |
-| Table A.7    | `R`      | `CASDr::ENLrun(1984)`               | tables/speed-dist-france-1984.tex      | no - CASD                  |
-| Table A.8    | `R`      | `CASDr::ENLrun(2013)`               | tables/speed-dist-france-2013.tex      | no - CASD                  |
-| Table A.9    | `R`      | `CASDr::ENL_all_run_panel()`        | tables/speed-dist-france-1984-2013.tex | no - CASD                  |
-| Figure A.28  | `R`      | `CASDr::d1d2_regression()`          | plots/figureA28a(b).pdf                | no - CASD                  |
-| Table A.10   | `R`      | `CASDr::PTSEDP19_subset()`          | tables/tableA10.tex                    | no - CASD                  |
-| Figure A.29  | `stata`  | `code/stata/figureA29.do`           | plots/figureA29.pdf                    | yes                        |
-| Figure A.30  | `stata`  | `code/stata/figureA30.do`           | plots/figureA30a(b).pdf                | yes                        |
+:::
 
-: Appendix A exhibits {tbl-colwidths="[10,10,35,35,10]"}
+Please notice that we split the content of directory `output/` further into
+
+```
+output
+    ├── data
+    │   ├── plots
+    │   └── tables
+    └── model
+        ├── plots
+        └── tables
+```
+
+i.e. we distinguish between output generated *from* data as opposed to *from* model, and we separate by *plots* and *tables*.
+
+::: {.callout-tip}
+
+# Function Namespaces
+
+In the tables below, we refer to `R` and `julia` functions from 2 packages. The replicator should search for the function definition in each package if required. All stata code is in `code/stata/`
+
+1. `R`: all functions are part of the `LandUseR` package (defined in `code/LandUseR`)
+2. `julia`: all function are part of the `LandUse.jl` package (defined in `code/LandUse.jl`)
+
+:::
 
 
-### Appendix B Exhibits
 
-to be done
+| Exhibit   | Language | Program/function | Output in `output/data/plots`      |
+|------|------|------|---------|
+| Figure 1  | `stata` | `figure1.do`            | `data/plots/figure1.pdf`   |
+| Figure 2  | --      | (no data/code used)                | `data/plots/fig2a(b).pdf`  |
+| Figure 3  | `R`     |`figure3()`               | `data/plots/figure3.pdf`   |
+| Figure 4a | `R`     |`plot_top100_densities()` | `data/plots/figure4a.pdf`       |
+| Figure 4b | `R`     |`figure4b()`              | `data/plots/figure4b.pdf`       |
+| Figure 5  | `R`     |`figure5()`               | `data/plots/figure5a(b).pdf`    |
+| Figure 6  | `stata` |`figure6.do`             | `data/plots/figure6a(b).pdf`    |
+| Figure 7  | `stata` |`generatethetas.do`      | `data/plots/figure7.pdf`        |
+: Main Text `data/plots` exhibits {tbl-colwidths="[10,10,35,35]"}
 
-| Exhibit    | Language | Program/function | Output in `output/` | Reproducible |
 
 
-## License
+| Exhibit   | Language | Program/function | Output in `output`      |
+|------|------|------|---------|
+| Table 1   | `julia` |`latex_param()`| `model/tables/table1.tex`        |
+| Table 2   | `R`     |`table2()`   | `data/tables/table2.tex`        |
+: Main Text table exhibits {tbl-colwidths="[10,10,35,35]"}
 
-[MIT](https://choosealicense.com/licenses/mit/)
+
+| Exhibit   | Language | Program/function | Output in `output/model/plots`      |
+|------|------|------|---------|
+| Figure 8  | `julia` | `full_pipeline()` | `figure8a(b,c).pdf` |
+| Figure 9  | `julia` | `full_pipeline()` | `figure9a(b).pdf` |
+| Figure 10 | `julia` | `full_pipeline()` | `figure10a(b).pdf` |
+| Figure 11 | `julia` | `full_pipeline()` | `figure11a(b).pdf` |
+| Figure 12 | `julia` | `full_pipeline()` | `figure12a(b).pdf` |
+| Figure 13 | `julia` | `full_pipeline()` | `figure13a(b,c).pdf` |
+| Figure 14 | `julia` | `full_pipeline()` | `figure14a(b).pdf` |
+| Figure 15 | `julia` | `full_pipeline()` | `figure15a(b,c).pdf` |
+| Figure 16 | `julia` | `full_pipeline()` | `figure16a(b,c).pdf` |
+| Figure 17 | `julia` | `full_pipeline()` | `figure17a(b,c).pdf` |
+: Main Text `model/plots` exhibits {tbl-colwidths="[10,10,35,35]"}
 
 
-# Dataset list
+## Appendix A Exhibits
 
-<!---
-In some cases, authors will provide one dataset (file) per data source, and the code to combine them. In others, in particular when data access might be restrictive, the replication package may only include derived/analysis data. Every file should be described. This can be provided as a Excel/CSV table, or in the table below.
--->
+| Exhibit      | Language | Program/function                    | Output in `output/`                    |
+|-----------   |----------|-----------                          |---------                               |
+| Figure A.1   | --       | no code                             | plots/figureA1.pdf                     |
+| Figure A.2   | `stata`  | `figureA2.do`            | plots/figureA2a(b).pdf                 |
+| Figure A.3   | `stata`  | `generatethetas.do`            | plots/figureA3.pdf                     |
+| Figure A.4   | `stata`  | `generatethetas.do`             | plots/figureA4.pdf                     |
+| Figure A.5   | `stata`  | `figureA5.do`            | plots/figureA5.pdf                     |
+| Figure A.6   | --       | no code                             | plots/figureA6.pdf                     |
+| Figure A.7   | --       | no code                             | plots/figureA7.pdf                     |
+| Figure A.8   | --       | no code                             | plots/figureA8.pdf                     |
+| Figure A.9   | --       | no code                             | plots/figureA9.pdf                     |
+| Table A.1    | `R`      | `print_pop_1950()`        | tables/tableA1.tex                     |
+| Table A.2    | `R`      | `print_paris_pop_1950()`  | tables/tableA2.tex                     |
+| Figure A.10  | `R`      | `GHSL_plots()`            | plots/tableA10.pdf                     |
+| Figure A.11  | `R`      | `GHSL_plots()`            | plots/tableA11.pdf                     |
+| Figure A.12  | `R`      | `plot_top100_densities()` | plots/figureA12.pdf                    |
+| Figure A.13  | `R`      | `plot_top100_densities()` | plots/figureA13.pdf                    |
+| Figure A.14  | `R`      | `exp_decay_linear()`      | plots/figureA14a(b).pdf                |
+| Figure A.15  | `R`      | `plot_top100_cutoff()`    | plots/figureA15.pdf                    |
+| Figure A.16  | `R`      | `plot_top100_cutoff()`    | plots/figureA16.pdf                    |
+| Figure A.17  | --       | no code                             | plots/figureA17.pdf                    |
+| Figure A.18  | `R`      | `plot_sat_vs_manual()`    | plots/figureA18.pdf                    |
+| Figure A.19  | `R`      | `plot_shlomo()`           | plots/figureA19.pdf                    |
+| Figure A.20  | `R`      | `CLC_plots()`             | plots/figureA20.pdf                    |
+| Figure A.21  | `R`      | `CLC_measure()`           | plots/figureA21.pdf                    |
+| Figure A.22  | `R`      | `map_pra_all()`           | plots/figureA22.pdf                    |
+| Figure A.23  | `R`      | `wheat_plots()`           | plots/figureA23a(b).pdf                |
+| Figure A.24  | `R`      | `pra_check()`             | plots/figureA24.pdf                    |
+| Figure A.25  | `R`      | `map_pra_prices2000()`    | plots/figureA25.pdf                    |
+| Table A.3    | `R`      | `tableA3()`               | tables/tableA3.tex                     |
+| Table A.4    | `R`      | `tableA4()`               | tables/tableA4.tex                     |
+| Table A.5    | `R`      | `tableA5_A6()`            | tables/tableA5.tex                     |
+| Table A.6    | `R`      | `tableA5_A6()`            | tables/tableA6.tex                     |
 
-| Data file | Source | Notes    |Provided |
-|-----------|--------|----------|---------|
+: Appendix A exhibits {tbl-colwidths="[12,12,45,30]"}
 
-to be done
+
+## Appendix B Exhibits
+
+Again, all output is generated via `full_pipeline`. We give the functions here for reference.
+
+| Exhibit    | Language | Program/function | Output in `output/` | 
+|----------- |----------|-----------       |---------            |
+| Figure B.1 | `julia`  | `app_numillustration()` | plots/figureB1a(b-f).pdf       |
+| Figure B.2 | `julia`  | `app_numillustration()` | plots/figureB2a(b,c,d).pdf     |
+| Figure B.3 | `julia`  | `app_numillustration_sbar()` | plots/figureB3a(b,c).pdf   |
+| Figure B.4 | `julia`  | `prepare_data()` | plots/figureB4.pdf   |
+| Figure B.5 | `julia`  | `prepare_data()` | plots/figureB5.pdf   |
+| Figure B.6 | `julia`  | `plot_areapricedata()` | plots/figureB6.pdf   |
+| Table B.1 | `julia`   | `citysample_comparison()`  | tables/tableB1.pdf   |
+| Table B.2 | `julia`   | `citysample_comparison()` | tables/tableB2.pdf   |
+| Table B.3 | `julia`   | `latex_param_alt()` | tables/tableB3.pdf   |
+| Table B.4 | `julia`   | `print_latex_moments()` | tables/tableB4.pdf   |
+| Table B.5 | `julia`   | `print_latex_moments()` | tables/tableB5.pdf   |
+| Figure B.7 | `julia`  | `sensitivity_σ()` | plots/figureB7a(b,c).pdf   |
+| Figure B.8 | `julia`  | `sensitivity_ω()` | plots/figureB8a(b,c).pdf   |
+| Figure B.9 | `julia`  | `sensitivity_ϵ()` | plots/figureB9a(b,c).pdf   |
+| Figure B.10 | `julia`  |  `sensitivity_agglo()` | plots/figureB10a(b-f).pdf   |
+| Figure B.11 | `julia`  |  `sensitivity_agglo()` | plots/figureB11a(b-f).pdf   |
+| Figure B.12 | `julia`  |  `sensitivity_d1d2()` | plots/figureB12a(b-f).pdf   |
+| Figure B.13 | `julia`  |  `sensitivity_d1d2()` | plots/figureB13a(b,c).pdf   |
+| Figure B.14 | `julia`  |  identical to figure 13 above      |         |
+
+: Appendix B exhibits {tbl-colwidths="[12,12,45,30]"}
+
+
+## In-text numbers
+
+We provide a function in the julia package which produces all relevant numeric output embedded in relevant text and with page numbers where in-text numbers can be found. The function output can be generated by calling
+
+```julia
+using LandUse, Flux
+LandUse.khet_run(readdisk = false, writedisk = true)
+LandUse.run_extensions(; save = true, readdisk = false)
+```
+
+Notice that the function called in the full runscript (@sec-runscript) does not save those results to disk. Here is the output of the `text_reporter` function:
+
+```julia
+julia> LandUse.text_reporter()
+[ Info: PAPER CLAIM: p. 28: density is divided by almost 6 since 1870.
+[ Info: MODEL PROOF: density is divided by 5.72
+
+┌ Info: PAPER CLAIM: p. 30: Our model predicts that the overall fall in the central density is about 70%
+└       of the fall in the average density
+[ Info: MODEL PROOF: log(centraldens(1840) / centraldens(2020)) / log(meandens(1840) / meandens(2020)) is 0.703
+
+[ Info: PAPER CLAIM: p. 30: Over time, our model generates almost a five-fold rise in the average commuting speed
+[ Info: MODEL PROOF: average commuting speed increases by 4.78
+
+┌ Info: PAPER CLAIM: p. 32: In the model, while the value of agricultural land constituted more than 80% of the total land value, it is about
+└       10% nowaday
+[ Info: MODEL PROOF: Land share 1840 = 0.825, Land share 2020 = 0.1019
+
+┌ Info: PAPER CLAIM: p. 32: The model generates more than half of the increase
+└       in housing prices described in Knoll et al. (2017) for France (1870-2013): 5.3141837
+┌ Info: MODEL PROOF: Average HPI increase (1840-2010) = 3.7571, i.e. 0.7075 of Knoll. 
+│       Average HPI increase (1870-2010) = 2.7001, i.e. 0.5085 of Knoll
+└ 
+
+[ Info: PAPER CLAIM: p. 39: This severely limits the sprawl of the city and the fall of the average urban density (Figure 17b)— the counterfactual change in (log) average urban density being 30% of the baseline and about 24% of the data since 1870
+┌ Warning: You are running this package in development mode. We will *not* write results into the replication packages `output/` directory, but rather to this location: /Users/floswald/Dropbox/research/LandUse
+└ @ LandUse ~/.julia/dev/LandUse/src/LandUse.jl:79
+┌ Info: MODEL PROOF: 
+│       log Δ(2020/1870) baseline: -1.74
+│       log Δ(2020/1870) ξw=1: -0.51
+│       log Δ(2020/1870) data: -2.15
+│ 
+│       The ratios of changes are thus:
+│       ξw=1 / baseline : 0.29
+└       ξw=1 / data     : 0.24
+
+[ Info: PAPER CLAIM: p.41: the counterfactual increase of the farmland price is an order of magnitude larger for the interim period relative to the other ones—an increase above 300% in 1970 to keep farmland prices over income constant over 1920-1970, close to 5 times (resp. 15 times) larger than the increase in 2020 (resp. 1920).
+[ Info: MODEL PROOF: The resulting required increase in ρr is shown here:
+
+┌───────────┬─────────────────────────────────┐
+│     years │ Counterfactual Price Change (%) │
+│    String │                         Float64 │
+├───────────┼─────────────────────────────────┤
+│ 1870-1920 │                         20.3928 │
+│ 1920-1970 │                         315.478 │
+│ 1970-2020 │                          67.485 │
+└───────────┴─────────────────────────────────┘
+[ Info: PAPER CLAIM: p.41: For 2020, we find that a 10% exogenous increase in the rental price at the urban fringe of all regions increases urban density by about 3% on average—an elasticity close to the cross-sectional one (Table 2). The same elasticity is also close to 1/3 for earlier dates. 
+[ Info: MODEL PROOF: The average density increase from a 1% exogenous rise in ρr can be seen in the last column of this table:
+
+┌───────┬────────────┐
+│  year │ elasticity │
+│ Int64 │    Float64 │
+├───────┼────────────┤
+│  1920 │   0.375618 │
+│  1970 │   0.301943 │
+│  2020 │   0.292169 │
+└───────┴────────────┘
+[ Info: PAPER CLAIM: p.41: While this mechanism makes up for about 75% of the decline over 1870-1920, our counterfactual experiments suggest that it plays less of a role in the later periods—still representing a significant share, about 30% (34% over 1920-1970 and 26% over 1970-2020)
+┌ Info: MODEL PROOF: All of the results for the fixed ρr counterfactual can be obtained by running
+│ 
+│       ```
+│       frho = fixed_ρr_setup(fifty_years = true)
+│       frho_results = fixed_ρr_results(readdisk = true)
+│       frho_su = fixed_ρr_summary(frho)
+│       ```
+│ the result in the claim is in `frho_su[:headline]` (last column):
+└ 
+
+┌───────────┬─────────────────┐
+│     years │ Share explained │
+│    String │         Float64 │
+├───────────┼─────────────────┤
+│ 1870-1920 │        0.748161 │
+│ 1920-1970 │        0.336926 │
+│ 1970-2020 │        0.257995 │
+└───────────┴─────────────────┘
+[ Info: text reporter done.
+
+```
+
+
+
+# Dataset list {#sec-datasets}
+
+
+
+| file in `data/` | Source | Notes    |
+|-----------|--------|----------|
+| cog_ensemble_2020_csv/
+communes2020.csv | [INSEE](https://www.insee.fr/fr/information/4316069) | Register of French Communes |
+| communes-20150101-100m-shp | [data.gouv.fr](https://www.data.gouv.fr/fr/datasets/r/0e6686ac-91fd-4f83-8d59-d0989cf48cbf) | Shapefile of French Communes |
+| `departements-shp` | [openstreetmap](https://osm13.openstreetmap.fr/~cquest/openfla/export/departements-20140528-100m-shp.zip) | Shapefile of French Departements |
+| `communes-shp` | [openstreetmap](https://osm13.openstreetmap.fr/~cquest/openfla/export/communes-20150101-100m-shp.zip) | Shapefile of French Communes |
+| `GHS` | @GHSL-datapack | GHSL raster data |
+| `IGN-chef-lieux` | IGN. [Download here](https://catalogue.atlasante.fr/geosource/panierDownloadFrontalParametrage?%20LAYERIDTS=13585053) | IGN chef-lieux dataset |
+| `images` |  | various images/sreenshots for supporting documentation |
+| `schauberger-yields` |  @schaubergeretal2022 and AGRESTE | Wheat yield and land use data for IV exercise, see @sec-wheat|
+| `manual-measurement` |  [geoportail](https://www.geoportail.gouv.fr) | screenshots of hand-collected city area measurement exercise from Carte d'Etat Major and 1950 Aerial Photography and Maps|
+| `processed` |  data processing |   |
+| `raw/FRA_base.dta` |  several sources | see @sec-FRAbase |
+| raw/historicalcommute_paris.xlsx |  several sources | see @sec-FRAbase |
+| `raw/NLHP_FRA` |   | see @sec-FRAbase |
+| `raw/PikettyZucman.xls` |   | see @sec-FRAbase |
+| `raw/spending_shares.xlsx` |   | see @sec-FRAbase |
+| `shlomo-angel` | @angel2012atlas | Shlomo Angel's data on spatial extension of historial Paris|
+| statistique-agricole/petite-region-agricole/input | Statistique Agricole (Ministère de l’Agriculture) (see @sec-datadetails above) | Photographs of statistical yearbooks at the French National Library. We digitize those. |
+| statistique-agricole/petite-region-agricole/output | processed | see @sec-PRA-details |
+| AU2010_au_01-01-2020.xlsx | INSEE | Aires Urbaines 2010 classification |
+| UU2020_au_01-01-2022.xlsx | INSEE | Unitées Urbaines 2020 classification |
+| base-pop-historiques-1876-2015.xls | INSEE | Historical Population Counts by Commune |
+| base-pop-historiques-1876-2015.Rds | INSEE | Historical Population Counts by Commune |
+| `CASD` | @PanelEDP  | Average Wage by city |
+| `citylist-baseline.csv` | model | List of 20 cities used in baseline |
+| `citylist-sample2.csv` | model | List of 20 cities used in alternative sample |
+| `France-population.csv` | INSEE | Total French population in Million  |
+| `paris-departement de la seine.xlsx` | INSEE | Population of ancient "Departement de la Seine"  |
+| `paris-seine.csv` | INSEE | Population of ancient "Departement de la Seine"  |
+| `top100.Rds` | measurement | see @sec-topn-list |
+| `top200-1975.Rds` | measurement | see @sec-topn-list |
+| `top500-1975.Rds` | input for top 200 | see @sec-topn-list |
+
+
+
+## Detailed Description of Aggregate Data {#sec-FRAbase}
+
+This section describes the content of file  `data/raw/FRA_base.dta`.
+
+Raw data in excel (PikettyZucman, spending_shares, historicalcommute_paris) are self-explanatory (see README tab in the excel file). Other raw data in Stata (‘No price like home data for France’, NPLH_FRA.dta) used for the introductory graph Figure 6b comes directly from @knoll2017no.
+
+Description of variables in FRA_base.dta [name, definition, unit, period, source]:
+
+-	year: year of observation
+
+**Price Indices (1949=100)**
+
+-	GDP_deflator. GDP deflator. Unit: Index. 1960-2018. Source: World Bank Development Indicator. 
+-	P_agri. Indice des prix de gros agricoles. Unit : Index. 1810-1952. Source : Sauvy (1952)
+-	P_agri_1949. Producer Price Index for Agricultural Goods (Indice des prix des produits agricoles à la production, IPPAP). Unit : Index. 1949-2019. Source : INSEE
+-	CPI. Consumer Price Index. Unit: Index. 1820-2018. Source: INSEE
+
+**Production Indices (1815=100)**
+
+-	Volume_Agriculture. Production Index in Agriculture. Unit : Index. 1815-1990. Source: Toutain and Marczewski (1987) until 1982 completed by Toutain (1993) until 1990.
+-	Volume_INDUSTRY. Production Index in Agriculture. Unit : Index. 1815-1982. Source: Toutain and Marczewski (1987)
+-	Volume_TOTAL. Aggregate Production Index. Unit : Index. 1815-1982. Source: Toutain and Marczewski (1987)
+
+**Value Added**
+
+-	VA_agriculture. Value added in Agriculture at current prices. Unit : Millions (Anciens Francs). Source: : Toutain and Marczewski (1987) pre-WW2 and INSEE post-WW2.
+-	VA_total. Aggregate Value added at current prices. Unit : Millions (Anciens Francs). Source: Toutain and Marczewski (1987) pre-WW2 and INSEE post-WW2.
+-	VA_nonagriculture. Value added outside Agriculture at current prices. Unit : Millions (Anciens Francs). Source: Toutain and Marczewski (1987) pre-WW2 and INSEE post-WW2.
+
+**Land Use**
+
+-	Land_Agriculture. Land Use in Agriculture (Surface Agricole Utilisée, SAU). Unit: 1000s of ha. 1790-2015. Source: various secondary sources using Agricultural Census until 2000 detailed in Appendix A.1.1 (Mauguin (1890), Fléchey (1898), Hitier (1899), Toutain (1993), Mauco (1937), Augé-Laribé (1945) until WW2 & Desriers (2007) post-WW2 until 2000). Utilisation du territoire, Statistique Agricole Annuelle (SAA, Agreste), Ministry of Agriculture for 2000-2015.[^1]
+-	Built_Land. Built Land (Sols Artificialisés). Unit: 1000s of ha. 2000-2015. Source: Utilisation du territoire, Statistique Agricole Annuelle (SAA, Agreste), Ministry of Agriculture.
+-	Area_France. Measured Area of France. Unit: 1000s of ha. Source: pre-WW2, measurement comes from the same secondary sources as Land_Agriculture
+
+[^1]: Note for users: Land Use in Agriculture prior to 1840 (not used in the paper) is less reliable and must be taken with extreme caution (see discussion in Appendix A.1.1).
+
+**Employment**
+
+-	employment_OECD. Total employment (Full-time equivalent, FTE). Unit: 1000s. 1950-2018. Source: OECD
+-	agriculture_OECD Employment in Agriculture (Full-time equivalent, FTE). Unit: 1000s. 1950-2018. Source: OECD
+-	Share_Emp_Agr100_OECD Share of Employment in Agriculture using OECD data = agriculture_OECD/employment_OECD. Unit: %. 1950-2018. Source: OECD.
+-	Empl_agriculture Employment in Agriculture. Unit: 1000s. 1806-2007. Source: @marchand1991deux until 1901 and  @herrendorf2014growth post-1901.
+-	Empl_manufacturing  Employment in Manufacturing. Unit: 1000s. 1806-2007. Source: @marchand1991deux until 1901 and @herrendorf2014growth  post-1901.
+-	Empl_services  Employment in Services. Unit: 1000s. 1806-2007. Source:  @marchand1991deux until 1901 and @herrendorf2014growth  post-1901.
+-   Empl_total Total Employment. Unit: 1000s. 1806-2007.  @marchand1991deux until 1901 and @herrendorf2014growth post-1901.
+-	Share_Emp_Agr100 Share of Employment in Agriculture (Baseline for plots). Unit: %. 1806-2018.  @marchand1991deux until 1901 and @herrendorf2014growth over 1901-1949 and OECD over 1950-2018.
+
+## Determination of top `n` city samples {#sec-topn-list}
+
+* The file `data/top100.Rds` contains the list of the top 100 largest cities by 1876 population
+* `data/top200-1975.Rds` contains the same top 100 plus the next 100 largest cities by 1975 population count. In order to arrive at the top 200 cities in 1975, we need to start at the top 500 communes by population (file `data/top200-1975.Rds`), but prune this list for places which are "Banlieues" (i.e. suburbs) of larger urban areas. This is necessary to avoid having suburbs of Paris in the list of 200 largest cities, which would result if one only looked at "communes". This is used in the R package in function `bboxes_top200()` where we construct bounding boxes for the top 200 cities, to then perform our satellite based measurement inside each box.
+
+## Area and Population of the Samples of Cities {#sec-pop-details}
+
+### Sample of 100 cities for estimation (most populated cities in the 1876 Census)
+
+The main output is the generated data for years 1870, 1950, 1975, 1990, 2000, 2015 in
+
+```
+data/statistique-agricole/petite-region-agricole/pra-output-100.csv
+```
+
+For area data, they are generated using ‘manual measurement’ based on maps/aerial photographs for 1870 and 1950 (see Appendix A.2.1). For information, screenshots for measurement are in `data/manual-measurement`. Population for the same years is provided using commune level population data from INSEE historical data in `data/base-pop-historiques-1876-2015.xls` (see Appendix A.2.2).  For 1975 onwards, we generate data on area and population using GHSL data (GHS-BUILT & GHS-POP) as described in Appendix A.2.3, where the raw data are in `data/GHS`.
+
+
+### Sample of 200 cities for regressions post-1975
+
+The data above for area/population for 100 cities are augmented with a larger set of cities post-1975 for statistical power for the IV-regressions. The generated output for the 200 cities used for the regressions is 
+
+```
+data/statistique-agricole/petite-region-agricole/pra-output-200.csv
+``` 
+
+As above, we generate them using GHSL data (GHS-BUILT & GHS-POP) as described in Appendix A.2.3, where the raw data are in `data/GHS`.
+
+
+## Agricultural Land Values at Local Level {#sec-PRA-details}
+
+### Farmland prices at the level of Département or Petite Région Agricole (PRA)
+
+The data are stored in `data/statistique-agricole`. There is different geographical availability depending on the period.
+
+1. Data on agricultural land values for 1892 from the Agricultural Census are at the level of the département in `data/statistique-agricole/departement/cleaned-output`
+2. Post-WW2 (1950, 1975, 1990, 2000, 2015) data for PRAs surrouding cities are in `data/statistique-agricole/petite-region-agricole/`. 
+
+   
+Farmland price data at the PRA level are read automatically from the raw data on the pdfs of the ‘Statistique Agricole’ downloaded via Bibliothèque Numérique de la Statistique Publique for years before 2000 (included). For 2015, it uses the value of the farmland price from Agreste data available at
+
+```
+data/statistique-agricole/petite-region-agricole/input/manual-mapping/
+cd2019-19_tableaux_VVT_mapping.xlsx
+```
+
+The corresponding PRA in 2015 is adjusted for comparison across years following the redefinition of PRAs post 2007. This is generated thanks to the crosswalk provided in 
+
+```
+data/statistique-agricole/petite-region-agricole/input/manual-mapping/
+Referentiel_CommuneRA_PRA_2017_mapping.xls
+```
+
+Details regarding the data on farmland prices at the département and PRA level are provided in Appendix A.3.1
+
+### Farmland Prices Surrounding Cities
+
+**Sample of 100 cities for estimation (most populated cities in the 1876 Census)** 
+
+Data available in `data/statistique-agricole`.
+
+Cities are allocated to the corresponding Département (in 1892) or Petite Région Agricole (PRA) (post-1950) surrounding them. The mapping is done using the crosswalk between département/PRAs and communes given above. 
+
+The cleaned generated output for all 100 cities contains all relevant population and area measures stacked for all our available periods of observations. This dataset is used to generate data plots as well as for the model’s estimation. It is located in:
+
+```
+data/statistique-agricole/petite-region-agricole/pra-output-100.csv
+```
+
+As above, it is generated using data at the département level in 1892 in 
+
+```
+data/statistique-agricole/departement/cleaned-output/table1-1892.csv
+```
+
+Post WW2, the main file to generate these data from the data above is 
+
+```
+data/statistique-agricole/petite-region-agricole/PRA_cleaned_20221201.xlsx
+``` 
+
+The ‘automatic reading’ of the pdfs of the ‘Statistique Agricole’ could not span the entire set of cities (some lines could not be read automatically and led to some missing data). To avoid missing observations/minimize measurement error, the data have been double-checked on raw data and adjusted manually due to this misreading of the pdfs, adjusting also cities surrounded by multiple PRAs (see read me spreadsheet in the same file). Paris is treated separately as the farmland price is the average of many PRAs (see `data/statistique-agricole/petite-region-agricole/PRA_PARIS.xlsx`). 
+
+Details regarding the data on farmland prices are provided in Appendix A.3.1 and Appendix A.4.1.
+
+
+**Sample of 200 cities for regressions post-1975**
+
+
+The enlarged sample used in the IV analysis (tables A5 and A6) is in 
+
+```
+data/statistique-agricole/petite-region-agricole/pra-output-200.csv
+``` 
+
+The data above for 100 cities are augmented with a larger set of cities post-1975 for statistical power for the IV-regressions (see details in Appendix A.4.1). As above, these data use farmland price data at the PRA level digitized from the pdfs of the ‘Statistique Agricole’ downloaded via Bibliothèque Numérique de la Statistique Publique from 1975 to 2000. For 2015, it uses the value of the farmland price of the corresponding PRA following the redefinition of PRAs post 2007. As above, cities are allocated to their corresponding PRA thanks to the crosswalk between PRAs and communes in
+
+```
+data/statistique-agricole/petite-region-agricole/input/manual-mapping/
+Referentiel_CommuneRA_PRA_2017_mapping.xls
+```
+
+Details regarding the data on farmland prices are provided in Appendix A.3.1 and Appendix A.4.1.
+
+
+
+## Description of Agricultural Yield and Land use Data
+
+This section decribes the data in `data/schauberger-yields` which is used for our IV strategy. Details are provided in Appendix A.4.
+
+### Data from Ministry of Agriculture (Agreste)
+
+Raw data `AgriLandUse.dta` provides selected data on agricultural land use from Agreste based on the Recensement Agricole at the level of the département (Cultures selon la superficie pour l’ensemble des exploitations). Two years provided, 2000 and 2010. Data for 2000 are used for the paper to select départements specialized in wheat.
+
+- Département, dep: name of département, département identifier (2 digits)
+- sau[year]: agricultural land use (Surface Agricole Utilisée, SAU) in [year=2000, 2010] (area in ha)
+- cereales[year]: agricultural land use for cereals in [year=2000, 2010] (area in ha)
+- ble[year]: agricultural land use for wheat in [year=2000, 2010] (area in ha)
+- bledur[year]: agricultural land use for durum wheat in [year=2000, 2010] (area in ha)
+- fourrages[year]: agricultural land use for fodder crops and pastures (‘culture fourragères et surfaces toujours en herbes’) in [year=2000, 2010] (area in ha)
+
+
+### Data from Schauberger et al. (2022) {#sec-wheat}
+
+Raw data `IV_yields.dta` are from the filtered data of Schauberger et al. (2022), selecting only relevant years for our study (1950, 1960, 1970, 1975, 1990, 2000, 2015). Regressions involve only dates post-1975 but the share of land used for a given crop prior to 1975 is used to provide an alternative IV as sensitivity analysis (see Robustness checks with a different IV-strategy), where the variable for 1960 is the baseline used in the paper. 
+Variables are at the level of the département x year. Crop area (in ha), production (in kg) and yields in kg/ha.
+9 crops: wheat, barley, maize, oats, potatoes, rape, sugarbeet, sunflower, wine (only wheat, maize, oats, barley, potatoes used in the IV strategy).
+
+- Department, dep, year : name of département, département identifier (2 digits), year of observation.
+- yield_[crop] : yield of the considered crop 
+- area_[crop]: agricultural land use of the considered crop
+- production_[crop]: production of the considered crop
+- s_area_[crop]1960: share of land used for this crop among the 9 crops in 1960
+- For date = 1960:  s_area_[crop]1960 = $(area_c)/(\sum_c area_c)$
 
 
 # Computational requirements
 
-<!---
-In general, the specific computer code used to generate the results in the article will be within the repository that also contains this README. However, other computational requirements - shared libraries or code packages, required software, specific computing hardware - may be important, and is always useful, for the goal of replication. Some example text follows. 
--->
+## Runtime
+
+* Structural estimation on an HPC cluster takes 48 hours, see specifications below.
+* Production of all output displayed in paper/appendices takes 63 minutes of runtime.
+
+## Hardware requirements
+
+* All output was generated on an Apple Macbook Pro M1 with 32GB of RAM and 50GB of free disk space.
+* Estimation of parameters of the structural model was performed on the [DANTE](https://www.ipgp.fr/en/research/research-platforms/dante/) platform, part of the [S-CAPAD cluster](https://www.ipgp.fr/en/research/shared-services/s-capad/). We used the `ncpu` partition with 40 CPUs, 4GB of RAM per CPU. The slurm submit scripts are at the root of `code/LandUse.jl`. The runtime of this task on the cluster was 48 hours.
 
 ## Software requirements
 
-<!---
-List all of the software requirements, up to and including any operating system requirements, for the entire set of code. It is suggested to distribute most dependencies together with the replication package if allowed, in particular if sourced from unversioned code repositories, Github repos, and personal webpages. In all cases, list the version *you* used. 
--->
+* We used both Stata 14, Stata 18.5 and StataNow with success. We have no stata add-on libraries, so replicators should not experience any issues in this part. That said, we assume you have StataMP installed.
+* R **must be version 4.4.2**. Later versions are more complicated because some of our packages need to be built from source (in particular `Matrix`) because the version we require is not available as binary for later R versions. We recommend to use [rig](https://github.com/r-lib/rig) to manage multiple R installations. Package environment detailed below.
+* julia **must be version 1.8.5**. We use the standard recommend approach to [install julia](https://julialang.org/install/) in order to manage multiple julia versions - please follow this approach, too. Package environment detailed below.
+
+### R Package Environment
+
+* We use `renv` to manage R dependencies. We strongly recommend to use R 4.4.2, for example via [rig](https://github.com/r-lib/rig). This consideration is driven by the availability of package binaries compatible with this version. This may change in the future. There is no known conflict with higher R versions, but this is untested.
+* All R package versions are encoded in the `renv.lock` file, which is located in `/code/LandUseR`.
+* In case a manual installation is necessary, those packages and corresponding versions need to be installed. A full list of R packages with suitable citations is given in the reference section of this readme.
+* We provide a run script (bash) which runs this automatically. It's straighforward to execute the steps in the script manually, however, so in case bash is not available, we have a manual route.
+
+::: {.callout-warning}
+
+# Known Version Incompatibility
+
+The only version incompatibility known to us comes from our code being written for `tmap` version `3.3-4`. Any version `>= 4` has a breaking change. Any other package should be fine with a higher version (say, if installing from source proves complicated).
+
+:::
+
+
+::: {.callout-note}
+
+# R package installation tips
+
+Some R packages will need to be built from source, if no fitting binary can be found. This can cause problems. Complicated packages to build on Mac SDK can be 
+
+1. Matrix
+2. XML
+
+Potential solutions, of any of those break (should not happen, but you never know):
+
+1. for Matrix: `brew install gcc` and update your `~/.R/Makevars` accordingly (see [here](https://github.com/Rdatatable/data.table/issues/4016#issuecomment-548447975))
+2. for XML: For me it was helpful to turn off any active `conda` environment manager in my terminal with `conda deactivate`, as this would move the location of `libxml2` inside the anaconda distribution up on the library search path, and the linker cannot find it there. 
+
+:::
+
+
+#### Automatic Setup of R 
+
+This will be handled as part of the full run script in @sec-runscript.
+
+#### Manual Setup of R 
+
+Here are the steps to set up the R part. All code to be executed *in your running R console*. 
+
+::: {.callout-note}
+# Are you sure?
+
+This is only relevant if you don't want to try the run script; I suggest you try running that first.
+
+:::
+
+1. Naviate to `code/LandUseR`
+2. (optional, but recommended) Verify you have R version 4.2.2 installed    
+    
+    ```R
+    (getRversion() == "4.4.2") || stop("you must use R 4.4.2 - look at github.com/r-lib/rig ")
+    ```
+
+1. Install `renv` and restore our library from the lock file:
+   
+    ```R
+    install.packages("renv", repos = "https://cloud.r-project.org/") 
+    renv::restore(project = ".", prompt = FALSE)
+    ```
+
+1. Activating this project library, install our package:
+
+    ```R
+    renv::activate(".")
+    renv::install()
+    install.packages(".",type = "source", repos = NULL)
+    ```
+
+### Julia Package Environment
+
+The julia setup is straightforward and encoded in the file `code/LandUse.jl/Project.toml`. Notice that we require to use julia 1.8.5, which you can get by using [juliaup](https://julialang.org/install/) as mentioned above.
+
+
+# Instructions to replicators {#sec-replicators}
+
+## Preliminaries
+
+### R environment Variable
+
+There is **one necessary environment variable** to set for the R code. I recommend using the `usethis` package in an IDE like Rstudio or positron to achieve this as follows:
+
+```R
+usethis::edit_r_environ()
+```
+
+In the opening window (or, if nothing comes up, in the text file `~/.Renviron`), add the following line, and save:
+
+```bash
+R_LANDUSE=~/Downloads/ReplicationPackage
+```
+
+where, instead of my location `~/Downloads/ReplicationPackage`, you put the path to wherever you placed our replication package on your computer. 
+
+Now you are ready to use our installed package `LandUseR`.
+
+### Stata Executable is on PATH 
+
+Our script calls your stata from the command line via command `stata-mp`. This can be achieved by adding the location of your stata executable to your `PATH` environment variable. For me this means that the output of `which stata-mp` returns the following. (I would have added this location to my `PATH` in order to achieve this.) 
+
+```bash
+$ which stata-mp 
+/Applications/StataNow/StataMP.app/Contents/MacOS/stata-mp
+```
+
+
+## The Full Automatic Run Script {#sec-runscript}
+
+Executing the run script requires access to a bash shell and may not work on windows. Being able to use the run script assumes the following list of conditions:
+
+- [ ] You installed R 4.2.2
+- [ ] You have access to `Rscript` on your command line (type `Rscript -e 'print("hi")'` to test).
+- [ ] You installed julia 1.8.5
+- [ ] Your stata executable `stata-mp` is on your `PATH`
+
+If those conditions are fulfilled, you can proceed with the following. (If you are unable to call stata/Rscript from the command line, you have to skip to the next section.)
+
+1. navigate to `code/`
+2. make the script executable: `chmod +x run_all.sh`
+3. launch the script: `./run_all.sh`
+4. Check output in `output/`
+
+> If all goes well, you should see output similar to what is in `code/succesful-run_all.log`
+
+## Manually executing Step by Step {#sec-runmanual}
+
+1. Naviate to `code/LandUseR`
+2. (optional, but recommended) Verify you have R version 4.2.2 installed    
+    
+    ```R
+    (getRversion() == "4.4.2") || stop("you must use R 4.4.2 - look at github.com/r-lib/rig ")
+    ```
+
+1. Install `renv` and restore our library from the lock file:
+   
+    ```R
+    install.packages("renv", repos = "https://cloud.r-project.org/") 
+    renv::restore(project = ".", prompt = FALSE, clean = TRUE)
+    ```
+
+1. Starting a new R session in the same location (`code/LandUseR`) should activate this project library. Now install our package:
+
+    ```R
+    install.packages(".",type = "source", repos = NULL)
+    ```
+
+1. Navigate to `code/`
+2. execute on the commandline; 
+   
+    ```bash
+    stata-mp -b stata/replication_aggregate_main.do
+    ```
+
+3. (or) open the stata GUI, navigate to `code/` and type
+
+    ```bash
+    do stata/replication_aggregate_main.do
+    ```
+
+4. Navigate to `code/LandUseR`
+5. Start R and type into console
+
+    ```R
+    library(LandUseR)
+    LandUseR:::run_data()
+    ```
+
+6. Navigate to `code/`
+7. type on your console the following code to set up the julia environment
+   
+    ```bash
+    julia --color=yes --project=LandUse.jl -e 'using Pkg; Pkg.instantiate()'
+    ```
+
+8. Type on your console
+
+    ```bash
+    julia --color=yes --project=LandUse.jl LandUse.jl/run.jl produce --output=all > logjulia.log
+    ```
+
+9. Navigate to `code/LandUseR`
+10. Start R and type
+
+    ```R 
+    LandUseR:::run_step3()
+    ```
+
+11. Check generated output in `output/`
+
+# Software citations
+
+We used [julialang](https://julialang.org) in this project (see @bezanson2017julia).
+
+
+We used R version 4.4.2 [@base] and the following R packages: abind v. 1.4.8 [@abind], askpass v. 1.2.1 [@askpass], backports v. 1.5.0 [@backports], base64enc v. 0.1.3 [@base64enc], bayestestR v. 0.16.0 [@bayestestR], bit v. 4.0.5 [@bit], bit64 v. 4.0.5 [@bit64], blob v. 1.2.4 [@blob], brew v. 1.0.10 [@brew], brio v. 1.1.5 [@brio], bslib v. 0.9.0 [@bslib], cachem v. 1.1.0 [@cachem], callr v. 3.7.6 [@callr], cellranger v. 1.1.0 [@cellranger], checkmate v. 2.3.2 [@checkmate], classInt v. 0.4.11 [@classInt], clipr v. 0.8.0 [@clipr], colorspace v. 2.1.1 [@colorspace2009b; @colorspace2009c; @colorspace2020a], cols4all v. 0.8 [@cols4all], commonmark v. 1.9.5 [@commonmark], corrplot v. 0.94 [@corrplot], cowplot v. 1.1.3 [@cowplot], cpp11 v. 0.5.2 [@cpp11], crayon v. 1.5.3 [@crayon], crosstalk v. 1.2.1 [@crosstalk], curl v. 6.2.3 [@curl], data.table v. 1.17.4 [@datatable], datawizard v. 1.1.0 [@datawizard], DBI v. 1.2.3 [@DBI], deldir v. 2.0.4 [@deldir], desc v. 1.4.3 [@desc], dichromat v. 2.0.0.1 [@dichromat], diffobj v. 0.3.5 [@diffobj], digest v. 0.6.37 [@digest], directlabels v. 2025.5.20 [@directlabels], downlit v. 0.4.4 [@downlit], dreamerr v. 1.5.0 [@dreamerr], e1071 v. 1.7.16 [@e1071], evaluate v. 1.0.3 [@evaluate], fansi v. 1.0.6 [@fansi], farver v. 2.1.2 [@farver], fastmap v. 1.2.0 [@fastmap], fixest v. 0.12.1 [@fixest], fontawesome v. 0.5.3 [@fontawesome], formatR v. 1.14 [@formatR], Formula v. 1.2.5 [@Formula], fs v. 1.6.6 [@fs], futile.logger v. 1.4.3 [@futilelogger], futile.options v. 1.0.1 [@futileoptions], gargle v. 1.5.2 [@gargle], generics v. 0.1.4 [@generics], geojsonsf v. 2.0.3 [@geojsonsf], geometries v. 0.2.4 [@geometries], ggrepel v. 0.9.5 [@ggrepel], glue v. 1.8.0 [@glue], gtable v. 0.3.6 [@gtable], here v. 1.0.1 [@here], hexbin v. 1.28.4 [@hexbin], highr v. 0.11 [@highr], htmltools v. 0.5.8.1 [@htmltools], htmlwidgets v. 1.6.4 [@htmlwidgets], httpuv v. 1.6.16 [@httpuv], httr2 v. 1.1.2 [@httr2], ids v. 1.0.1 [@ids], igraph v. 2.1.4 [@igraph2006; @igraph2025], insight v. 1.3.0 [@insight], interp v. 1.1.6 [@interp], isoband v. 0.2.7 [@isoband], jpeg v. 0.1.10 [@jpeg], jquerylib v. 0.1.4 [@jquerylib], jsonify v. 1.2.2 [@jsonify], kableExtra v. 1.4.0 [@kableExtra], knitr v. 1.50 [@knitr2014; @knitr2015; @knitr2025], labeling v. 0.4.3 [@labeling], lambda.r v. 1.2.4 [@lambdar], LandUseR v. 0.0.0.9000 [@LandUseR], later v. 1.4.2 [@later], latticeExtra v. 0.6.30 [@latticeExtra], lazyeval v. 0.2.2 [@lazyeval], leafem v. 0.2.4 [@leafem], leafgl v. 0.2.2 [@leafgl], leaflegend v. 1.2.1 [@leaflegend], leaflet v. 2.2.2 [@leaflet], leaflet.providers v. 2.0.0 [@leafletproviders], leafpop v. 0.1.0 [@leafpop], leafsync v. 0.1.0 [@leafsync], lifecycle v. 1.0.4 [@lifecycle], logger v. 0.4.0 [@logger], lwgeom v. 0.2.14 [@lwgeom], maptiles v. 0.10.0 [@maptiles], mapview v. 2.11.2 [@mapview], MatrixModels v. 0.5.4 [@MatrixModels], memoise v. 2.0.1 [@memoise], mime v. 0.13 [@mime], minty v. 0.0.1 [@minty], modelsummary v. 2.3.0 [@modelsummary], numDeriv v. 2016.8.1.1 [@numDeriv], openssl v. 2.3.3 [@openssl], parameters v. 0.26.0 [@parameters], performance v. 0.14.0 [@performance], pkgbuild v. 1.4.8 [@pkgbuild], pkgconfig v. 2.0.3 [@pkgconfig], pkgdown v. 2.1.3 [@pkgdown], pkgload v. 1.4.0 [@pkgload], plyr v. 1.8.9 [@plyr], png v. 0.1.8 [@png], praise v. 1.0.0 [@praise], prettyunits v. 1.2.0 [@prettyunits], processx v. 3.8.6 [@processx], progress v. 1.2.3 [@progress], promises v. 1.3.3 [@promises], proxy v. 0.4.27 [@proxy], ps v. 1.9.1 [@ps], quadprog v. 1.5.8 [@quadprog], quantreg v. 6.1 [@quantreg], R6 v. 2.6.1 [@R6], rapidjsonr v. 1.2.0 [@rapidjsonr], rappdirs v. 0.3.3 [@rappdirs], raster v. 3.6.32 [@raster], rasterVis v. 0.51.6 [@rasterVis], RColorBrewer v. 1.1.3 [@RColorBrewer], Rcpp v. 1.0.14 [@Rcpp2011; @Rcpp2013; @Rcpp2018; @Rcpp2025], RcppEigen v. 0.3.4.0.2 [@RcppEigen], readODS v. 2.3.1 [@readODS], rematch v. 2.0.0 [@rematch], rematch2 v. 2.1.2 [@rematch2], remotes v. 2.5.0 [@remotes], renv v. 1.1.4 [@renv], rmarkdown v. 2.29 [@rmarkdown2018; @rmarkdown2020; @rmarkdown2024], rnaturalearth v. 1.0.1 [@rnaturalearth], roxygen2 v. 7.3.2 [@roxygen2], rprojroot v. 2.0.4 [@rprojroot], s2 v. 1.1.9 [@s2], sandwich v. 3.1.1 [@sandwich2004; @sandwich2006; @sandwich2020], sass v. 0.4.10 [@sass], satellite v. 1.0.5 [@satellite], scales v. 1.4.0 [@scales], selectr v. 0.4.2 [@selectr], servr v. 0.32 [@servr], sessioninfo v. 1.2.2 [@sessioninfo], sf v. 1.0.21 [@sf2018; @sf2023], sfheaders v. 0.4.4 [@sfheaders], slippymath v. 0.3.1 [@slippymath], sp v. 2.2.0 [@sp2005; @sp2013], spacesXYZ v. 1.6.0 [@spacesXYZ], SparseM v. 1.84.2 [@SparseM], stars v. 0.6.6 [@stars], stringdist v. 0.9.15 [@stringdist], stringi v. 1.8.7 [@stringi], stringmagic v. 1.2.0 [@stringmagic], svglite v. 2.2.1 [@svglite], sys v. 3.4.3 [@sys], systemfonts v. 1.2.3 [@systemfonts], tables v. 0.9.31 [@tables], terra v. 1.8.54 [@terra], testthat v. 3.2.3 [@testthat], textshaping v. 1.0.1 [@textshaping], tidyselect v. 1.2.1 [@tidyselect], tidyverse v. 2.0.0 [@tidyverse], timechange v. 0.3.0 [@timechange], tinytable v. 0.9.0 [@tinytable], tinytex v. 0.57 [@tinytex2019; @tinytex2025], tmap v. 3.3.4 [@tmap], tmaptools v. 3.1.1 [@tmaptools], tzdb v. 0.5.0 [@tzdb], units v. 0.8.7 [@units], utf8 v. 1.2.5 [@utf8], uuid v. 1.2.1 [@uuid], vctrs v. 0.6.5 [@vctrs], viridisLite v. 0.4.2 [@viridisLite], vroom v. 1.6.5 [@vroom], waldo v. 0.6.1 [@waldo], whisker v. 0.4.1 [@whisker], withr v. 3.0.2 [@withr], wk v. 0.9.4 [@wk], xfun v. 0.52 [@xfun], XML v. 3.99.0.17 [@XML], yaml v. 2.3.10 [@yaml], zip v. 2.3.3 [@zip], zoo v. 1.8.14 [@zoo].
 
 
 
-### Memory and runtime requirements
 
-<!---
-Memory and compute-time requirements may also be relevant or even critical. Some example text follows. It may be useful to break this out by Table/Figure/section of processing. For instance, some estimation routines might run for weeks, but data prep and creating figures might only take a few minutes.
--->
-
-#### Summary
-
-
-#### Details
-
-The code was last run on a **4-core Intel-based laptop with MacOS version 10.14.4**. 
-
-Portions of the code were last run on a **32-core Intel server with 1024 GB of RAM, 12 TB of fast local storage**. Computation took 734 hours. 
-
-Portions of the code were last run on a **12-node AWS R3 cluster, consuming 20,000 core-hours**.  
-
-
-## Instructions to replicators
-
-### Software Installation Instructions
-
-We give installation instructions for each software package separately.
-
-#### `LandUseR`
-
-
-
-<!---
-The first two sections ensure that the data and software necessary to conduct the replication have been collected. This section then describes a human-readable instruction to conduct the replication. This may be simple, or may involve many complicated steps. It should be a simple list, no excess prose. Strict linear sequence. If more than 4-5 manual steps, please wrap a master program/Makefile around them, in logical sequences. Examples follow.
--->
-
-1. do this
-2. do that
-3. look there
-
-### Details
 
