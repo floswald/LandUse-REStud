@@ -2,7 +2,7 @@
 set -e
 export R_LIBS_USER=/opt/rlibs
 
-runall () {
+runall_docker () {
 
     echo "WELCOME!"
     echo "========"
@@ -68,4 +68,4 @@ runall () {
 
 }
 
-time runall
+time runall_docker
