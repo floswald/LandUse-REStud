@@ -39,4 +39,4 @@ echo 'alias la="ls -A"' >> ~/.bashrc
 echo 'alias l="ls -CF"' >> ~/.bashrc
 echo 'export PS1="\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ "' >> ~/.bashrc
 
-echo "Setup complete!"
+echo "R and Julia Package Setup complete! ✅ "

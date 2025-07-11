@@ -6,7 +6,8 @@
     "mounts": [
         "source=${localWorkspaceFolder}/data,target=/workspace/data,type=bind",
         "source=${localWorkspaceFolder}/output,target=/workspace/output,type=bind",
-        "source=${localWorkspaceFolder}/code,target=/workspace/code,type=bind"
+        "source=${localWorkspaceFolder}/code,target=/workspace/code,type=bind",
+        "source=${localEnv:STATA_LICENSE_PATH},target=/usr/local/stata/stata.lic,type=bind"
     ],
     
     // Use the required user
@@ -35,5 +36,5 @@
     },
     
     // Run setup script
-    "postCreateCommand": "setup-packages.sh"
+    "postCreateCommand": "validate-setup.sh"
 }

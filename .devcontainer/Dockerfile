@@ -73,9 +73,13 @@ ENV GKSwstype="nul"
 RUN mkdir -p /workspace/data /workspace/output /workspace/code && \
     chown -R statauser:stata /workspace
 
-# Copy setup script
+# Copy package setup script into container (will run from there)
 COPY .devcontainer/setup-packages.sh /usr/local/bin/setup-packages.sh
 RUN chmod +x /usr/local/bin/setup-packages.sh
+
+# same for validation script
+COPY .devcontainer/validate-setup.sh /usr/local/bin/validate-setup.sh
+RUN chmod +x /usr/local/bin/validate-setup.sh
 
 # Copy static files that don't change often
 COPY LICENSE.txt /home/statauser/LICENSE.txt

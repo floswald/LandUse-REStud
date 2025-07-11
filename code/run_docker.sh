@@ -11,6 +11,13 @@ runall () {
     echo "this script will attempt to run the entire replication package inside the prebuilt docker image."
     echo ""
 
+    if [ -d "/workspace/code" ]; then
+        echo "chaning dirs into /workspace/code"
+    else
+        echo "Directory /workspace/code does not exist. something is wrong here."
+    fi
+    cd /workspace/code
+
     stata-mp -b stata/replication_aggregate_main.do
 
     echo ""

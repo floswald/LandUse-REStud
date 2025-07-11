@@ -9,14 +9,14 @@ distance is equal to residential distance; in the data, it is not. In this Exten
 we incorporate a relationship between residential and commuting distance that we 
 recover from commuting data.
 """
-function sensitivity_d1d2(;save = false,readdisk = true,returnplots = true,estimateθ = true)
+function sensitivity_d1d2(;save = false,readdisk = true,returnplots = true,estimateθ = true, d2 = 2.0)
     
     pth = joinpath(dbplots(), "revision$(revision())","sensitivity-d1d2")
     mkpath(pth)
 
 
     if !readdisk
-        d = sensitivity_d1d2_(estimateθ = estimateθ)
+        d = sensitivity_d1d2_(estimateθ = estimateθ,d2 = d2)
         JLD2.jldsave(joinpath(pth,"data.jld2"); d)
     else
         d = JLD2.load_object(joinpath(pth,"data.jld2"))
@@ -45,19 +45,7 @@ end
 function sensitivity_d1d2_(;d1 = 0.05,d2 = 2.0, estimateθ = true, constr_viol_tol = nothing)
     b = khet_run(readdisk = true)
     # pars = merge(parsd1d2(),Dict(:K => 20,:d1 => d1, :d2 => d2,:T => 1840:10:2020))
-    if Sys.islinux()
-        @warn """
-        we have a convergence issue on this docker image (ubuntu 22 - please see Dockerfile). 
-        While this runs on 
-        - MacOS 15.5 (M1, aarch64-apple-darwin20)
-        - Windows 11 professional, version 23h2, build 22631.5472
-        with d2=2 (results in appendix B), 
-        here values beyond d2=1.8 crash. Therefore we set d2=1.8, and we relabel plots with d2=1.8. 
-        Results are expectedly different to appendix B, where cities get even larger than here, but 
-        the fundamental message stays the same.
-        """
-        d2 = min(d2,1.8)
-    end
+
     pars = Dict(:K => 20,:d1 => d1, :d2 => d2,:T => 1840:10:2020, :a => 2.29)
     if estimateθ
         d1d2 = khet_estimate_impl(20,par = pars,iterateP = 0, LUwgt_data = false,estimateθu = estimateθ,estimateθr = estimateθ, constr_viol_tol = constr_viol_tol)

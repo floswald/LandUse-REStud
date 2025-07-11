@@ -235,7 +235,6 @@ function run_extensions(; save = false, readdisk = false)
 
 	sensitivity_agglo(readdisk = readdisk, save = save)
 	sensitivity_ξ(readdisk = readdisk, save = save)
-	sensitivity_d1d2(readdisk = readdisk, save = save)
 	sensitivity_ϵ(readdisk = readdisk, save = save)
 	sensitivity_R3_θfixed(readdisk = readdisk, save = save)
 	sensitivity_θr(readdisk = readdisk, save = save)
@@ -243,6 +242,22 @@ function run_extensions(; save = false, readdisk = false)
 	sensitivity_σ(readdisk = readdisk, save = save)
 	sensitivity_ω(readdisk = readdisk, save = save)
 	sensitivity_fixedρ(readdisk = readdisk)
+
+	try 
+		sensitivity_d1d2(readdisk = readdisk, save = save)
+	catch e
+        @warn """
+        we have a convergence issue on this docker image (ubuntu 22 - please see Dockerfile). 
+        While this runs on 
+        - MacOS 15.5 (M1, aarch64-apple-darwin20)
+        - Windows 11 professional, version 23h2, build 22631.5472
+        with d2=2 (results in appendix B), 
+        here the simulation just crashed. Therefore we set d2=1.8, and we relabel plots with d2=1.8. 
+        Results are expectedly different to appendix B (fig B12 and B13), where cities get even larger than here, but 
+        the fundamental message stays the same.
+        """
+		sensitivity_d1d2(readdisk = readdisk, save = save, d2 = 1.8)
+    end
 
 	@info "extensions done! ✅"
 end
@@ -272,7 +287,7 @@ function full_pipeline( )
 		2. You successfully executed `pkgroot/code/stata/replication_aggregate_main.do`
 		3. You successfully installed the `pkgroot/code/LandUseR/` package and executed function `LandUseR::run_data()`
 		4. We call the values in `pkgroot/code/LandUse.jl/src/params.json` the *optimal parameter value*. 
-		We obtained those values by running the estimation algorithm on the S-CAPAD cluster and takes those as given now.
+		We obtained those values by running the estimation algorithm on the S-CAPAD cluster and take those as given now.
 
 		👉 All good? Then let's roll!
 		
