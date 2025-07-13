@@ -6,5 +6,6 @@ output/**
 code/LandUseR/*.log
 code/LandUse.jl/out/*
 README.pdf
+README.tex
 
 !output/.gitkeep
