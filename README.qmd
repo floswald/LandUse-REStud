@@ -155,8 +155,9 @@ We have different data sources for different points in time. These secondary sou
 
 The package uses stata, R and julia code; All code is located in the subfolder `code/`.
 
-* We provide a single driver script which will run the entire package top to bottom, after suitable software installation and configuration. This script is located at `code/run_all.sh`
-* We also provide instructions to run the package step by step, i.e., executing the programs in different languages one after the other, by hand.
+* We provide a single driver script which will run the entire package top to bottom, after suitable software installation and configuration. This script is located at `code/run_all.sh`. Details in @sec-runscript.
+* We provide instructions to run the package step by step, i.e., executing the programs in different languages one after the other, by hand. Details in @sec-runmanual.
+* Finally, we provide a Dockerfile and devcontainer setup to build a fully functional docker container. This is designed to bypass difficulties in setting up the software environment required for our package. Details in @sec-rundocker.
 
 ## Stata
 
@@ -277,7 +278,7 @@ In the tables below, we refer to `R` and `julia` functions from 2 packages. The 
 | Exhibit      | Language | Program/function                    | Output in `output/`                    |
 |-----------   |----------|-----------                          |---------                               |
 | Figure A.1   | --       | no code                             | plots/figureA1.pdf                     |
-| Figure A.2   | `stata`  | `figureA2.do`            | plots/figureA2a(b).pdf                 |
+| Figure A.2   | `stata`  | `figure1.do`            | plots/figureA2a(b).pdf                 |
 | Figure A.3   | `stata`  | `generatethetas.do`            | plots/figureA3.pdf                     |
 | Figure A.4   | `stata`  | `generatethetas.do`             | plots/figureA4.pdf                     |
 | Figure A.5   | `stata`  | `figureA5.do`            | plots/figureA5.pdf                     |
@@ -297,12 +298,10 @@ In the tables below, we refer to `R` and `julia` functions from 2 packages. The 
 | Figure A.17  | --       | no code                             | plots/figureA17.pdf                    |
 | Figure A.18  | `R`      | `plot_sat_vs_manual()`    | plots/figureA18.pdf                    |
 | Figure A.19  | `R`      | `plot_shlomo()`           | plots/figureA19.pdf                    |
-| Figure A.20  | `R`      | `CLC_plots()`             | plots/figureA20.pdf                    |
-| Figure A.21  | `R`      | `CLC_measure()`           | plots/figureA21.pdf                    |
-| Figure A.22  | `R`      | `map_pra_all()`           | plots/figureA22.pdf                    |
-| Figure A.23  | `R`      | `wheat_plots()`           | plots/figureA23a(b).pdf                |
-| Figure A.24  | `R`      | `pra_check()`             | plots/figureA24.pdf                    |
-| Figure A.25  | `R`      | `map_pra_prices2000()`    | plots/figureA25.pdf                    |
+| Figure A.20  | `R`      | `map_pra_all()`             | plots/figureA20.pdf                    |
+| Figure A.21  | `R`      | `wheat_plots()`           | plots/figureA21a(b).pdf                    |
+| Figure A.22  | `R`      | `pra_check()`           | plots/figureA22.pdf                    |
+| Figure A.23  | `R`      | `map_pra_prices2000()`    | plots/figureA23.pdf                |
 | Table A.3    | `R`      | `tableA3()`               | tables/tableA3.tex                     |
 | Table A.4    | `R`      | `tableA4()`               | tables/tableA4.tex                     |
 | Table A.5    | `R`      | `tableA5_A6()`            | tables/tableA5.tex                     |
@@ -673,7 +672,7 @@ Variables are at the level of the département x year. Crop area (in ha), produc
 ## Software requirements
 
 * We used both Stata 14, Stata 18.5 and StataNow with success. We have no stata add-on libraries, so replicators should not experience any issues in this part. That said, we assume you have StataMP installed.
-* R **must be version 4.4.2**. Later versions are more complicated because some of our packages need to be built from source (in particular `Matrix`) because the version we require is not available as binary for later R versions. We recommend to use [rig](https://github.com/r-lib/rig) to manage multiple R installations. Package environment detailed below.
+* R **should be version 4.4.2**. Later versions are more complicated because some of our packages need to be built from source (in particular `Matrix`) because the version we require is not available as binary for later R versions. We recommend to use [rig](https://github.com/r-lib/rig) to manage multiple R installations. Package environment detailed below.
 * julia **must be version 1.8.5**. We use the standard recommend approach to [install julia](https://julialang.org/install/) in order to manage multiple julia versions - please follow this approach, too. Package environment detailed below.
 
 ### R Package Environment
@@ -681,7 +680,7 @@ Variables are at the level of the département x year. Crop area (in ha), produc
 * We use `renv` to manage R dependencies. We strongly recommend to use R 4.4.2, for example via [rig](https://github.com/r-lib/rig). This consideration is driven by the availability of package binaries compatible with this version. This may change in the future. There is no known conflict with higher R versions, but this is untested.
 * All R package versions are encoded in the `renv.lock` file, which is located in `/code/LandUseR`.
 * In case a manual installation is necessary, those packages and corresponding versions need to be installed. A full list of R packages with suitable citations is given in the reference section of this readme.
-* We provide a run script (bash) which runs this automatically. It's straighforward to execute the steps in the script manually, however, so in case bash is not available, we have a manual route.
+* We provide a run script (`bash`) which runs this automatically. It's straighforward to execute the steps in the script manually, however, so in case bash is not available, we have a manual route.
 
 ::: {.callout-warning}
 
@@ -700,6 +699,7 @@ Some R packages will need to be built from source, if no fitting binary can be f
 
 1. Matrix
 2. XML
+3. data.table
 
 Potential solutions, of any of those break (should not happen, but you never know):
 
@@ -725,7 +725,7 @@ This is only relevant if you don't want to try the run script; I suggest you try
 :::
 
 1. Naviate to `code/LandUseR`
-2. (optional, but recommended) Verify you have R version 4.2.2 installed    
+2. (optional, but recommended) Verify you have R version 4.4.2 installed    
     
     ```R
     (getRversion() == "4.4.2") || stop("you must use R 4.4.2 - look at github.com/r-lib/rig ")
@@ -750,6 +750,16 @@ This is only relevant if you don't want to try the run script; I suggest you try
 
 The julia setup is straightforward and encoded in the file `code/LandUse.jl/Project.toml`. Notice that we require to use julia 1.8.5, which you can get by using [juliaup](https://julialang.org/install/) as mentioned above.
 
+## Docker Container {#sec-docker-image}
+
+> What is [docker](https://docs.docker.com/get-started/docker-overview/)?
+
+We realize that the above described route to recreate the software environment is a source of complication for replicators. Therefore we provide a dockerfile as part of the package, which can be used to build a docker container, based on [stata-docker](https://github.com/AEADataEditor/docker-stata) provided by the AEA Data Editor, itself currently based on a Ubuntu 22.0 base image. The container mounts the contents of this replication package as volumes (i.e. the container uses what you see in `code/` and `data/`, no code or data are *baked into* the container). The advantage is that the entire setup is automated. The disadvantage is that the container runs slightly slower than a native implementation. Using the docker container implies two additional software requirements:
+
+1. A `docker` client. This could be the standard [docker desktop](https://docs.docker.com/get-started/get-docker/) or something like [orbstack](https://orbstack.dev) which works well on MacOS (I used orbstack, for example).
+2. I prepared the image in a [devcontainer](https://code.visualstudio.com/docs/devcontainers/containers) which greatly simplifies the setup. Hence, you will need VScode to build the container. Install the [devcontainer](https://code.visualstudio.com/docs/devcontainers/containers) extension in your VS
+
+Precise instructions for using the image are given in @sec-rundocker.
 
 # Instructions to replicators {#sec-replicators}
 
@@ -785,9 +795,9 @@ $ which stata-mp
 
 ## The Full Automatic Run Script {#sec-runscript}
 
-Executing the run script requires access to a bash shell and may not work on windows. Being able to use the run script assumes the following list of conditions:
+Executing the run script requires access to a bash shell and will not work on Windows. Being able to use the run script assumes the following list of conditions:
 
-- [ ] You installed R 4.2.2
+- [ ] You installed R 4.4.2
 - [ ] You have access to `Rscript` on your command line (type `Rscript -e 'print("hi")'` to test).
 - [ ] You installed julia 1.8.5
 - [ ] Your stata executable `stata-mp` is on your `PATH`
@@ -865,6 +875,84 @@ If those conditions are fulfilled, you can proceed with the following. (If you a
     ```
 
 11. Check generated output in `output/`
+
+## Build and Run Docker Container {#sec-rundocker}
+
+### Preliminaries
+
+1. You have a working docker client installed (docker, orbstack,...). Make sure the docker daemon is running (launch docker desktop, for example)
+2. You downloaded and extracted our package on your computer.
+3. You have VScode installed, together with its devcontainer extension.
+4. You have access to a stata license file. The docker container uses `stata-mp`, so your license needs to allow for this usage. *Before launching the container*, you must export the environment variable `STATA_LICENSE_PATH` in your shell, pointing to the location of your local license file. For me, this looks like this
+
+    ```bash
+    # in my ~/.bashrc file or similar
+    export STATA_LICENSE_PATH="/Users/floswald/Dropbox/licenses/stata.lic"
+    ```
+
+### Step by Step Instructions
+
+#### Build Container
+
+1. Navigate to folder `./devcontainer`
+2. Build the container with docker. This will take 30 minutes roughly, depending on your connection speed and computer performance. The below command will build a virtual machine which has all base software (third party libraries, R, julia, stata) pre-installed. You may want to consult the `Dockerfile` to see what's going on. In particular, you may want to reassure yourself that we do *not* include any of the replication package code or data in the container, which would obfuscate things considerably. The `Dockerfile` builts a computer which is *empty* up to base stata, R and julia installations - no packages or any of our code are added so far.
+
+```bash
+cd .devcontainer  # navigate into devcontainer folder
+docker build -f Dockerfile -t land-use ..  
+```
+
+#### Mount Package Inside Container and Install Packages
+
+We now will use the `devcontainer` extension to take care of mounting the content of this package (on your local machine) inside our newly built container (i.e., inside another computer if you will). 
+
+1. You should open the package in vscode (`File > Open Folder` and navigate to the root of this package).
+2. Open the command palette (Cmd+shift+P on my mac, click the cogwheel bottom left of the vscode window if not) and type : `devcontainers : rebuild and reopen in container`. This will only work if you installed the devcontainer extension as required.
+3. This will launch the process of downloading and installing all julia and R packages needed for our package. This process takes another 30 minutes.
+4. You will see that the installation finished successfully upon receiving this output in the VSCode terminal:
+   
+    ```bash
+    🎉 Container setup completed successfully!
+    ```
+5. Your container is now up and running. The terminal will show something like this:
+   
+    ```bash
+    statauser@292aba2a9dfe:/workspace$ 
+    ```
+6. Either proceed directly to next step or shut down VScode.
+
+
+#### Run Package and Generate Output
+
+1. Open VScode on package folder.
+2. Command Palette (Shift-Cmd-P): `devcontainer : reopen in container` will reopen this project as running inside our container.
+3. In the **running** container's terminal, navigate to `code/`
+4. execute the docker run script:
+   
+    ```bash
+    # navigate
+    statauser@292aba2a9dfe:/workspace$ cd code
+
+    # make sure is executable
+    statauser@292aba2a9dfe:/workspace/code$ chmod +x ./run_docker.sh
+
+    # execute!
+    statauser@292aba2a9dfe:/workspace/code$ ./run_docker.sh
+    ```
+5. Successful completion looks like this (but check the script output for errors):
+
+    ```bash
+    All done.
+    =========
+
+
+    real    92m24.181s
+    user    94m31.092s
+    sys     22m10.441s
+    ```
+6. After successful completion (roughly 1.5 hours), you can shut down the container if you prefer.
+7. Checkout output in `output`, on container (if still running) or in local package on your computer - it's the same directory (local `output` is mounted on container).
+
 
 # Software citations
 
