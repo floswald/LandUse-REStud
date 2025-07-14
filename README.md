@@ -17,11 +17,11 @@ cd .devcontainer  # navigate into devcontainer folder
 docker build -f Dockerfile -t land-use ..  
 ```
 
-It will be based on the docker-stata image of the AEA Data Editor, add R from the rocker project, and install a bunch of linux support libraries needed as dependencies for the later R packages.
+It will be based on the docker-stata image of the AEA Data Editor, it will add R from the rocker project, and install a bunch of linux support libraries needed as dependencies for the later R packages.
 
 ## Mount Package Inside Container and Install Packages
 
-Next Steup is to use the `devcontainer` extension in VSCode to take care of mounting the content of this package (on your local machine) inside our newly built container (i.e., inside another computer if you will). 
+Next step is to use the `devcontainer` extension in VSCode to take care of mounting the content of this package (on your local machine) inside our newly built container (i.e., inside another computer if you will). 
 
 1. You should open the package in vscode (`File > Open Folder` and navigate to the root of this package).
 2. Open the command palette (Cmd+shift+P on my mac, click the cogwheel bottom left of the vscode window if not) and type : `devcontainers : rebuild and reopen in container`. This will only work if you installed the devcontainer extension as required.
