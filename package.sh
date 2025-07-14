@@ -3,6 +3,7 @@
 # exports current dir to Downloads and zips up
 DEST=/Users/floswald/Downloads/package-submission
 
+rm -rf $DEST
 cp -rf $(pwd) $DEST
 
 # cleanup
@@ -12,6 +13,7 @@ find . -name ".DS_Store" -type f -delete
 rm $DEST/package.sh
 rm $DEST/README.md
 rm $DEST/README.html
+rm $DEST/README.tex
 rm -rf $DEST/README_files
 
 rm -f $DEST/code/LandUseR/*.log
