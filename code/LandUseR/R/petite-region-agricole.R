@@ -365,7 +365,7 @@ plot_ts_pra_cities <- function(){
     x = x[,.(rank,CODGEO,price,year,LIBGEO)]
     x_ = rbind(x,p1870_[,.(rank,price,year,CODGEO,LIBGEO)],use.names=TRUE,fill = TRUE)
 
-    pal = tmaptools::get_brewer_pal("Accent",n = 21)
+    pal = viridisLite::viridis(21)
 
     zzr = x_[ , list(rank,CODGEO,LIBGEO,rprice = price / .SD[rank == 1,price ]), by = year]
     # zzr = zzr[LIBGEO != "Strasbourg"]
@@ -377,7 +377,7 @@ plot_ts_pra_cities <- function(){
       directlabels::geom_dl(aes(label = LIBGEO), method = list(directlabels::dl.trans(x = x - 0.2), "first.points", cex = 0.8))
     ggsave(plot = pl, file.path(dataplots(),"city-prices.pdf"),width = 15, height = 9)
 
-    pal = tmaptools::get_brewer_pal("Accent",n = 100)
+    pal = viridisLite::viridis(100)
 
     zzr = x_[ , list(rank,CODGEO,LIBGEO,rprice = price / .SD[rank == 1,price ]), by = year]
     # zzr = zzr[LIBGEO != "Strasbourg"]
