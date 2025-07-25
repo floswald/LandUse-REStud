@@ -18,7 +18,7 @@ function param_4_cities(; g = 1.2)
     p = Param(par = Dict(:T => 1840:10:2020, :gsr => zeros(K),:gs => zeros(K),:kshare => [1/K for i in 1:K],:factors => ones(K),:K => K,:𝕊 => zeros(60,K), :Lflat => true,
     :cbar => 0.7,
     :sbar => 0.0,
-    :a => !Sys.isapple() ? 2.99 : 3.0,
+    :a => 3.0,
     :γ => 0.3,
     :ν => 0.025,
     :ϵflat => true,
@@ -41,7 +41,7 @@ end
 # add separate one for population spread
 # one for land rent spread under suitable normalization
 # one for density spread for prediction
-function app_numillustration(; overwrite = false, save = false)
+function app_numillustration(; overwrite = false, save = false,tryfor = 10)
     pth = joinpath(dbplots(), "revision$(revision())","appendix-numillust")
     mkpath(pth)
 
@@ -55,8 +55,20 @@ function app_numillustration(; overwrite = false, save = false)
         # get artificial θ series 
         arti = artificialθ(p4,offs)
     
-        # get a starting values
-        x0 = start_4cities(p4)
+        # get a starting value
+        for i in 1:tryfor
+            try
+                x0 = start_4cities(p4)
+            catch e
+                if i == tryfor
+                    println("tried for $tryfor steps with reducing p4.a , then failed")
+                    @warn "app_numillustration did not find valid starting value - no results produced"
+                    return 0
+                end
+                # next try
+                p4.a -= 0.01
+            end
+        end
 
         # run model 
         d = app_numillustration_impl_(p4,x0,arti)
