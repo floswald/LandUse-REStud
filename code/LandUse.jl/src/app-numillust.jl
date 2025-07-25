@@ -56,6 +56,7 @@ function app_numillustration(; overwrite = false, save = false,tryfor = 10)
         arti = artificialθ(p4,offs)
     
         # get a starting value
+        x0 = nothing
         for i in 1:tryfor
             try
                 x0 = start_4cities(p4)
