@@ -894,7 +894,7 @@ If those conditions are fulfilled, you can proceed with the following. (If you a
 
 #### Build Container
 
-1. Navigate to folder `./devcontainer`
+1. Navigate to (hidden) folder `/.devcontainer`
 2. Build the container with docker. This will take 30 minutes roughly, depending on your connection speed and computer performance. The below command will build a virtual machine which has all base software (third party libraries, R, julia, stata) pre-installed. You may want to consult the `Dockerfile` to see what's going on. In particular, you may want to reassure yourself that we do *not* include any of the replication package code or data in the container, which would obfuscate things considerably. The `Dockerfile` builts a computer which is *empty* up to base stata, R and julia installations - no packages or any of our code are added so far.
 
 ```bash
@@ -920,6 +920,26 @@ We now will use the `devcontainer` extension to take care of mounting the conten
     statauser@292aba2a9dfe:/workspace$ 
     ```
 6. Either proceed directly to next step or shut down VScode.
+
+
+::: {.callout-note}
+
+# Possible Issues with Devcontainer
+
+## ENV var not resolving
+
+We have had reports from users where the variable resolution from host shell into the container's environment did not work. This is related to object `source=${localEnv:STATA_LICENSE_PATH}` on line 10 of `./devcontainer/devcontainer.json`. A working solution is to just hardcode the path to the stata license file, i.e. I would change line 10 to
+
+```bash
+"source=/Users/floswald/Dropbox/licenses/stata.lic,target=/usr/local/stata/stata.lic,type=bind"
+```
+
+## Permissions of folder to be mounted
+
+All directories to be mounted need to have sufficient permissions (read,write,execute) for the current user. Some users have reported problems from storing the stata license like I did in their dropbox folder, for instance. Consider moving this to a location with sufficient access permissions.
+
+:::
+
 
 
 #### Run Package and Generate Output
