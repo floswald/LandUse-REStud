@@ -94,6 +94,22 @@ function app_numillustration(; overwrite = false, save = false,tryfor = 10)
 
 end
 
+function app_numillustration_trap()
+    # save empty plots
+    files = [pf_app("numillust","Lr.pdf") ,
+    pf_app("numillust","spending.pdf")    ,
+    pf_app("numillust","pr.pdf")          ,
+    pf_app("numillust","LuArea.pdf")      ,
+    pf_app("numillust","AggDensities.pdf"),
+    pf_app("numillust","landrents.pdf")   ]
+
+    for f in files
+        pl = plot(title = "not converged")
+        savefig(pl,f)
+    end
+
+end
+
 # no pop growth
 # same values as described
 # 4 cities, and their aggregation

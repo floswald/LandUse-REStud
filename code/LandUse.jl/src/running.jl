@@ -230,7 +230,12 @@ end
 function run_extensions(; save = false, readdisk = false)
 	@info "runs all extensions $(ifelse(!readdisk,"; writes results to disk. This is going to take some time. ☕️ 🍜 🍔","; reads results from disk 💾 ⚡️⚡️"))"
 
-	app_numillustration(overwrite = true, save = true)
+	try
+		app_numillustration(overwrite = true, save = true)
+	catch e
+		@warn "failed to find a starting value. Figure B1 will not be produced"
+		app_numillustration_trap()
+	end
 	app_numillustration_sbar(overwrite = true, save = true)
 
 	sensitivity_agglo(readdisk = readdisk, save = save)
