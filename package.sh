@@ -2,32 +2,33 @@
 
 # exports current dir to Downloads and zips up
 set DEST /Users/floswald/Downloads/package-submission
+set PKG $DEST/ReplicationPackage-submit
 
 rm -rf $DEST
 mkdir -p $DEST; and cp -rf (pwd) $DEST
 
 # cleanup
-cd $DEST
+cd $PKG
 find . -name ".DS_Store" -type f -delete
 
-rm -f $DEST/package.sh
-rm -f $DEST/README.md
-rm -f $DEST/README.html
-rm -f $DEST/README.tex
-rm -rf $DEST/README_files
+rm -f $PKG/package.sh
+rm -f $PKG/README.md
+rm -f $PKG/README.html
+rm -f $PKG/README.tex
+rm -rf $PKG/README_files
 
 # remove all .log files using find instead of glob
-find $DEST/code/LandUseR -name "*.log" -type f -delete 2>/dev/null
+find $PKG/code/LandUseR -name "*.log" -type f -delete 2>/dev/null
 
 # remove all output but keep dir (only if output directory exists)
 if test -d output
     cd output; and rm -rf (ls -A | grep -v "^\.gitkeep\$")
-    cd $DEST
+    cd $PKG
 end
 
 # remove git
-cd $DEST; and rm -rf .git .gitignore
+cd $PKG; and rm -rf .git .gitignore
 
 # zip it up
-cd $DEST/..
-zip -rq package-submission.zip package-submission
+cd $PKG/..
+zip -rq package-submission.zip ReplicationPackage-submit
