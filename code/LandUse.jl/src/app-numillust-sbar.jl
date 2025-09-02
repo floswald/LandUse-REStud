@@ -55,10 +55,11 @@ function start_4cities_sbar(p::Param,sbar)
 	x0 = jm(p,x0, estimateθ = false)
 
     # step-wise increase sbar now
+    Δ = (sbar > p.sbar) * 0.01 + (sbar < p.sbar) * (-0.01)
     s0 = p.sbar
-    for isbar in s0:0.01:sbar
+    for isbar in s0:Δ:sbar
         p.sbar = isbar
-        @debug p.sbar
+        println("adjusting sbar to $(p.sbar)")
         x0 = jm(p,x0, estimateθ = false)
     end
 

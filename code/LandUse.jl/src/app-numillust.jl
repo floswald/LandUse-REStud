@@ -15,6 +15,19 @@ function param_4_cities(; g = 1.2)
 
     # baseline param 
     K = 4
+
+    p_search = Param(par = Dict(:T => 1840:10:2020, :gsr => zeros(K),:gs => zeros(K),:kshare => [1/K for i in 1:K],:factors => ones(K),:K => K,:𝕊 => zeros(60,K), :Lflat => true,
+    :cbar => 0.7,
+    :sbar => 0.1, # then move down
+    :a => 1.5,
+    :γ => 0.3,
+    :ν => 0.025,
+    :ϵflat => true,
+    :ϵr => 4.0,
+    :ξl => 0.8,
+    :ξw => 0.8
+    ))
+
     p = Param(par = Dict(:T => 1840:10:2020, :gsr => zeros(K),:gs => zeros(K),:kshare => [1/K for i in 1:K],:factors => ones(K),:K => K,:𝕊 => zeros(60,K), :Lflat => true,
     :cbar => 0.7,
     :sbar => 0.0,
@@ -28,9 +41,10 @@ function param_4_cities(; g = 1.2)
     ))
 
     # set growth to g
+    constant_growth_θs!(p_search, g, g)
     constant_growth_θs!(p, g, g)
 
-    return p
+    return p, p_search
 end
 
 
@@ -50,29 +64,16 @@ function app_numillustration(; overwrite = false, save = false,tryfor = 10)
     if overwrite
     
         # 5 city param
-        p4 = param_4_cities()
+        p4,psearch = param_4_cities()
+
+        # get a starting values
+        out = start_4cities_sbar(psearch,0.0)  
     
         # get artificial θ series 
         arti = artificialθ(p4,offs)
-    
-        # get a starting value
-        x0 = nothing
-        for i in 1:tryfor
-            try
-                x0 = start_4cities(p4)
-            catch e
-                if i == tryfor
-                    println("tried for $tryfor steps with reducing p4.a , then failed")
-                    @warn "app_numillustration did not find valid starting value - no results produced"
-                    return 0
-                end
-                # next try
-                p4.a -= 0.01
-            end
-        end
 
         # run model 
-        d = app_numillustration_impl_(p4,x0,arti)
+        d = app_numillustration_impl_(p4,out.x0,arti)
 
         # save
         JLD2.jldsave(joinpath(pth,"data.jld2"); d)
@@ -269,12 +270,21 @@ function app_numillustration_plot(d::DataFrame,offs::OrderedDict; highsbar = fal
     pl
 end
 
-function start_4cities(p::Param)
+function start_4cities(p::Param,cbar)
     # start a single city
     setperiod!(p,1)
 	x0 = nearstart(p)
 	m = Region(p)
 	x0 = jm(p,x0, estimateθ = false)
+
+    # step-wise increase cbar now
+    c0 = p.cbar
+    for isbar in c0:0.01:cbar
+        p.cbar = isbar
+        @debug p.cbar
+        x0 = jm(p,x0, estimateθ = false)
+    end
+
 	update!(m,p,x0)
 
     (Lr = [m.Lr for i in 1:p.K],

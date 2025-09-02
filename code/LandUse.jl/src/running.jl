@@ -256,14 +256,16 @@ function run_extensions(; save = false, readdisk = false)
         Results are expectedly different to appendix B (fig B12 and B13), where cities get even larger than here, but 
         the fundamental message stays the same.
         """
-		for itry in 1:5
+		for itry in 1:10
 			d2_ = 1.8
 			try
-				println("trying with d2 = $(d2_)")
 				sensitivity_d1d2(readdisk = readdisk, save = save, d2 = d2_)
 			catch e2
-				if itry == 5
+				println("not converging. trying with d2 = $(d2_)")
+				if itry == 10
 					@warn "d1d2 experiment failed to converge on this platform :-("
+					@warn "Figures B.12, B.13 and B.14 will not be produced in this run"
+					sensitivity_d1d2_trap()
 				end
 				d2_ -= 0.01
 			end

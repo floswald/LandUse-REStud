@@ -42,6 +42,31 @@ function sensitivity_d1d2(;save = false,readdisk = true,returnplots = true,estim
     end
 end
 
+
+function sensitivity_d1d2_trap()
+    # save empty plots
+    files = [pf_sens("d1d2","cityarea_agg_1840.pdf") ,
+    pf_sens("d1d2","citydensity_1840.pdf")  ,
+    pf_sens("d1d2","d0_1840.pdf")           ,
+    pf_sens("d1d2","dr_1840.pdf")           ,
+    pf_sens("d1d2","dens_decile.pdf")       ,
+    pf_sens("d1d2","ρr_1840.pdf")           ,
+
+    pf_sens("d1d2","Lu_allyears_d1d2.pdf")  ,
+    pf_sens("d1d2","area_allyears_d1d2.pdf"),
+    pf_sens("d1d2","dens_allyears_d1d2.pdf"),
+
+    pf_sens("d1d2","Lu_allyears.pdf")       ,
+    pf_sens("d1d2","area_allyears.pdf")     ,
+    pf_sens("d1d2","dens_allyears.pdf")  ]   
+
+    for f in files
+        pl = plot(title = "not converged")
+        savefig(pl,f)
+    end
+
+end
+
 function sensitivity_d1d2_(;d1 = 0.05,d2 = 2.0, estimateθ = true, constr_viol_tol = nothing)
     b = khet_run(readdisk = true)
     # pars = merge(parsd1d2(),Dict(:K => 20,:d1 => d1, :d2 => d2,:T => 1840:10:2020))
